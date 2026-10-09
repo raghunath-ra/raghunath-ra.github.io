@@ -36,14 +36,14 @@ export const topics: Topic[] = [
     slug: 'ai-adoption',
     title: 'AI adoption at work',
     short: 'AI adoption',
-    question: 'How do you get a team to build with AI, rather than only try it?',
+    question: 'How do you help colleagues explore where AI becomes the best tool for their work?',
     thesis:
       'Which AI tool fits a piece of work depends on how its harness, environment and context work; when a task works once, I turn it into a skill that colleagues can run.',
     stance: [
-      'I help colleagues at a US health system use AI in their work. I have set up more than twenty of them with VS Code, GitHub Copilot, Python and Node.js, and I advise on when to use Microsoft 365 Copilot and when to use GitHub Copilot CLI.',
+      'My work with colleagues at a US health system is about exploring things first, and helping them explore where AI becomes the best tool and gives productivity and efficiency gains. I have set up more than twenty of them with VS Code, GitHub Copilot, Python and Node.js, and I advise on when to use Microsoft 365 Copilot and when to use GitHub Copilot CLI.',
       'The department newsletters are my example. There was a need for internal newsletters, monthly and half-yearly, one for each department, and I build them with GitHub Copilot CLI; they come out engaging and professional, close to what a designer would produce. Microsoft 365 Copilot does not work for this, because its harness is not built for repetitive work where I keep iterating on the same files and folders under Git version control. GitHub Copilot in VS Code, or GitHub Copilot CLI, is the better tool because of how its harness, environment and context work. Without AI, we would not have thought of the task this way, and we would not have done it.',
       'When a task works in Copilot CLI, I transcribe it into a durable skill in the Agent Skills format, so that I can distribute it to colleagues and they can run it. We have used these skills for PowerPoint presentations, HR headcount analysis and governance, risk and compliance (GRC) work.',
-      'I write about getting a team to build with AI rather than only try it.',
+      'I write about exploring where AI becomes the best tool at work.',
     ],
   },
   {

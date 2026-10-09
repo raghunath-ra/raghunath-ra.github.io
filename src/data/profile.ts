@@ -53,7 +53,7 @@ export const profile = {
   pov: {
     statement: 'The model is probabilistic. The software around it doesn’t have to be.',
     emphasis: 'doesn’t have to be',
-    dek: 'I’m Raghunath Reddy. I work in cybersecurity at a US health system, where I also help colleagues build with AI. Before that, I spent years explaining identity and security products to developers and the people who buy for them. My focus in AI engineering is harness engineering, context engineering and understanding which models and sub-agents respond better to a task, and I am applying this on a trial project for an internal use case. This site is where I write about these subjects.',
+    dek: 'I’m Raghunath Reddy. I work in cybersecurity at a US health system, and I also help colleagues there explore where AI becomes the best tool for their work. Before that, I spent years explaining identity and security products to developers and the people who buy for them. My focus in AI engineering is harness engineering, context engineering and understanding which models and sub-agents respond better to a task, and I am applying this on a trial project for an internal use case. This site is where I write about these subjects.',
   },
 
   /** Used for <meta name="description"> on the home page and as the site default. */

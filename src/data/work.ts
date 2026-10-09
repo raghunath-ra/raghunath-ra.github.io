@@ -111,7 +111,7 @@ export const notebooks: { title: string; kind: string; date: string; summary: st
 
 export const caseStudies: CaseStudy[] = [
   {
-    title: 'Setting up a team to build with AI',
+    title: 'Setting up colleagues to explore where AI becomes the best tool',
     kind: 'AI enablement',
     context: 'US health system · 2025–',
     topics: ['ai-adoption'],
