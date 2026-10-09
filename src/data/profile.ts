@@ -35,8 +35,11 @@ export interface Elsewhere {
 export const profile = {
   name: 'Raghunath Reddy',
   shortName: 'Raghunath',
-  /** Current job title. Used for Person.jobTitle in structured data. */
-  jobTitle: 'Senior Cybersecurity Program Manager',
+  /**
+   * Used for Person.jobTitle in structured data. Kept at the level of the
+   * visible copy ("a program role" in cybersecurity), not the exact title.
+   */
+  jobTitle: 'Cybersecurity program role at a US health system',
   /** Follows your name in the home page <title> and the default social card. */
   descriptor: 'AI, security & technical marketing',
   /** Keep this to city and country at most. */
