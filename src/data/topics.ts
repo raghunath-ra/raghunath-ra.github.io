@@ -84,6 +84,7 @@ export const topics: Topic[] = [
       'I rebuilt the LoginRadius engineering blog’s editorial strategy around what developers search for, and organic traffic doubled in six months. I ran the blog as an open-source project on GitHub, with outside developers as paid authors and our engineers as reviewers.',
       'When marketing security products, we need to understand the pain points very clearly, and the solution we propose should clearly show its technical value. Testimonials are important, and so is showing how the product works and how it solves a specific pain point.',
       'We should be very selective about the language we use, which can gain trust as well as lose it if we get it wrong. For example, are you targeting the enterprise buyer or a startup, or are you selling a product where the influencer is different from the buying decision maker? Then you have to plan whom you target at which stage of the marketing funnel, although you don’t have to be too strict about the boundaries within the funnel itself.',
+      'Creating interest in your product, or gaining attention, is the easier part; building trust is key to a purchase decision, or even a proof-of-concept (PoC) decision. Technical products are complex, and buyers are usually skeptical about unproven players promising something good. This is also a reason why bigger deal values often go to known vendors, or where top executives have personal relationships with the vendor.',
       'I write about marketing technical products: AI, security and developer tools.',
     ],
   },
