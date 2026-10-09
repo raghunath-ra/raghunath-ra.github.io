@@ -8,7 +8,7 @@ export async function GET() {
       kicker: 'Essays & research',
       title: profile.pov.statement,
       emphasis: profile.pov.emphasis,
-      subtitle: 'On AI adoption at work, how AI systems work, security communication and technical marketing.',
+      subtitle: 'On AI adoption at work, how AI systems work, cybersecurity communication and technical marketing.',
     }),
   );
 }

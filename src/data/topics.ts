@@ -14,7 +14,7 @@
  * argue a position for him.
  */
 
-export const TOPIC_SLUGS = ['ai-adoption', 'ai-systems', 'security-communication', 'technical-marketing'] as const;
+export const TOPIC_SLUGS = ['ai-adoption', 'ai-systems', 'cybersecurity-communication', 'technical-marketing'] as const;
 export type TopicSlug = (typeof TOPIC_SLUGS)[number];
 
 export interface Topic {
@@ -61,35 +61,35 @@ export const topics: Topic[] = [
     ],
   },
   {
-    slug: 'security-communication',
-    title: 'Security communication',
-    short: 'Security comms',
-    question: 'How do you make security understandable to people who do not work in security?',
+    slug: 'cybersecurity-communication',
+    title: 'Cybersecurity communication',
+    short: 'Cybersecurity comms',
+    question: 'How do you make cybersecurity understandable to people who do not work in it?',
     thesis:
       'Most enterprises treat cyber awareness as a drill; I believe in a careful, thoughtfully designed skills survey, with training completion requested by role, skill level and necessity.',
     stance: [
-      'I work in cybersecurity at a US health system, where the work involves security engineers, network teams, caregivers and senior leadership. Part of it is turning dense security program detail into briefings that lay out risks, dependencies and decisions for senior leadership.',
-      'The other part is the people who do not work in security. In early 2025 there was a need for comic strips on cybersecurity topics, so that busy caregivers could understand them by glancing at them for a minute or two. The image generation tools we had were not good at placing text in images, so I created the panels image by image with Microsoft 365 Copilot’s built-in image generation, then learned Figma to place the dialogue accurately on each panel. That way we delivered comic strips that teach security topics to internal users in an engaging way. I have also scripted and produced videos for an internal security platform.',
+      'I work in cybersecurity at a US health system, where the work involves cybersecurity engineers, network teams, caregivers and senior leadership. Part of it is turning dense cybersecurity program detail into briefings that lay out risks, dependencies and decisions for senior leadership.',
+      'The other part is the people who do not work in cybersecurity. In early 2025 there was a need for comic strips on cybersecurity topics, so that busy caregivers could understand them by glancing at them for a minute or two. The image generation tools we had were not good at placing text in images, so I created the panels image by image with Microsoft 365 Copilot’s built-in image generation, then learned Figma to place the dialogue accurately on each panel. That way we delivered comic strips that teach cybersecurity topics to internal users in an engaging way. I have also scripted and produced videos for an internal cybersecurity platform.',
       'Most enterprises treat cyber awareness as a drill; they keep pushing training and phishing drills. Phishing drills are okay, but pushing training only overburdens people. What I believe in is a careful, thoughtfully designed skills survey, and requesting training completion based on role, skill level and necessity.',
       'For traditionally run awareness programs, this is much harder to do. The people with those responsibilities will keep doing what they have been doing: declaring October cyber awareness month, conducting some fun events, and pushing some emails, sessions and trainings. I am surprised that people do not put more thought into the structural thinking I am trying to champion.',
-      'I write about making security understandable to people who do not work in security.',
+      'I write about making cybersecurity understandable to people who do not work in it.',
     ],
   },
   {
     slug: 'technical-marketing',
     title: 'Marketing technical products',
     short: 'Technical marketing',
-    question: 'How do you market technical products, such as AI, security and developer tools?',
+    question: 'How do you market technical products, such as AI, cybersecurity and developer tools?',
     thesis:
-      'When marketing security products, we need to understand the pain points very clearly, and the solution we propose should clearly show its technical value.',
+      'When marketing cybersecurity products, we need to understand the pain points very clearly, and the solution we propose should clearly show its technical value.',
     stance: [
-      'Before security, I worked in content and product marketing for cloud, identity and security companies. At LoginRadius I shaped the messaging and positioning for a customer identity platform, explaining identity, authentication and data privacy to developers and the people who buy for them.',
+      'Before cybersecurity, I worked in content and product marketing for cloud, identity and cybersecurity companies. At LoginRadius I shaped the messaging and positioning for a customer identity platform, explaining identity, authentication and data privacy to developers and the people who buy for them.',
       'I rebuilt the LoginRadius engineering blog’s editorial strategy around what developers search for, and organic traffic doubled in six months. I ran the blog as an open-source project on GitHub, with outside developers as paid authors and our engineers as reviewers.',
-      'When marketing security products, we need to understand the pain points very clearly, and the solution we propose should clearly show its technical value. Testimonials are important, and so is showing how the product works and how it solves a specific pain point.',
+      'When marketing cybersecurity products, we need to understand the pain points very clearly, and the solution we propose should clearly show its technical value. Testimonials are important, and so is showing how the product works and how it solves a specific pain point.',
       'We should be very selective about the language we use, which can gain trust as well as lose it if we get it wrong. For example, are you targeting the enterprise buyer or a startup, or are you selling a product where the influencer is different from the buying decision maker? Then you have to plan whom you target at which stage of the marketing funnel, although you don’t have to be too strict about the boundaries within the funnel itself.',
       'Creating interest in your product, or gaining attention, is the easier part; building trust is key to a purchase decision, or even a proof-of-concept (PoC) decision. Technical products are complex, and buyers are usually skeptical about unproven players promising something good. This is also a reason why bigger deal values often go to known vendors, or where top executives have personal relationships with the vendor.',
       'I have more experience in marketing technical products to technical buyers. Sometimes a technical product has a buyer persona in a traditional enterprise, where the marketing dynamics are different; this is not an area of strong expertise for me, but I can adapt.',
-      'I write about marketing technical products: AI, security and developer tools.',
+      'I write about marketing technical products: AI, cybersecurity and developer tools.',
     ],
   },
 ];

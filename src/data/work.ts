@@ -134,21 +134,21 @@ export const caseStudies: CaseStudy[] = [
     featured: true,
   },
   {
-    title: 'Security comic strips for busy caregivers',
-    kind: 'Security education',
+    title: 'Cybersecurity comic strips for busy caregivers',
+    kind: 'Cybersecurity education',
     context: 'US health system · 2025',
-    topics: ['security-communication', 'ai-adoption'],
+    topics: ['cybersecurity-communication', 'ai-adoption'],
     summary:
-      'Busy caregivers needed to understand security topics by glancing at them for a minute or two. In early 2025, the image-generation tools we had were not good at placing text in images, so I created the comic panels image by image with Microsoft 365 Copilot’s built-in image generation, then learned Figma to place the dialogue accurately on each panel.',
+      'Busy caregivers needed to understand cybersecurity topics by glancing at them for a minute or two. In early 2025, the image-generation tools we had were not good at placing text in images, so I created the comic panels image by image with Microsoft 365 Copilot’s built-in image generation, then learned Figma to place the dialogue accurately on each panel.',
     lesson: 'The strips had to work for a caregiver glancing at them for a minute or two. Where the image tools could not place the text, I did that part by hand in Figma.',
     links: [],
     featured: true,
   },
   {
-    title: 'Product videos for an internal security platform',
+    title: 'Product videos for an internal cybersecurity platform',
     kind: 'Video',
     context: 'US health system · 2025',
-    topics: ['security-communication', 'technical-marketing'],
+    topics: ['cybersecurity-communication', 'technical-marketing'],
     summary:
       'I scripted and produced product videos for an internal cybersecurity platform, from storyboard to motion graphics in Premiere Pro and After Effects.',
     links: [],
@@ -178,7 +178,7 @@ export const caseStudies: CaseStudy[] = [
     title: 'Ghostwritten eBooks on data privacy and passwordless login',
     kind: 'Ghostwriting',
     context: 'LoginRadius',
-    topics: ['technical-marketing', 'security-communication'],
+    topics: ['technical-marketing', 'cybersecurity-communication'],
     summary:
       'I turned in-house expertise on data privacy and passwordless authentication into long-form eBooks for customer education. They were published under an executive’s name, so they are not linked here.',
     links: [],

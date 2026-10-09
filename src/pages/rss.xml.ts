@@ -48,7 +48,7 @@ export async function GET(context: APIContext) {
 
   return rss({
     title: `${profile.name} · Writing`,
-    description: `Essays by ${profile.name} on AI adoption at work, how AI systems work, security communication and marketing technical products.`,
+    description: `Essays by ${profile.name} on AI adoption at work, how AI systems work, cybersecurity communication and marketing technical products.`,
     site: base,
     items,
     customData: `<language>${site.lang}</language>`,
