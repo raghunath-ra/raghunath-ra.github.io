@@ -52,12 +52,12 @@ export const topics: Topic[] = [
     short: 'AI systems',
     question: 'What happens between your prompt and the answer, and how do you keep an agent accountable?',
     thesis:
-      'A lot of AI engineering today is harness engineering, the deterministic software around the model, and context engineering, which gives the model the specifics of your situation inside a limited context window.',
+      'In my own work, I focus on harness engineering, the deterministic software around the model, and context engineering, which gives the model the specifics of your situation inside a limited context window.',
     stance: [
       'This is how I explain it. A language model takes your text, breaks it into tokens and turns those tokens into numbers. The numbers go through the transformer: attention works out how the words relate to each other, and the feed-forward layers are where most of what the model learned is believed to be stored. Most of it is matrix multiplication. At the end, the model picks a likely next token, then does it again. Text in, numbers, math, text out.',
-      'On its own, a model produces text and cannot act on anything outside the conversation. Tool calling lets it ask for actions. The harness, the deterministic software around the model, runs it in loops, hands big tasks to sub-agents and manages its context. Context engineering is how you give a model with general knowledge the specifics of your business, inside a context window that is always limited. Much of the AI engineering work today is harness engineering and context engineering.',
+      'On its own, a model produces text and cannot act on anything outside the conversation. Tool calling lets it ask for actions. The harness, the deterministic software around the model, runs it in loops, hands big tasks to sub-agents and manages its context. Context engineering is how you give a model with general knowledge the specifics of your business, inside a context window that is always limited.',
       'Once you build agentic systems on top of that, the questions are about control. How much of the system is deterministic, and how much needs the model’s probabilistic output? Which decisions can only a human approve? How do you prove what an agent did? That takes evidence, end-to-end traces like the ones we rely on in application performance management, and audit logs. Without them, you cannot claim enterprise-grade reliability or accountability.',
-      'I learned this hands-on: a transformer written from scratch, small models fine-tuned on Kaggle, a one-off red-teaming exercise in 2025, and now a trial project for an internal use case at work, where part of what I am testing is which models and sub-agents respond better to a task.',
+      'I learned this hands-on: a transformer written from scratch, small models fine-tuned on Kaggle, a one-off red-teaming exercise in 2025, and now a trial project for an internal use case at work, where I focus on harness engineering and context engineering, and part of what I am testing is which models and sub-agents respond better to a task.',
     ],
   },
   {

@@ -15,7 +15,8 @@ draft: true
   Where each part comes from:
   - The thesis and sections 1 to 7, 9 and 10 are your dictation, with slips
     corrected ("chunking" to "tokens", "top v" to "top-p", "agent decay
-    models" to "agentic AI models").
+    models" to "agentic AI models"). The sentence that generalized about AI
+    engineering as a field is left out, as you asked on 2026-10-09.
   - Section 8 is your account of the Mythos incident, checked against
     Anthropic's post of 30 July 2026 (linked in the footnote). Where your
     dictation and the post differ, the outline follows the post and says so.
@@ -34,7 +35,7 @@ draft: true
 
 ## Thesis
 
-When I pitch an AI solution to an executive, I start with where we are in the AI paradigm. A language model takes text, turns it into numbers, processes them through a lot of math, mostly matrix multiplication, and gives text back. On its own it cannot interact with the world; tool calling is how it does. Around the model sits the harness, the deterministic software that runs it in loops, hands work to sub-agents and manages its context, and context engineering, which gives a model trained on general knowledge the specifics of your situation inside a limited context window. A lot of AI engineering today is about those two things.
+When I pitch an AI solution to an executive, I start with where we are in the AI paradigm. A language model takes text, turns it into numbers, processes them through a lot of math, mostly matrix multiplication, and gives text back. On its own it cannot interact with the world; tool calling is how it does. Around the model sits the harness, the deterministic software that runs it in loops, hands work to sub-agents and manages its context, and context engineering, which gives a model trained on general knowledge the specifics of your situation inside a limited context window.
 
 Once you build an agentic system, you also have to decide how much of it is deterministic and how much needs the model's probabilistic output, where only humans can approve, and how you prove what the agents did: evidence, traceability and audit logs. Without that visibility, enterprise-grade reliability and accountability are very hard.
 
