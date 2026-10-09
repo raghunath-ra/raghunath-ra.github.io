@@ -1,0 +1,133 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHead from '../components/PageHead.astro';
+import CaseStudy from '../components/CaseStudy.astro';
+import StudyFeature from '../components/StudyFeature.astro';
+import Icon from '../components/Icon.astro';
+import { caseStudies, research, notebooks } from '../data/work';
+import { topics, topicHref } from '../data/topics';
+import { profile } from '../data/profile';
+import { breadcrumbNode } from '../lib/schema';
+
+const crumbs = [{ name: 'Work', href: '/work/' }];
+// Group by each case study's first (primary) topic, in topic order.
+const groups = topics
+  .map((t) => ({ topic: t, items: caseStudies.filter((c) => c.topics[0] === t.slug) }))
+  .filter((g) => g.items.length > 0);
+---
+
+<Base
+  title="Work"
+  description="Selected work by Raghunath Reddy in AI adoption at work, security communication and technical marketing, plus research and notebooks on how language models work."
+  schema={[breadcrumbNode(Astro.site!, crumbs)]}
+>
+  <PageHead
+    crumbs={crumbs}
+    kicker="Work"
+    title="Selected work"
+    lede="Selected projects, grouped by the topic they belong to. Where a project taught me something, that follows the summary."
+  >
+    <p class="note mono">
+      Research and notebooks are <a href="#research">at the end</a>. Dates, titles and the full history are on{' '}
+      <a href={profile.links.linkedin} rel="me">LinkedIn</a>.
+    </p>
+  </PageHead>
+
+  {
+    groups.map((g, i) => (
+      <section class="wrap group" aria-labelledby={`g-${g.topic.slug}`}>
+        <div class="section-head">
+          <span class="num">§ {String(i + 1).padStart(2, '0')}</span>
+          <h2 id={`g-${g.topic.slug}`}>{g.topic.title}</h2>
+          <p>{g.topic.thesis}</p>
+          <a class="more" href={topicHref(g.topic.slug)}>
+            More on this topic
+          </a>
+        </div>
+        <div class="cases">
+          {g.items.map((item) => (
+            <CaseStudy item={item} />
+          ))}
+        </div>
+      </section>
+    ))
+  }
+
+  <section class="wrap group" id="research" aria-labelledby="research-title">
+    <div class="section-head">
+      <span class="num">§ {String(groups.length + 1).padStart(2, '0')}</span>
+      <h2 id="research-title">Research &amp; notebooks</h2>
+      <p>What I learned about how language models work by building and probing them: a one-off red-teaming exercise from 2025, and notebooks from implementing and fine-tuning models.</p>
+    </div>
+    <div class="studies">
+      {research.map((s) => <StudyFeature study={s} headingLevel="h3" />)}
+    </div>
+    <ul class="notebooks">
+      {
+        notebooks.map((nb) => (
+          <li>
+            <p class="kicker">
+              {nb.kind} · {nb.date}
+            </p>
+            <h3>
+              <a href={nb.href}>
+                {nb.title}
+                <Icon name="external" />
+              </a>
+            </h3>
+            <p class="nb-summary">{nb.summary}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</Base>
+
+<style>
+  .note {
+    margin-top: 1.5rem;
+    color: var(--muted);
+  }
+  .group {
+    padding-block: clamp(2rem, 5vw, 3.5rem);
+  }
+  .group:last-of-type {
+    padding-bottom: clamp(4rem, 9vw, 6rem);
+  }
+  .cases {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 28rem), 1fr));
+    gap: 0 3rem;
+  }
+  .studies {
+    display: grid;
+    gap: 2rem;
+  }
+  .notebooks {
+    list-style: none;
+    padding: 0;
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 22rem), 1fr));
+    gap: 0 2.5rem;
+  }
+  .notebooks li {
+    padding-block: 1.25rem 1.5rem;
+    border-top: 1px solid var(--rule);
+  }
+  .notebooks h3 {
+    margin-top: 0.4rem;
+    font-size: 1.06rem;
+  }
+  .notebooks h3 :global(svg) {
+    display: inline-block;
+    width: 0.7em;
+    height: 0.7em;
+    margin-left: 0.2em;
+    color: var(--accent);
+  }
+  .nb-summary {
+    margin-top: 0.4rem;
+    color: var(--ink-2);
+  }
+</style>

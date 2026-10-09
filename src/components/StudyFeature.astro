@@ -1,0 +1,150 @@
+---
+import Icon from './Icon.astro';
+import type { Study } from '../data/work';
+interface Props {
+  study: Study;
+  headingLevel?: 'h2' | 'h3';
+  /** Short version for topic pages: links to the full entry on /work. */
+  teaser?: boolean;
+}
+const { study, headingLevel: H = 'h3', teaser = false } = Astro.props;
+---
+
+<article class="study reveal-on-scroll" id={teaser ? undefined : study.slug}>
+  <div class="main">
+    <p class="kicker">
+      <span class="accent">Research</span> · {study.venue} · <time datetime={study.isoDate}>{study.date}</time>
+    </p>
+    <H class="title">{study.title}</H>
+    <p class="subject">{study.subject}</p>
+    <p class="abstract">{study.abstract}</p>
+    {
+      !teaser && (
+        <>
+          <dl class="facts">
+            {study.facts.map((f) => (
+              <div>
+                <dt class="kicker">{f.label}</dt>
+                <dd>{f.value}</dd>
+              </div>
+            ))}
+          </dl>
+          <p class="kicker why">What it taught me</p>
+          {study.takeaways.map((t) => (
+            <p class="takeaway">{t}</p>
+          ))}
+        </>
+      )
+    }
+    <ul class="links">
+      {teaser && <li><a class="more" href={`/work/#${study.slug}`}>Read the summary</a></li>}
+      {
+        study.links.map((l) => (
+          <li>
+            <a href={l.href}>
+              {l.label}
+              <Icon name="external" />
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+  {
+    study.pullQuote && (
+      <figure class="quote">
+        <p>{study.pullQuote}</p>
+      </figure>
+    )
+  }
+</article>
+
+<style>
+  .study {
+    display: grid;
+    grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+    gap: 2rem clamp(2rem, 6vw, 5rem);
+    padding: clamp(1.5rem, 4vw, 2.75rem);
+    background: var(--paper-2);
+    border: 1px solid var(--rule);
+    border-top: 3px solid var(--accent);
+  }
+  .title {
+    margin-top: 0.75rem;
+    font-size: clamp(1.15rem, 1rem + 0.6vw, 1.45rem);
+    letter-spacing: -0.035em;
+  }
+  .subject {
+    margin-top: 0.5rem;
+    font-family: var(--font-quote);
+    font-style: italic;
+    font-size: 1.075rem;
+    color: var(--ink-2);
+  }
+  .abstract {
+    margin-top: 1rem;
+    max-width: 60ch;
+    color: var(--ink-2);
+  }
+  .facts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+    gap: 1rem 2rem;
+    margin-top: 1.5rem;
+    padding-block: 1rem;
+    border-block: 1px solid var(--rule);
+  }
+  .facts dd {
+    margin-top: 0.2rem;
+    font-size: 0.95rem;
+  }
+  .why {
+    margin-top: 1.5rem;
+    font-weight: 400;
+  }
+  .takeaway {
+    margin-top: 0.6rem;
+    max-width: 60ch;
+  }
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    list-style: none;
+    padding: 0;
+    margin-top: 1.5rem;
+  }
+  .links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+  }
+  .links :global(svg) {
+    width: 0.9em;
+    height: 0.9em;
+  }
+  .quote {
+    align-self: center;
+    padding-left: 1.5rem;
+    border-left: 2px solid var(--accent);
+  }
+  .quote p {
+    font-family: var(--font-quote);
+    font-size: clamp(1.35rem, 1.15rem + 0.9vw, 1.85rem);
+    font-style: italic;
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+  }
+  @media (max-width: 52rem) {
+    .study {
+      grid-template-columns: 1fr;
+    }
+    .quote {
+      grid-row: 1;
+    }
+  }
+</style>

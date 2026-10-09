@@ -1,0 +1,285 @@
+---
+import Base from '../layouts/Base.astro';
+import TopicGrid from '../components/TopicGrid.astro';
+import PostList from '../components/PostList.astro';
+import ElsewhereList from '../components/ElsewhereList.astro';
+import CaseStudy from '../components/CaseStudy.astro';
+import { profile, elsewhere } from '../data/profile';
+import { topics } from '../data/topics';
+import { caseStudies } from '../data/work';
+import { getPosts, postsOnTopic } from '../lib/posts';
+
+const posts = await getPosts();
+const latest = posts.slice(0, 3);
+const counts = Object.fromEntries(topics.map((t) => [t.slug, postsOnTopic(posts, t.slug).length]));
+const selected = caseStudies.filter((c) => c.featured);
+const nowItems = profile.now?.items.filter((i) => i.home) ?? [];
+
+const { statement, emphasis, dek } = profile.pov;
+const at = statement.indexOf(emphasis);
+const [before, after] = at >= 0 ? [statement.slice(0, at), statement.slice(at + emphasis.length)] : [statement, ''];
+let n = 0;
+const num = () => `§ ${String(++n).padStart(2, '0')}`;
+---
+
+<Base>
+  <!-- ── Point of view ────────────────────────────────────── -->
+  <section class="hero wrap" aria-labelledby="hero-title">
+    <p class="masthead kicker reveal" style="--i:0">
+      <span class="who">{profile.name}</span>
+      <span>Essays on AI at work, security and technical communication</span>
+    </p>
+    <h1 id="hero-title" class="reveal" style="--i:1">
+      {before}{
+        at >= 0 && (
+          <span class="lead">
+            {emphasis}
+            <svg class="squiggle" viewBox="0 0 300 12" preserveAspectRatio="none" aria-hidden="true">
+              <path d="M2 8 C 40 2, 70 11, 110 6 S 190 2, 230 7 S 280 9, 298 4" pathLength="1" />
+            </svg>
+          </span>
+        )
+      }{after}
+    </h1>
+    <p class="dek reveal" style="--i:2">{dek}</p>
+    <p class="hero-links reveal" style="--i:3">
+      <a class="more" href="/writing/">Read the writing</a>
+      <a class="more" href="/work/">See the work</a>
+      <a class="more" href="/about/">About me</a>
+    </p>
+  </section>
+
+  <!-- ── Now ──────────────────────────────────────────────── -->
+  {
+    nowItems.length > 0 && (
+      <section class="section" aria-labelledby="now-title">
+        <div class="wrap">
+          <div class="section-head">
+            <span class="num">{num()}</span>
+            <h2 id="now-title">What I’m working on now</h2>
+            <a class="more" href="/now/">More on my now page</a>
+          </div>
+          <dl class="now">
+            {nowItems.map((item) => (
+              <div>
+                <dt class="kicker">{item.label}</dt>
+                <dd>{item.text}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </section>
+    )
+  }
+
+  <!-- ── Topics ───────────────────────────────────────────── -->
+  <section class="section" aria-labelledby="topics-title">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="num">{num()}</span>
+        <h2 id="topics-title">What I write about</h2>
+        <p>Four topics. Each one has a page that collects the essays, research and work behind it.</p>
+      </div>
+      <TopicGrid counts={counts} />
+    </div>
+  </section>
+
+  <!-- ── Writing ──────────────────────────────────────────── -->
+  <section class="section" aria-labelledby="writing-title">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="num">{num()}</span>
+        {
+          latest.length > 0 ? (
+            <>
+              <h2 id="writing-title">Latest essays</h2>
+              <a class="more" href="/writing/">All writing</a>
+            </>
+          ) : (
+            <>
+              <h2 id="writing-title">Writing</h2>
+              <p>
+                The first essays are being written now. Until then, here is what I’ve published elsewhere under my own name.
+              </p>
+              <a class="more" href="/writing/">All writing</a>
+            </>
+          )
+        }
+      </div>
+      {latest.length > 0 ? <PostList posts={latest} headingLevel="h3" /> : <ElsewhereList items={elsewhere.slice(0, 3)} />}
+    </div>
+  </section>
+
+  <!-- ── Selected work ────────────────────────────────────── -->
+  <section class="section" aria-labelledby="work-title">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="num">{num()}</span>
+        <h2 id="work-title">Selected work</h2>
+        <p>The work behind the writing. Where a project taught me something, I have written it down with it.</p>
+        <a class="more" href="/work/">All work</a>
+      </div>
+      <div class="rows">
+        {selected.map((item) => <CaseStudy item={item} compact />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── About ────────────────────────────────────────────── -->
+  <section class="section" aria-labelledby="about-title">
+    <div class="wrap about">
+      <div class="section-head">
+        <span class="num">{num()}</span>
+        <h2 id="about-title">About</h2>
+      </div>
+      <div class="about-body">
+        <p class="intro">{profile.intro}</p>
+        <p class="about-links">
+          <a class="more" href="/about/">More about me</a>
+          <a class="more" href={profile.links.linkedin} rel="me">LinkedIn</a>
+          <a class="more" href={profile.links.github} rel="me">GitHub</a>
+        </p>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  /* Hero */
+  .hero {
+    padding-block: clamp(2.5rem, 8vw, 6rem) clamp(3rem, 7vw, 5rem);
+  }
+  .masthead {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.25rem 1rem;
+    padding-bottom: 0.9rem;
+    border-bottom: 1px solid var(--rule-heavy);
+  }
+  .masthead .who {
+    color: var(--ink);
+  }
+  .masthead .who::after {
+    content: '/';
+    margin-left: 1rem;
+    color: var(--accent);
+  }
+  h1 {
+    margin-top: clamp(1.75rem, 5vw, 3rem);
+    font-size: clamp(1.85rem, 1rem + 2.6vw, 2.9rem);
+    letter-spacing: -0.05em;
+    line-height: 1.06;
+    max-width: 21ch;
+  }
+  .lead {
+    position: relative;
+    display: inline-block;
+    color: var(--accent);
+  }
+  .squiggle {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -0.24em;
+    width: 100%;
+    height: 0.2em;
+    overflow: visible;
+  }
+  .squiggle path {
+    fill: none;
+    stroke: var(--accent);
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    vector-effect: non-scaling-stroke;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .squiggle path {
+      stroke-dasharray: 1;
+      stroke-dashoffset: 1;
+      animation: draw 900ms 650ms var(--ease) forwards;
+    }
+    @keyframes draw {
+      to {
+        stroke-dashoffset: 0;
+      }
+    }
+  }
+  .dek {
+    margin-top: clamp(1.5rem, 4vw, 2.25rem);
+    max-width: 58ch;
+    font-size: clamp(1rem, 0.95rem + 0.3vw, 1.15rem);
+    line-height: 1.55;
+    color: var(--ink-2);
+  }
+  .hero-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 2rem;
+    margin-top: 2rem;
+  }
+
+  .rows {
+    border-top: 1px solid var(--rule-heavy);
+  }
+
+  /* Now */
+  .now {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border-top: 1px solid var(--rule-heavy);
+  }
+  .now div {
+    padding: 1.25rem 1.5rem 1.5rem 0;
+  }
+  .now div + div {
+    padding-left: 1.5rem;
+    border-left: 1px solid var(--rule);
+  }
+  .now dt {
+    color: var(--accent);
+  }
+  .now dd {
+    margin-top: 0.5rem;
+    color: var(--ink-2);
+  }
+  @media (max-width: 52rem) {
+    .now {
+      grid-template-columns: 1fr;
+    }
+    .now div,
+    .now div + div {
+      padding: 1.1rem 0 1.25rem;
+      border-left: 0;
+    }
+    .now div + div {
+      border-top: 1px solid var(--rule);
+    }
+  }
+
+  /* About */
+  .about {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+    gap: 1rem 3rem;
+  }
+  .about .section-head {
+    margin-bottom: 0;
+  }
+  .intro {
+    max-width: 50ch;
+    font-size: clamp(1.05rem, 0.95rem + 0.4vw, 1.25rem);
+    line-height: 1.5;
+  }
+  .about-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 2rem;
+    margin-top: 1.5rem;
+  }
+  @media (max-width: 48rem) {
+    .about {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

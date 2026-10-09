@@ -1,0 +1,94 @@
+---
+import { formatDate, readingTime, postHref, type Post } from '../lib/posts';
+import { topicBySlug, topicHref } from '../data/topics';
+interface Props {
+  posts: Post[];
+  headingLevel?: 'h2' | 'h3';
+}
+const { posts, headingLevel: H = 'h2' } = Astro.props;
+---
+
+<ol class="posts">
+  {
+    posts.map((post) => (
+      <li class="post reveal-on-scroll">
+        <p class="meta mono">
+          <time datetime={post.data.pubDate.toISOString()}>{formatDate(post.data.pubDate)}</time>
+          <span>{readingTime(post.body)} min read</span>
+          {post.data.draft && <span class="draft">draft</span>}
+        </p>
+        <div>
+          <ul class="topic-labels">
+            {post.data.topics.map((t) => (
+              <li>
+                <a class="topic-label" href={topicHref(t)}>
+                  {topicBySlug(t).title}
+                </a>
+              </li>
+            ))}
+          </ul>
+          <H class="title">
+            <a href={postHref(post)}>{post.data.title}</a>
+          </H>
+          <p class="desc">{post.data.description}</p>
+        </div>
+      </li>
+    ))
+  }
+</ol>
+
+<style>
+  .posts {
+    list-style: none;
+    padding: 0;
+    border-top: 1px solid var(--rule-heavy);
+  }
+  .post {
+    display: grid;
+    grid-template-columns: 10rem minmax(0, 1fr);
+    gap: 0.4rem 2rem;
+    padding-block: 1.6rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    padding-top: 0.2rem;
+    color: var(--muted);
+  }
+  .title {
+    margin-top: 0.35rem;
+    font-size: clamp(1.05rem, 1rem + 0.25vw, 1.2rem);
+  }
+  .title a {
+    text-decoration: none;
+  }
+  .title a:hover {
+    text-decoration: underline;
+    text-decoration-color: var(--accent);
+    color: var(--ink);
+  }
+  .desc {
+    margin-top: 0.5rem;
+    color: var(--ink-2);
+    max-width: 62ch;
+  }
+  .draft {
+    align-self: flex-start;
+    color: var(--accent);
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    padding: 0 0.45rem;
+  }
+  @media (max-width: 40rem) {
+    .post {
+      grid-template-columns: 1fr;
+    }
+    .meta {
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 0.25rem 1rem;
+    }
+  }
+</style>

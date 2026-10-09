@@ -1,0 +1,21 @@
+# build output
+dist/
+.astro/
+
+# dependencies
+node_modules/
+
+# logs
+npm-debug.log*
+
+# environment
+.env
+.env.*
+
+# editors / OS
+.vscode/
+.idea/
+.DS_Store
+
+# local AI tool config
+.claude/

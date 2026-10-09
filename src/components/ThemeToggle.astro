@@ -1,0 +1,85 @@
+---
+import Icon from './Icon.astro';
+---
+
+<button type="button" class="theme-toggle" aria-label="Toggle dark mode" aria-pressed="false" data-theme-toggle>
+  <span class="sun"><Icon name="sun" /></span>
+  <span class="moon"><Icon name="moon" /></span>
+</button>
+
+<script>
+  const root = document.documentElement;
+  const media = window.matchMedia('(prefers-color-scheme: dark)');
+  const isDark = () => (root.dataset.theme ? root.dataset.theme === 'dark' : media.matches);
+
+  function sync() {
+    document.querySelectorAll<HTMLButtonElement>('[data-theme-toggle]').forEach((btn) => {
+      btn.setAttribute('aria-pressed', String(isDark()));
+    });
+  }
+
+  document.querySelectorAll<HTMLButtonElement>('[data-theme-toggle]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const next = isDark() ? 'light' : 'dark';
+      // Choosing the theme the system already uses clears the override, so the site follows the OS again.
+      const systemTheme = media.matches ? 'dark' : 'light';
+      if (next === systemTheme) {
+        delete root.dataset.theme;
+        try {
+          localStorage.removeItem('theme');
+        } catch {}
+      } else {
+        root.dataset.theme = next;
+        try {
+          localStorage.setItem('theme', next);
+        } catch {}
+      }
+      sync();
+    });
+  });
+  media.addEventListener('change', sync);
+  sync();
+</script>
+
+<style>
+  .theme-toggle {
+    display: grid;
+    place-items: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border: 1px solid var(--rule);
+    border-radius: 50%;
+    background: transparent;
+    cursor: pointer;
+    transition: border-color 160ms var(--ease), transform 300ms var(--ease);
+  }
+  .theme-toggle:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+  .theme-toggle:active {
+    transform: rotate(-20deg);
+  }
+  .theme-toggle > span {
+    grid-area: 1 / 1;
+    display: grid;
+  }
+  /* Show the icon for the theme you'd switch TO. */
+  .sun {
+    display: none !important;
+  }
+  :global(:root[data-theme='dark']) .sun {
+    display: grid !important;
+  }
+  :global(:root[data-theme='dark']) .moon {
+    display: none !important;
+  }
+  @media (prefers-color-scheme: dark) {
+    :global(:root:not([data-theme='light'])) .sun {
+      display: grid !important;
+    }
+    :global(:root:not([data-theme='light'])) .moon {
+      display: none !important;
+    }
+  }
+</style>

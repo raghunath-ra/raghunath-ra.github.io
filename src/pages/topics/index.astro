@@ -1,0 +1,33 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHead from '../../components/PageHead.astro';
+import TopicGrid from '../../components/TopicGrid.astro';
+import { getPosts, postsOnTopic } from '../../lib/posts';
+import { topics } from '../../data/topics';
+import { breadcrumbNode } from '../../lib/schema';
+
+const posts = await getPosts();
+const counts = Object.fromEntries(topics.map((t) => [t.slug, postsOnTopic(posts, t.slug).length]));
+const crumbs = [{ name: 'Topics', href: '/topics/' }];
+---
+
+<Base
+  title="Topics"
+  description="The four topics Raghunath Reddy writes about: AI adoption at work, how AI systems work, security communication, and marketing technical products."
+  schema={[breadcrumbNode(Astro.site!, crumbs)]}
+>
+  <PageHead
+    crumbs={crumbs}
+    title="The four topics I write about"
+    lede="Everything on this site is filed under one of these. Each topic page opens with what I have to say on it so far, then collects the essays, research and work behind it."
+  />
+  <section class="wrap body" aria-label="Topics">
+    <TopicGrid counts={counts} headingLevel="h2" />
+  </section>
+</Base>
+
+<style>
+  .body {
+    padding-bottom: clamp(4rem, 9vw, 6rem);
+  }
+</style>

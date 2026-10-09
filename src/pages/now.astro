@@ -1,0 +1,71 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHead from '../components/PageHead.astro';
+import { profile } from '../data/profile';
+import { formatDate } from '../lib/posts';
+import { breadcrumbNode } from '../lib/schema';
+
+// Setting profile.now to null retires this page (it redirects to /about/).
+if (!profile.now) return Astro.redirect('/about/');
+const now = profile.now;
+const updated = new Date(now.updated);
+const crumbs = [{ name: 'Now', href: '/now/' }];
+---
+
+<Base
+  title="Now"
+  description={`What ${profile.name} is working on, writing and building now.`}
+  schema={[breadcrumbNode(Astro.site!, crumbs)]}
+>
+  <PageHead crumbs={crumbs} kicker="Now" title="What I’m doing now">
+    <p class="updated mono reveal" style="--i:2">
+      Updated <time datetime={now.updated}>{formatDate(updated)}</time> · from {profile.location}
+    </p>
+  </PageHead>
+  <div class="wrap body">
+    <dl class="now">
+      {
+        now.items.map((item) => (
+          <div>
+            <dt class="kicker">{item.label}</dt>
+            <dd>{item.text}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </div>
+</Base>
+
+<style>
+  .updated {
+    margin-top: 1.25rem;
+    color: var(--muted);
+  }
+  .body {
+    padding-bottom: clamp(4rem, 9vw, 6rem);
+  }
+  .now {
+    max-width: 48rem;
+    border-top: 1px solid var(--rule-heavy);
+  }
+  .now div {
+    display: grid;
+    grid-template-columns: 9rem minmax(0, 1fr);
+    gap: 0.25rem 2rem;
+    padding-block: 1.25rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .now dt {
+    padding-top: 0.35rem;
+    color: var(--accent);
+  }
+  .now dd {
+    font-size: 1.05rem;
+    line-height: 1.45;
+  }
+  @media (max-width: 36rem) {
+    .now div {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

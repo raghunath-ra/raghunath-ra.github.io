@@ -1,0 +1,200 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHead from '../components/PageHead.astro';
+import Icon from '../components/Icon.astro';
+import { profile } from '../data/profile';
+import { topics, topicHref } from '../data/topics';
+import { breadcrumbNode } from '../lib/schema';
+
+const crumbs = [{ name: 'About', href: '/about/' }];
+const profiles = [
+  { label: 'LinkedIn', note: 'Full career history', href: profile.links.linkedin, icon: 'linkedin' as const },
+  { label: 'GitHub', note: 'Code and notebooks', href: profile.links.github, icon: 'github' as const },
+  { label: 'Kaggle', note: 'Competitions and writeups', href: profile.links.kaggle, icon: 'kaggle' as const },
+];
+---
+
+<Base
+  title="About"
+  description={`About ${profile.name}: from software testing to technical writing, product marketing and cybersecurity, and how that led to writing about AI and security.`}
+  type="profile"
+  schema={[breadcrumbNode(Astro.site!, crumbs)]}
+>
+  <PageHead crumbs={crumbs} kicker="About" title={`I’m ${profile.shortName}.`} lede={profile.intro} />
+
+  <div class="wrap layout">
+    <div class="story prose">
+      {
+        profile.story.map((chapter, i) => (
+          <section aria-labelledby={`ch-${i}`}>
+            <h2 id={`ch-${i}`}>
+              <span class="ch mono" aria-hidden="true">
+                {String(i + 1).padStart(2, '0')}
+              </span>
+              {chapter.heading}
+            </h2>
+            {chapter.paragraphs.map((p) => (
+              <p>{p}</p>
+            ))}
+          </section>
+        ))
+      }
+      <p class="history">
+        This page describes my career in prose. For dates, titles and employers, see{' '}
+        <a href={profile.links.linkedin} rel="me">my LinkedIn profile</a>.
+      </p>
+    </div>
+
+    <aside class="aside" aria-label="At a glance">
+      {
+        profile.headshot && (
+          <img
+            class="headshot"
+            src={profile.headshot}
+            alt={`Portrait of ${profile.name}`}
+            width="600"
+            height="600"
+            loading="lazy"
+            decoding="async"
+          />
+        )
+      }
+      <div class="card">
+        <h2 class="kicker">I write about</h2>
+        <ul class="topics">
+          {
+            topics.map((t) => (
+              <li>
+                <a href={topicHref(t.slug)}>{t.title}</a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+      <div class="card">
+        <h2 class="kicker">Elsewhere</h2>
+        <ul class="profiles">
+          {
+            profiles.map((p) => (
+              <li>
+                <a href={p.href} rel="me">
+                  <Icon name={p.icon} />
+                  <span>
+                    {p.label}
+                    <span class="muted"> · {p.note}</span>
+                  </span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+      <div class="card">
+        <h2 class="kicker">Based in</h2>
+        <p>{profile.location}</p>
+        {profile.now && <p class="now"><a class="more" href="/now/">What I’m doing now</a></p>}
+      </div>
+    </aside>
+  </div>
+</Base>
+
+<style>
+  .layout {
+    display: grid;
+    grid-template-columns: minmax(0, var(--measure)) minmax(0, 18rem);
+    justify-content: space-between;
+    gap: 3rem;
+    padding-bottom: clamp(4rem, 9vw, 6rem);
+  }
+  .story section:first-child h2 {
+    margin-top: 0.5rem;
+  }
+  .story h2 {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+  }
+  .ch {
+    font-size: 0.8125rem;
+    color: var(--accent);
+    letter-spacing: 0;
+  }
+  .history {
+    margin-top: 2.5em;
+    padding-top: 1.25em;
+    border-top: 1px solid var(--rule);
+    color: var(--muted);
+    font-size: 0.95em;
+  }
+  .aside {
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+    align-self: start;
+    position: sticky;
+    top: 6rem;
+  }
+  .card {
+    padding-left: 1.25rem;
+    border-left: 2px solid var(--accent);
+  }
+  .card h2 {
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+  }
+  .card ul {
+    list-style: none;
+    padding: 0;
+  }
+  .card li {
+    padding-block: 0.2rem;
+  }
+  .topics a {
+    font-family: var(--font-display);
+    font-size: 0.92rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    text-decoration: none;
+  }
+  .topics a:hover {
+    text-decoration: underline;
+  }
+  .profiles a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    font-size: 0.95rem;
+  }
+  .profiles a:hover > span:not(.muted) {
+    text-decoration: underline;
+  }
+  .profiles :global(svg) {
+    flex: none;
+    color: var(--muted);
+  }
+  .now {
+    margin-top: 0.4rem;
+  }
+  .headshot {
+    width: 100%;
+    max-width: 16rem;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: var(--radius);
+    filter: grayscale(0.15) contrast(1.02);
+  }
+  @media (max-width: 56rem) {
+    .layout {
+      grid-template-columns: 1fr;
+    }
+    .aside {
+      position: static;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 1.5rem 2.5rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--rule);
+    }
+  }
+</style>

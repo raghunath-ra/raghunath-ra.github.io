@@ -1,0 +1,52 @@
+---
+/**
+ * A numbered note. On wide screens it sits in the right margin beside the line
+ * it annotates; on narrow screens it appears inline, below that line.
+ *
+ *   Some claim.<Sidenote>Where the claim comes from, or a caveat.</Sidenote>
+ */
+---
+
+<span class="sidenote"
+  ><span class="ref" aria-hidden="true"></span><small class="note" role="note"><slot /></small></span
+>
+
+<style>
+  .ref::after {
+    counter-increment: sidenote;
+    content: counter(sidenote);
+    position: relative;
+    top: -0.5em;
+    margin-left: 0.1em;
+    font-family: var(--font-mono);
+    font-size: 0.7em;
+    line-height: 0;
+    color: var(--accent);
+  }
+  .note {
+    display: block;
+    margin-block: 0.6rem 0.9rem;
+    padding-left: 0.85rem;
+    border-left: 2px solid var(--accent-soft);
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: var(--muted);
+  }
+  .note::before {
+    content: counter(sidenote) '. ';
+    font-family: var(--font-mono);
+    font-size: 0.8em;
+    color: var(--accent);
+  }
+  @media (min-width: 80rem) {
+    .note {
+      float: right;
+      clear: right;
+      width: var(--side);
+      margin: 0.3rem calc(-1 * (var(--side) + var(--col-gap))) 1rem 0;
+      padding-left: 0;
+      border-left: 0;
+      font-size: 0.8125rem;
+    }
+  }
+</style>

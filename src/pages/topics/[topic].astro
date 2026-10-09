@@ -1,0 +1,215 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHead from '../../components/PageHead.astro';
+import PostList from '../../components/PostList.astro';
+import ElsewhereList from '../../components/ElsewhereList.astro';
+import CaseStudy from '../../components/CaseStudy.astro';
+import StudyFeature from '../../components/StudyFeature.astro';
+import TopicGrid from '../../components/TopicGrid.astro';
+import { getPosts, postsOnTopic } from '../../lib/posts';
+import { topics, topicHref, type Topic } from '../../data/topics';
+import { elsewhere } from '../../data/profile';
+import { caseStudies, research, notebooks } from '../../data/work';
+import Icon from '../../components/Icon.astro';
+import { breadcrumbNode } from '../../lib/schema';
+
+export function getStaticPaths() {
+  return topics.map((topic, i) => ({ params: { topic: topic.slug }, props: { topic, index: i } }));
+}
+
+interface Props {
+  topic: Topic;
+  index: number;
+}
+const { topic, index } = Astro.props;
+const all = await getPosts();
+const posts = postsOnTopic(all, topic.slug);
+const counts = Object.fromEntries(topics.map((t) => [t.slug, postsOnTopic(all, t.slug).length]));
+const studies = research.filter((r) => r.topics.includes(topic.slug));
+const cases = caseStudies.filter((c) => c.topics.includes(topic.slug));
+const nbs = notebooks.filter((nb) => nb.topics.includes(topic.slug));
+// Skip pieces already linked from a research study shown above.
+const studyLinks = new Set(studies.flatMap((s) => s.links.map((l) => l.href)));
+const pieces = elsewhere.filter((e) => e.topics.includes(topic.slug) && !studyLinks.has(e.href));
+const crumbs = [
+  { name: 'Topics', href: '/topics/' },
+  { name: topic.title, href: topicHref(topic.slug) },
+];
+let n = 0;
+const num = () => `§ ${String(++n).padStart(2, '0')}`;
+---
+
+<Base
+  title={topic.title}
+  description={`${topic.thesis} Essays, research and work by Raghunath Reddy filed under ${topic.title}.`}
+  image={`/og/topics/${topic.slug}.png`}
+  imageAlt={`${topic.title}: ${topic.question}`}
+  schema={[breadcrumbNode(Astro.site!, crumbs)]}
+>
+  <PageHead crumbs={crumbs} kicker={`Topic ${String(index + 1).padStart(2, '0')} of ${topics.length}`} title={topic.title}>
+    <p class="question reveal" style="--i:2">{topic.question}</p>
+    <div class="stance prose reveal" style="--i:3">
+      {topic.stance.map((p) => <p>{p}</p>)}
+    </div>
+  </PageHead>
+
+  <section class="wrap block" aria-labelledby="essays-title">
+    <div class="section-head">
+      <span class="num">{num()}</span>
+      <h2 id="essays-title">Essays</h2>
+    </div>
+    {
+      posts.length > 0 ? (
+        <PostList posts={posts} headingLevel="h3" />
+      ) : (
+        <p class="empty">
+          The first essay on this topic is being written. Subscribe to the <a href="/rss.xml">RSS feed</a> to read it
+          when it is published; until then, the work below is where these views come from.
+        </p>
+      )
+    }
+  </section>
+
+  {
+    studies.length > 0 && (
+      <section class="wrap block" aria-labelledby="research-title">
+        <div class="section-head">
+          <span class="num">{num()}</span>
+          <h2 id="research-title">Research</h2>
+        </div>
+        {studies.map((s) => (
+          <StudyFeature study={s} teaser />
+        ))}
+      </section>
+    )
+  }
+
+  {
+    nbs.length > 0 && (
+      <section class="wrap block" aria-labelledby="notebooks-title">
+        <div class="section-head">
+          <span class="num">{num()}</span>
+          <h2 id="notebooks-title">Notebooks</h2>
+          <a class="more" href="/work/#research">All research &amp; notebooks</a>
+        </div>
+        <ul class="notebooks">
+          {nbs.map((nb) => (
+            <li>
+              <p class="kicker">
+                {nb.kind} · {nb.date}
+              </p>
+              <h3>
+                <a href={nb.href}>
+                  {nb.title}
+                  <Icon name="external" />
+                </a>
+              </h3>
+              <p class="nb-summary">{nb.summary}</p>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
+
+  {
+    cases.length > 0 && (
+      <section class="wrap block" aria-labelledby="work-title">
+        <div class="section-head">
+          <span class="num">{num()}</span>
+          <h2 id="work-title">Related work</h2>
+          <a class="more" href="/work/">All work</a>
+        </div>
+        <div class="rows">
+          {cases.map((c) => (
+            <CaseStudy item={c} compact />
+          ))}
+        </div>
+      </section>
+    )
+  }
+
+  {
+    pieces.length > 0 && (
+      <section class="wrap block" aria-labelledby="elsewhere-title">
+        <div class="section-head">
+          <span class="num">{num()}</span>
+          <h2 id="elsewhere-title">Published elsewhere</h2>
+        </div>
+        <ElsewhereList items={pieces} showTopics={false} />
+      </section>
+    )
+  }
+
+  <section class="wrap block others" aria-labelledby="others-title">
+    <div class="section-head">
+      <span class="num">§</span>
+      <h2 id="others-title">Other topics</h2>
+    </div>
+    <TopicGrid counts={counts} exclude={topic.slug} />
+  </section>
+</Base>
+
+<style>
+  .question {
+    margin-top: 1.5rem;
+    max-width: 26ch;
+    font-family: var(--font-quote);
+    font-size: clamp(1.3rem, 1.1rem + 0.9vw, 1.75rem);
+    font-style: italic;
+    font-weight: 400;
+    line-height: 1.25;
+    color: var(--accent);
+  }
+  .stance {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--rule);
+  }
+  .stance p:first-child {
+    font-size: 1.15em;
+    color: var(--ink);
+  }
+  .block {
+    padding-block: clamp(2rem, 5vw, 3.5rem);
+  }
+  .others {
+    padding-bottom: clamp(4rem, 9vw, 6rem);
+  }
+  .empty {
+    max-width: 62ch;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--rule-heavy);
+    color: var(--ink-2);
+  }
+  .rows {
+    border-top: 1px solid var(--rule-heavy);
+  }
+  .notebooks {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 22rem), 1fr));
+    gap: 0 2.5rem;
+    border-top: 1px solid var(--rule-heavy);
+  }
+  .notebooks li {
+    padding-block: 1.25rem 1.5rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .notebooks h3 {
+    margin-top: 0.4rem;
+    font-size: 1.06rem;
+  }
+  .notebooks h3 :global(svg) {
+    display: inline-block;
+    width: 0.7em;
+    height: 0.7em;
+    margin-left: 0.2em;
+    color: var(--accent);
+  }
+  .nb-summary {
+    margin-top: 0.4rem;
+    color: var(--ink-2);
+  }
+</style>

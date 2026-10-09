@@ -1,0 +1,77 @@
+---
+import Icon from './Icon.astro';
+import type { Elsewhere } from '../data/profile';
+import { topicBySlug, topicHref } from '../data/topics';
+interface Props {
+  items: (Elsewhere & { href: string })[];
+  headingLevel?: 'h2' | 'h3' | 'h4';
+  showTopics?: boolean;
+}
+const { items, headingLevel: H = 'h3', showTopics = true } = Astro.props;
+---
+
+<ul class="elsewhere">
+  {
+    items.map((item) => (
+      <li class="item reveal-on-scroll">
+        <p class="kicker">
+          {item.kind} · {item.outlet}
+          {item.year && ` · ${item.year}`}
+        </p>
+        <H class="title">
+          <a href={item.href}>
+            {item.title}
+            <Icon name="external" />
+          </a>
+        </H>
+        {showTopics && (
+          <ul class="topic-labels">
+            {item.topics.map((t) => (
+              <li>
+                <a class="topic-label" href={topicHref(t)}>
+                  {topicBySlug(t).title}
+                </a>
+              </li>
+            ))}
+          </ul>
+        )}
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  .elsewhere {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr));
+    gap: 0 2.5rem;
+  }
+  .item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    padding-block: 1.2rem 1.35rem;
+    border-top: 1px solid var(--rule);
+  }
+  .title {
+    font-size: 1rem;
+    line-height: 1.4;
+  }
+  .title a {
+    text-decoration-color: var(--rule-strong);
+  }
+  .title a:hover {
+    text-decoration-color: var(--accent);
+    color: var(--ink);
+  }
+  .title :global(svg) {
+    display: inline-block;
+    width: 0.75em;
+    height: 0.75em;
+    margin-left: 0.15em;
+    vertical-align: baseline;
+    color: var(--accent);
+  }
+</style>

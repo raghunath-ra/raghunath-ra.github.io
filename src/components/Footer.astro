@@ -1,0 +1,106 @@
+---
+import Icon from './Icon.astro';
+import { profile } from '../data/profile';
+import { site } from '../data/site';
+const year = new Date().getFullYear();
+
+const pages = [
+  { href: '/writing/', label: 'Writing' },
+  { href: '/topics/', label: 'Topics' },
+  { href: '/work/', label: 'Work' },
+  { href: '/about/', label: 'About' },
+  ...(profile.now ? [{ href: '/now/', label: 'Now' }] : []),
+];
+---
+
+<footer class="site-footer">
+  <div class="wrap grid">
+    <div class="sign">
+      <p class="who">{profile.name}</p>
+      <p class="muted">{profile.pov.statement}</p>
+    </div>
+    <nav aria-label="Site">
+      <ul class="pages mono">
+        {pages.map((p) => <li><a href={p.href}>{p.label}</a></li>)}
+      </ul>
+    </nav>
+    <ul class="links" aria-label="Elsewhere">
+      <li><a href={profile.links.linkedin} rel="me"><Icon name="linkedin" /><span>LinkedIn</span></a></li>
+      <li><a href={profile.links.github} rel="me"><Icon name="github" /><span>GitHub</span></a></li>
+      <li><a href="/rss.xml"><Icon name="rss" /><span>RSS</span></a></li>
+    </ul>
+    <p class="mono colophon">
+      © {year} {profile.name} · {profile.location} · Set in Cascadia Mono, Inter &amp; Source Serif 4 · Built with Astro ·{' '}
+      <a href={site.repo}>Source</a>
+    </p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid var(--rule);
+    padding-block: 3rem 2.5rem;
+    color: var(--muted);
+    background: var(--paper-2);
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) auto;
+    gap: 2rem 3rem;
+    align-items: start;
+  }
+  .who {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    font-size: 1.05rem;
+    color: var(--ink);
+  }
+  .sign .muted {
+    margin-top: 0.4rem;
+    max-width: 38ch;
+    font-family: var(--font-quote);
+    font-style: italic;
+  }
+  .pages,
+  .links {
+    list-style: none;
+    padding: 0;
+  }
+  .pages {
+    display: grid;
+    grid-template-columns: repeat(2, max-content);
+    gap: 0.15rem 2rem;
+  }
+  .pages a,
+  .links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding-block: 0.3rem;
+    color: var(--ink-2);
+    text-decoration: none;
+  }
+  .links a {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+  }
+  .pages a:hover,
+  .links a:hover {
+    color: var(--accent);
+  }
+  .colophon {
+    grid-column: 1 / -1;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--rule);
+    font-size: 0.75rem;
+  }
+  @media (max-width: 48rem) {
+    .grid {
+      grid-template-columns: 1fr 1fr;
+    }
+    .sign {
+      grid-column: 1 / -1;
+    }
+  }
+</style>

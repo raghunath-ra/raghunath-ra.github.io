@@ -1,0 +1,138 @@
+---
+import { topics, topicHref, type TopicSlug } from '../data/topics';
+interface Props {
+  /** Published essays per topic, for the status line. */
+  counts: Partial<Record<TopicSlug, number>>;
+  headingLevel?: 'h2' | 'h3';
+  /** Leave this topic out (e.g. on its own hub page). */
+  exclude?: TopicSlug;
+}
+const { counts, headingLevel: H = 'h3', exclude } = Astro.props;
+const list = topics.map((t, i) => ({ ...t, n: String(i + 1).padStart(2, '0') })).filter((t) => t.slug !== exclude);
+const status = (n = 0) => (n === 0 ? 'First essay in progress' : n === 1 ? '1 essay' : `${n} essays`);
+---
+
+<ol class:list={['topics', { three: list.length === 3 }]}>
+  {
+    list.map((t) => (
+      <li class="topic reveal-on-scroll">
+        <p class="num mono" aria-hidden="true">
+          {t.n}
+        </p>
+        <H class="title">
+          <a href={topicHref(t.slug)}>{t.title}</a>
+        </H>
+        <p class="question">{t.question}</p>
+        <p class="thesis">{t.thesis}</p>
+        <p class="status mono">{status(counts[t.slug])}</p>
+      </li>
+    ))
+  }
+</ol>
+
+<style>
+  .topics {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    border-top: 1px solid var(--rule-heavy);
+  }
+  .topics.three {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .topic {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    padding: 1.5rem 1.5rem 1.75rem 0;
+  }
+  /*
+   * Line the cards up row by row (number, title, question, thesis, status), so a
+   * question that wraps to three lines doesn't push its neighbors out of line.
+   * Browsers without subgrid keep the flex column above.
+   */
+  @supports (grid-template-rows: subgrid) {
+    .topic {
+      display: grid;
+      grid-template-rows: subgrid;
+      grid-row: span 5;
+      row-gap: 0.6rem;
+    }
+    .status {
+      margin-top: 0;
+      align-self: end;
+    }
+  }
+  .topic + .topic {
+    padding-left: 1.5rem;
+    border-left: 1px solid var(--rule);
+  }
+  .num {
+    color: var(--accent);
+  }
+  .title {
+    font-size: 1rem;
+  }
+  /* The whole column is the link target; the heading carries the accessible name. */
+  .title a {
+    text-decoration: none;
+  }
+  .title a::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+  }
+  .topic:hover .title a {
+    color: var(--accent);
+  }
+  .question {
+    font-family: var(--font-quote);
+    font-style: italic;
+    font-size: 1.05rem;
+    line-height: 1.4;
+    color: var(--ink);
+  }
+  .thesis {
+    font-size: 0.95rem;
+    color: var(--ink-2);
+  }
+  .status {
+    margin-top: auto;
+    padding-top: 0.5rem;
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+  .status::after {
+    content: ' →';
+    color: var(--accent);
+  }
+  @media (max-width: 64rem) {
+    .topics,
+    .topics.three {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .topic:nth-child(odd) {
+      padding-left: 0;
+      border-left: 0;
+    }
+    .topic:nth-child(n + 3) {
+      border-top: 1px solid var(--rule);
+    }
+  }
+  @media (max-width: 36rem) {
+    .topics,
+    .topics.three {
+      grid-template-columns: 1fr;
+    }
+    .topic,
+    .topic + .topic {
+      padding: 1.4rem 0 1.5rem;
+      border-left: 0;
+    }
+    .topic + .topic {
+      border-top: 1px solid var(--rule);
+    }
+  }
+</style>
