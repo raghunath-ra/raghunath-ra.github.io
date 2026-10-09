@@ -1,0 +1,302 @@
+---
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import Toc from '../../components/essay/Toc.astro';
+import PullQuote from '../../components/essay/PullQuote.astro';
+import Sidenote from '../../components/essay/Sidenote.astro';
+import { getPosts, postHref, readingTime, formatDate, type Post } from '../../lib/posts';
+import { topicBySlug, topicHref } from '../../data/topics';
+import { profile } from '../../data/profile';
+import { blogPostingNode, breadcrumbNode } from '../../lib/schema';
+
+export async function getStaticPaths() {
+  const posts = await getPosts();
+  return posts.map((post, i) => ({
+    params: { slug: post.id },
+    props: { post, newer: posts[i - 1], older: posts[i + 1] },
+  }));
+}
+
+interface Props {
+  post: Post;
+  newer?: Post;
+  older?: Post;
+}
+
+const { post, newer, older } = Astro.props;
+const { title, description, pubDate, updatedDate, draft } = post.data;
+const { Content, headings } = await render(post);
+const minutes = readingTime(post.body);
+// Long essays get a table of contents: 3+ sections, or 4+ headings counting subsections.
+const h2s = headings.filter((h) => h.depth === 2).length;
+const h3s = headings.filter((h) => h.depth === 3).length;
+const showToc = post.data.toc ?? (h2s >= 3 || h2s + h3s >= 4);
+const topics = post.data.topics.map(topicBySlug);
+const [primary] = topics;
+const href = postHref(post);
+const image = `/og/writing/${post.id}.png`;
+const crumbs = [
+  { name: 'Writing', href: '/writing/' },
+  { name: title, href },
+];
+const base = Astro.site!;
+const schema = [
+  blogPostingNode(base, {
+    url: href,
+    title,
+    description,
+    published: pubDate,
+    modified: updatedDate,
+    image,
+    topics: topics.map((t) => t.title),
+    wordCount: (post.body ?? '').split(/\s+/).filter(Boolean).length,
+  }),
+  breadcrumbNode(base, crumbs),
+];
+---
+
+<Base
+  title={title}
+  description={description}
+  image={image}
+  imageAlt={`${title}, an essay by ${profile.name}`}
+  type="article"
+  publishedTime={pubDate}
+  modifiedTime={updatedDate}
+  section={primary.title}
+  tags={topics.map((t) => t.title)}
+  noindex={draft}
+  schema={schema}
+>
+  <article class="essay">
+    <header class="essay-head wrap">
+      <Breadcrumbs crumbs={crumbs} />
+      <p class="kicker topic reveal" style="--i:0">
+        {
+          topics.map((t, i) => (
+            <>
+              {i > 0 && <span aria-hidden="true"> · </span>}
+              <a href={topicHref(t.slug)}>{t.title}</a>
+            </>
+          ))
+        }
+      </p>
+      <h1 class="reveal" style="--i:1">{title}</h1>
+      <p class="dek reveal" style="--i:2">{description}</p>
+      <p class="byline mono reveal" style="--i:3">
+        <span>By <a href="/about/" rel="author">{profile.name}</a></span>
+        <time datetime={pubDate.toISOString()}>{formatDate(pubDate)}</time>
+        {
+          updatedDate && (
+            <span>
+              Updated <time datetime={updatedDate.toISOString()}>{formatDate(updatedDate)}</time>
+            </span>
+          )
+        }
+        <span>{minutes} min read</span>
+        {draft && <span class="draft">Draft · not published</span>}
+      </p>
+    </header>
+
+    <div class:list={['essay-body', { 'has-toc': showToc }]}>
+      {
+        showToc && (
+          <div class="toc-col">
+            <Toc headings={headings} />
+          </div>
+        )
+      }
+      <div class="prose">
+        <Content components={{ PullQuote, Sidenote }} />
+      </div>
+    </div>
+
+    <footer class="essay-foot">
+      <section class="filed" aria-labelledby="filed-title">
+        <h2 id="filed-title" class="kicker">Filed under</h2>
+        <ul>
+          {
+            topics.map((t) => (
+              <li>
+                <a href={topicHref(t.slug)} class="filed-topic">
+                  <span class="name">{t.title}</span>
+                  <span class="thesis">{t.thesis}</span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+      <p class="signoff">
+        Written by <a href="/about/">{profile.name}</a>. Follow new essays by <a href="/rss.xml">RSS</a> or on{' '}
+        <a href={profile.links.linkedin} rel="me">LinkedIn</a>.
+      </p>
+      {
+        (older || newer) && (
+          <nav class="pager" aria-label="More essays">
+            {older && (
+              <a class="older" href={postHref(older)}>
+                <span class="kicker">← Previous essay</span>
+                <span class="t">{older.data.title}</span>
+              </a>
+            )}
+            {newer && (
+              <a class="newer" href={postHref(newer)}>
+                <span class="kicker">Next essay →</span>
+                <span class="t">{newer.data.title}</span>
+              </a>
+            )}
+          </nav>
+        )
+      }
+    </footer>
+  </article>
+</Base>
+
+<style>
+  .essay {
+    --essay-wrap: calc(var(--side) + var(--col-gap) + var(--measure) + var(--col-gap) + var(--side));
+    padding-bottom: clamp(4rem, 9vw, 6rem);
+  }
+  .essay-head,
+  .essay-body,
+  .essay-foot {
+    width: 100%;
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+  .essay-head {
+    max-width: calc(var(--measure) + 2 * var(--gutter));
+    padding-block: clamp(2rem, 6vw, 4rem) clamp(2rem, 4vw, 2.75rem);
+  }
+  .topic {
+    margin-top: clamp(1.75rem, 5vw, 3rem);
+  }
+  .topic a {
+    color: var(--accent);
+  }
+  h1 {
+    margin-top: 0.85rem;
+    font-size: clamp(1.65rem, 1.25rem + 1.7vw, 2.5rem);
+    letter-spacing: -0.045em;
+    line-height: 1.08;
+  }
+  .dek {
+    margin-top: 1.1rem;
+    font-size: clamp(1.05rem, 1rem + 0.25vw, 1.2rem);
+    line-height: 1.5;
+    color: var(--ink-2);
+  }
+  .byline {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem 0;
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--rule);
+    color: var(--muted);
+  }
+  .byline > * + *::before {
+    content: '·';
+    margin-inline: 0.6rem;
+    color: var(--rule-strong);
+  }
+  .byline a {
+    color: var(--ink);
+  }
+  .draft {
+    color: var(--accent);
+  }
+
+  .essay-body {
+    max-width: calc(var(--measure) + 2 * var(--gutter));
+  }
+  .essay-foot {
+    max-width: calc(var(--measure) + 2 * var(--gutter));
+    margin-top: 4rem;
+  }
+  /* Wide screens: contents on the left, reading column, notes in the right margin. */
+  @media (min-width: 80rem) {
+    .essay-head,
+    .essay-foot {
+      max-width: calc(var(--essay-wrap) + 2 * var(--gutter));
+      padding-inline: calc(var(--gutter) + var(--side) + var(--col-gap)) calc(var(--gutter) + var(--side) + var(--col-gap));
+    }
+    .essay-body {
+      display: grid;
+      grid-template-columns: var(--side) minmax(0, var(--measure)) var(--side);
+      column-gap: var(--col-gap);
+      max-width: calc(var(--essay-wrap) + 2 * var(--gutter));
+    }
+    .prose {
+      grid-column: 2;
+    }
+    .toc-col {
+      grid-column: 1;
+      grid-row: 1;
+    }
+  }
+
+  .filed {
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--rule-heavy);
+  }
+  .filed h2 {
+    font-weight: 400;
+  }
+  .filed ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 0.75rem;
+  }
+  .filed-topic {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    padding-block: 0.75rem;
+    text-decoration: none;
+  }
+  .filed-topic .name {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    font-size: 1.02rem;
+    color: var(--accent);
+  }
+  .filed-topic .thesis {
+    color: var(--ink-2);
+  }
+  .filed-topic:hover .name {
+    text-decoration: underline;
+  }
+  .signoff {
+    margin-top: 1.5rem;
+    color: var(--muted);
+  }
+  .pager {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--rule);
+  }
+  .pager a {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    text-decoration: none;
+  }
+  .pager .newer {
+    grid-column: 2;
+    text-align: right;
+  }
+  .pager .t {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    font-size: 0.98rem;
+    line-height: 1.3;
+  }
+</style>

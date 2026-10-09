@@ -1,0 +1,105 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHead from '../../components/PageHead.astro';
+import PostList from '../../components/PostList.astro';
+import ElsewhereList from '../../components/ElsewhereList.astro';
+import Icon from '../../components/Icon.astro';
+import { getPosts } from '../../lib/posts';
+import { elsewhere } from '../../data/profile';
+import { topics, topicHref } from '../../data/topics';
+
+const posts = await getPosts();
+---
+
+<Base
+  title="Writing"
+  description="Essays on AI adoption at work, how AI systems work, security communication and marketing technical products, plus pieces published elsewhere."
+>
+  <PageHead
+    kicker="Writing"
+    title="Essays & notes"
+    lede="Essays on the four topics this site is organized around. Each essay is filed under a topic, so you can follow only the ones you care about."
+  >
+    <p class="actions mono">
+      <a href="/rss.xml"><Icon name="rss" /> Subscribe by RSS</a>
+      <a href="/topics/">Browse by topic →</a>
+    </p>
+  </PageHead>
+
+  <section class="wrap block" aria-labelledby="essays-title">
+    <div class="section-head">
+      <span class="num">§ 01</span>
+      <h2 id="essays-title">Essays</h2>
+    </div>
+    {
+      posts.length > 0 ? (
+        <PostList posts={posts} headingLevel="h3" />
+      ) : (
+        <div class="empty">
+          <p class="lead">The first essays are being written now, one for each topic:</p>
+          <ul>
+            {topics.map((t) => (
+              <li>
+                <a href={topicHref(t.slug)}>{t.title}</a>
+                <span class="muted"> · {t.question}</span>
+              </li>
+            ))}
+          </ul>
+          <p class="muted">
+            Subscribe to the <a href="/rss.xml">RSS feed</a> to get them as they’re published. Until then, the{' '}
+            <a href="/work/#research">research</a> and the pieces below show how I think.
+          </p>
+        </div>
+      )
+    }
+  </section>
+
+  <section class="wrap block" aria-labelledby="elsewhere-title">
+    <div class="section-head">
+      <span class="num">§ 02</span>
+      <h2 id="elsewhere-title">Published elsewhere</h2>
+      <p>These are pieces published under my own name on other sites.</p>
+    </div>
+    <ElsewhereList items={elsewhere} />
+  </section>
+</Base>
+
+<style>
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.75rem;
+    margin-top: 1.75rem;
+  }
+  .actions a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .block {
+    padding-block: clamp(2rem, 5vw, 3.5rem);
+  }
+  .block:last-child {
+    padding-bottom: clamp(4rem, 9vw, 6rem);
+  }
+  .empty {
+    max-width: 62ch;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--rule-heavy);
+  }
+  .empty .lead {
+    font-size: 1.2rem;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+  .empty ul {
+    margin-block: 1rem 1.25rem;
+    padding-left: 1.1rem;
+  }
+  .empty li {
+    padding-block: 0.3rem;
+  }
+  .empty li::marker {
+    color: var(--accent);
+  }
+</style>

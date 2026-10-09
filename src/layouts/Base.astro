@@ -1,0 +1,64 @@
+---
+import '@fontsource/cascadia-mono/400.css';
+import '@fontsource/cascadia-mono/600.css';
+import '@fontsource-variable/inter';
+import '@fontsource-variable/source-serif-4/wght-italic.css';
+import '../styles/global.css';
+import Seo, { type SeoProps } from '../components/Seo.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { profile } from '../data/profile';
+import { site } from '../data/site';
+import { graph, personNode, websiteNode } from '../lib/schema';
+// Preload the latin subsets used above the fold to avoid layout shift on font swap.
+import headlineUrl from '@fontsource/cascadia-mono/files/cascadia-mono-latin-600-normal.woff2?url';
+import monoUrl from '@fontsource/cascadia-mono/files/cascadia-mono-latin-400-normal.woff2?url';
+import sansUrl from '@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url';
+
+interface Props extends SeoProps {
+  /** Extra JSON-LD nodes for this page (BlogPosting, BreadcrumbList, …). */
+  schema?: Record<string, unknown>[];
+}
+
+const { schema = [], ...seo } = Astro.props;
+const base = Astro.site ?? site.url;
+const ld = graph([personNode(base), websiteNode(base), ...schema]);
+---
+
+<!doctype html>
+<html lang={site.lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script is:inline>
+      // Apply a saved theme before first paint (no flash). No saved value = follow the system.
+      (() => {
+        try {
+          const t = localStorage.getItem('theme');
+          if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+        } catch {}
+      })();
+    </script>
+    <link rel="preload" href={headlineUrl} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={monoUrl} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={sansUrl} as="font" type="font/woff2" crossorigin />
+    <Seo {...seo} />
+    <meta name="theme-color" content="#f6f1e7" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0b0b0b" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="alternate" type="application/rss+xml" title={`${profile.name} · Writing`} href="/rss.xml" />
+    <meta name="generator" content={Astro.generator} />
+    <script type="application/ld+json" set:html={JSON.stringify(ld)} />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <Header />
+    <main id="main" tabindex="-1">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

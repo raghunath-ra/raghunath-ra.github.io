@@ -1,0 +1,44 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Page not found" noindex>
+  <section class="wrap nf">
+    <p class="kicker">Error 404</p>
+    <h1>
+      There is no page at this address.
+    </h1>
+    <p class="lede">The link may be old, or the page moved during a redesign. Try one of these instead:</p>
+    <ul>
+      <li><a class="btn primary" href="/">Home</a></li>
+      <li><a class="btn" href="/writing/">Writing</a></li>
+      <li><a class="btn" href="/topics/">Topics</a></li>
+      <li><a class="btn" href="/work/">Work</a></li>
+    </ul>
+  </section>
+</Base>
+
+<style>
+  .nf {
+    padding-block: clamp(5rem, 14vw, 10rem);
+  }
+  h1 {
+    margin-top: 1rem;
+    font-size: clamp(1.75rem, 1.3rem + 1.9vw, 2.6rem);
+    letter-spacing: -0.045em;
+    max-width: 20ch;
+  }
+  .lede {
+    margin-top: 1.25rem;
+    color: var(--ink-2);
+    max-width: 50ch;
+  }
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    list-style: none;
+    padding: 0;
+    margin-top: 2rem;
+  }
+</style>

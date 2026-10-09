@@ -1,0 +1,163 @@
+---
+import Icon from './Icon.astro';
+import type { CaseStudy } from '../data/work';
+import { topicBySlug, topicHref } from '../data/topics';
+interface Props {
+  item: CaseStudy;
+  headingLevel?: 'h2' | 'h3' | 'h4';
+  /** One-line row for the home and topic pages. */
+  compact?: boolean;
+}
+const { item, headingLevel: H = 'h3', compact = false } = Astro.props;
+---
+
+{
+  compact ? (
+    <article class="row reveal-on-scroll">
+      <p class="kicker">
+        <span class="accent">{item.kind}</span>
+        <span> · {item.context}</span>
+      </p>
+      <div>
+        <H class="title">{item.title}</H>
+        {item.lesson ? <p class="lesson">{item.lesson}</p> : <p class="lesson">{item.summary}</p>}
+      </div>
+    </article>
+  ) : (
+    <article class="case reveal-on-scroll">
+      <header>
+        <p class="kicker">
+          <span class="accent">{item.kind}</span> · {item.context}
+        </p>
+        <H class="title">{item.title}</H>
+      </header>
+      <p class="summary">{item.summary}</p>
+      {
+        item.lesson && (
+          <blockquote class="takeaway">
+            <p class="label mono">What it taught me</p>
+            <p>{item.lesson}</p>
+          </blockquote>
+        )
+      }
+      <footer>
+        {item.outcome && <p class="outcome mono">{item.outcome}</p>}
+        <ul class="topic-labels">
+          {item.topics.map((t) => (
+            <li>
+              <a class="topic-label" href={topicHref(t)}>
+                {topicBySlug(t).title}
+              </a>
+            </li>
+          ))}
+        </ul>
+        {item.links.length > 0 && (
+          <ul class="links">
+            {item.links.map((l) => (
+              <li>
+                <a href={l.href}>
+                  {l.label}
+                  <span class="sr-only">: {item.title}</span>
+                  <Icon name="external" />
+                </a>
+              </li>
+            ))}
+          </ul>
+        )}
+      </footer>
+    </article>
+  )
+}
+
+<style>
+  /* Compact row */
+  .row {
+    display: grid;
+    grid-template-columns: 14rem minmax(0, 1fr);
+    gap: 0.4rem 2rem;
+    padding-block: 1.4rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .row .kicker {
+    padding-top: 0.3rem;
+    line-height: 1.5;
+  }
+  .row .title {
+    font-size: 1.06rem;
+  }
+  .row .lesson {
+    margin-top: 0.35rem;
+    color: var(--ink-2);
+    max-width: 62ch;
+  }
+  @media (max-width: 44rem) {
+    .row {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Full case study */
+  .case {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding-block: 1.75rem 2rem;
+    border-top: 1px solid var(--rule);
+  }
+  .case .title {
+    margin-top: 0.4rem;
+    font-size: clamp(1.05rem, 1rem + 0.25vw, 1.2rem);
+  }
+  .summary {
+    color: var(--ink-2);
+    max-width: 62ch;
+  }
+  .takeaway {
+    padding-left: 1.1rem;
+    border-left: 2px solid var(--accent);
+    max-width: 52ch;
+  }
+  .takeaway p:not(.label) {
+    font-family: var(--font-quote);
+    font-size: 1.1rem;
+    font-style: italic;
+    line-height: 1.4;
+  }
+  .takeaway .label {
+    margin-bottom: 0.25rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.5rem 1.5rem;
+  }
+  .outcome {
+    color: var(--ink);
+    padding: 0.1rem 0.5rem;
+    background: var(--accent-soft);
+    border-radius: 3px;
+  }
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1.25rem;
+    list-style: none;
+    padding: 0;
+  }
+  .links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+  }
+  .links :global(svg) {
+    width: 0.9em;
+    height: 0.9em;
+  }
+</style>

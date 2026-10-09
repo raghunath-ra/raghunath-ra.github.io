@@ -1,0 +1,96 @@
+---
+title: 'What a language model learns from language'
+description: 'How I explain what a language model does: it learns the mathematical relationships in human language and reapplies them. Language itself keeps changing, so the words a model returns can drift from what they mean today.'
+pubDate: 2026-10-08
+updatedDate: 2026-10-09
+topics: ['ai-systems', 'ai-adoption']
+draft: false
+---
+
+{/*
+  WORKING DRAFT, reworked on 2026-10-09 from your own material: a thesis and an
+  outline to write from. Replace the outline with your own prose.
+
+  Where each part comes from:
+  - The thesis is your guide for AI agents (the sample you pasted on
+    2026-10-09), in your sentences, with three slips corrected: "pecuniarily"
+    to "peculiarity", "based off" to "based on", "reapplied" to "reapplies".
+    Nothing was added to it.
+  - Section 2 is your walk-through of the model, as captured in
+    what-i-explain-before-pitching-ai.mdx (the draft on pitching AI to an
+    executive). Decide which essay carries it in full.
+  - The earlier outline's points (the autocomplete comparison, pre-training and
+    post-training, confident wrong answers, sensitivity to phrasing, framing,
+    the three wrong pictures) were my additions, not yours, and are gone. Add
+    any of them back only if it is your view.
+
+  Gaps only you can fill, marked in the outline: a definition of meaning drift
+  in your words, examples of drift you have seen, what "honest to the current
+  times" looks like in practice, and the close.
+
+  Available in .mdx essays without importing:
+    <PullQuote>A line from the essay, set large.</PullQuote>
+    <Sidenote>A margin note. Shown inline on small screens.</Sidenote>
+  Markdown footnotes ([^1]) also work and render as numbered notes at the end.
+*/}
+
+## Thesis
+
+Over the past few months I have observed one peculiarity with AI, and with large language models in particular (future AI systems may grow beyond LLMs): a model attributes mathematical logic and relationships to language and its intricacies, and it then reapplies that gigantic mathematical modeling when it interacts with users, whether those users are humans or other agents. All of this translates to learning patterns and reapplying them, based on mathematics-powered computational logic.
+
+Language itself has a nuance: it is not born out of rules. It is born out of human evolution and humans becoming societal. The rules are derived afterwards, from known literature and language artifacts, for learning and standardization. This means language evolves continuously and changes direction at a different pace at different times, which Bryan Garner records in *Garner's Modern English Usage*.[^garner] During training, I presume, a model is trained on language patterns created at different times, in which many English words carry different meanings, and the human societies that use those words, in different geographies, read words and phrases in different ways again. That is where meaning drift comes from.
+
+This does not mean a model should be restricted to words and phrases that have only one concrete meaning, on the assumption that most human societies read them as concrete and without drift. It does mean that, for my own use, I want an AI system to write back in words, phrases and sentence lengths that carry concrete meaning and information to the greatest extent possible, and that stay honest to the time at which the system is responding.
+
+<PullQuote>Language is not born out of rules. It is born out of human evolution and humans becoming societal.</PullQuote>
+
+## Outline
+
+### 1. The peculiarity I noticed
+
+- Where the observation comes from: months of working with language models, directly and through agents.
+- The observation itself: the model treats language as mathematical logic and relationships, learns those relationships, and reapplies them to whoever is on the other side, a person or another agent.
+
+### 2. What the model does with your words
+
+- The tokenizer splits text into tokens. Each model provider has its own tokenizer and vocabulary.
+- Each token becomes a vector of numbers, from a lookup table the model learned in training.
+- Inside the transformer, attention works out how each token relates to the others, and the feed-forward layers are where much of the learned knowledge is believed to live. Mostly matrix multiplication, repeated across many layers.
+- At the end, the model scores every possible next token; softmax turns the scores into probabilities, and sampling picks one, shaped by temperature, top-k and top-p.
+- Then it repeats, one token at a time, until the answer is done.
+- The point to make here: every step is mathematics applied to patterns found in text.
+
+### 3. Where language comes from
+
+- Not from rules. From human evolution, and from people becoming societal.
+- The rules come afterwards: derived from known literature and language artifacts, for learning and standardization.
+- Language keeps evolving, at a different pace at different times. *Garner's Modern English Usage* as the record of that.
+
+### 4. What the training data carries
+
+- Patterns written at different times, so one English word arrives with several meanings.
+- The same words and phrases, read differently in different geographies and societies.
+- What follows, as I presume it: the model learns all of this as relationships and reapplies it when it answers.
+
+### 5. Meaning drift
+
+- Define meaning drift in your own words. The guide uses the term without defining it.
+- Examples you have seen: a word or phrase in an answer that meant one thing when the training text was written and means another now, or in your context.
+- Why it matters more when the reader is an agent than when the reader is a person.
+
+### 6. Why this is not a case for restricting the model
+
+- A model should not be limited to words with only concrete meanings, on the assumption that every society reads them as concrete.
+- The constraint below is for your use case, not a general rule for models.
+
+### 7. What I ask of an AI system
+
+- Words, phrases and sentence lengths that carry concrete meaning and information to the greatest extent possible.
+- Honest to the time at which the system is responding.
+- How you put this to agents: a guide written by hand, as a lightly constrained train of thought with minimal editing, in a fixed-width layout. Say why that layout.
+
+### 8. Close
+
+- Yours to write.
+
+[^garner]: Bryan A. Garner, *Garner's Modern English Usage*, Oxford University Press.
