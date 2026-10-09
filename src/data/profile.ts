@@ -58,7 +58,7 @@ export const profile = {
 
   /** Used for <meta name="description"> on the home page and as the site default. */
   seoDescription:
-    'Raghunath Reddy writes about AI adoption at work, how AI systems work, making security understandable to executives and non-experts, and marketing technical products.',
+    'Raghunath Reddy writes about AI adoption at work, how AI systems work, security communication and marketing technical products.',
 
   /** Short about for the home page, and the lede of /about. */
   intro:
