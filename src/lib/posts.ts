@@ -25,4 +25,4 @@ export function readingTime(body = ''): number {
 }
 
 export const formatDate = (d: Date) =>
-  d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' });
+  d.toLocaleDateString('en-US', { day: '2-digit', month: 'short', year: 'numeric', timeZone: 'UTC' });
