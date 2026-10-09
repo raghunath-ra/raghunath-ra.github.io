@@ -65,10 +65,13 @@ export const topics: Topic[] = [
     title: 'Security communication',
     short: 'Security comms',
     question: 'How do you make security understandable to executives and non-experts?',
-    thesis: 'I write about making security understandable to executives and non-experts, from doing that work inside a US health system.',
+    thesis:
+      'Most enterprises treat cyber awareness as a drill; I believe in a careful, thoughtfully designed skills survey, with training completion requested by role, skill level and necessity.',
     stance: [
       'I work in cybersecurity at a US health system, where the work involves security engineers, network teams, caregivers and senior leadership. Part of it is turning dense security program detail into briefings that lay out risks, dependencies and decisions for senior leadership.',
       'The other part is the people who do not work in security. In early 2025 there was a need for comic strips on cybersecurity topics, so that busy caregivers could understand them by glancing at them for a minute or two. The image generation tools we had were not good at placing text in images, so I created the panels image by image with Microsoft 365 Copilot’s built-in image generation, then learned Figma to place the dialogue accurately on each panel. That way we delivered comic strips that teach security topics to internal users in an engaging way. I have also scripted and produced videos for an internal security platform.',
+      'Most enterprises treat cyber awareness as a drill; they keep pushing training and phishing drills. Phishing drills are okay, but pushing training only overburdens people. What I believe in is a careful, thoughtfully designed skills survey, and requesting training completion based on role, skill level and necessity.',
+      'For traditionally run awareness programs, this is much harder to do. The people with those responsibilities will keep doing what they have been doing: declaring October cyber awareness month, conducting some fun events, and pushing some emails, sessions and trainings. I am surprised that people do not put more thought into the structural thinking I am trying to champion.',
       'I write about making security understandable to executives and non-experts.',
     ],
   },
