@@ -41,7 +41,7 @@ export const profile = {
    */
   jobTitle: 'Cybersecurity program role at a US health system',
   /** Follows your name in the home page <title> and the default social card. */
-  descriptor: 'AI, security & technical marketing',
+  descriptor: 'AI, cybersecurity & technical marketing',
   /** Keep this to city and country at most. */
   location: 'Hyderabad, India',
 
@@ -53,16 +53,16 @@ export const profile = {
   pov: {
     statement: 'The model is probabilistic. The software around it doesn’t have to be.',
     emphasis: 'doesn’t have to be',
-    dek: 'I’m Raghunath Reddy. I work in cybersecurity at a US health system, and I also help colleagues there explore where AI becomes the best tool for their work. Before that, I spent years explaining identity and security products to developers and the people who buy for them. My focus in AI engineering is harness engineering, context engineering and understanding which models and sub-agents respond better to a task, and I am applying this on a trial project for an internal use case. This site is where I write about these subjects.',
+    dek: 'I’m Raghunath Reddy. I work in cybersecurity at a US health system, and I also help colleagues there explore where AI becomes the best tool for their work. Before that, I spent years explaining identity and cybersecurity products to developers and the people who buy for them. My focus in AI engineering is harness engineering, context engineering and understanding which models and sub-agents respond better to a task, and I am applying this on a trial project for an internal use case. This site is where I write about these subjects.',
   },
 
   /** Used for <meta name="description"> on the home page and as the site default. */
   seoDescription:
-    'Raghunath Reddy writes about AI adoption at work, how AI systems work, security communication and marketing technical products.',
+    'Raghunath Reddy writes about AI adoption at work, how AI systems work, cybersecurity communication and marketing technical products.',
 
   /** Short about for the home page, and the lede of /about. */
   intro:
-    'I started in software testing, spent years writing and marketing for cloud, identity and security companies, and now work in cybersecurity for a US health system from Hyderabad. At work I also help colleagues use AI: setting them up with the tools, advising on which tool fits which job, and turning tasks that work into skills they can run.',
+    'I started in software testing, spent years writing and marketing for cloud, identity and cybersecurity companies, and now work in cybersecurity for a US health system from Hyderabad. At work I also help colleagues use AI: setting them up with the tools, advising on which tool fits which job, and turning tasks that work into skills they can run.',
 
   /**
    * The /about page: a career arc in prose, not a dated timeline. The full,
@@ -89,9 +89,9 @@ export const profile = {
       ],
     },
     {
-      heading: 'Working in security',
+      heading: 'Working in cybersecurity',
       paragraphs: [
-        'Today I work in cybersecurity for a US health system, in a program role. Part of the work is turning dense security program detail into briefings that lay out risks, dependencies and decisions for senior leadership. Alongside it, I have made comic strips so that busy caregivers can take in a security topic by glancing at them for a minute or two, produced videos for an internal security platform, and helped colleagues use GitHub Copilot CLI and turn tasks that work into skills they can run.',
+        'Today I work in cybersecurity for a US health system, in a program role. Part of the work is turning dense cybersecurity program detail into briefings that lay out risks, dependencies and decisions for senior leadership. Alongside it, I have made comic strips so that busy caregivers can take in a cybersecurity topic by glancing at them for a minute or two, produced videos for an internal cybersecurity platform, and helped colleagues use GitHub Copilot CLI and turn tasks that work into skills they can run.',
       ],
     },
     {
@@ -172,7 +172,7 @@ export const profile = {
       kind: 'Article',
       year: '2024',
       href: 'https://www.loginradius.com/blog/engineering/identity-impact-of-google-chrome-thirdparty-cookie-restrictions/',
-      topics: ['security-communication', 'technical-marketing'],
+      topics: ['cybersecurity-communication', 'technical-marketing'],
     },
     {
       title: 'What is Risk-Based Authentication? And Why Should You Implement It?',
@@ -180,7 +180,7 @@ export const profile = {
       kind: 'Article',
       year: '2021',
       href: 'https://www.loginradius.com/blog/engineering/risk-based-authentication/',
-      topics: ['security-communication', 'technical-marketing'],
+      topics: ['cybersecurity-communication', 'technical-marketing'],
     },
     {
       title: 'Everything I published on the LoginRadius blog',

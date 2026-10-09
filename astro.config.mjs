@@ -8,12 +8,13 @@ import { profile } from './src/data/profile.ts';
 export default defineConfig({
   site: SITE_URL,
   trailingSlash: 'ignore',
-  // The blog moved to /writing, tags became the four topics, a topic was renamed,
-  // research became a section of /work, and the first essay was retitled.
+  // The blog moved to /writing, tags became the four topics, two topics were
+  // renamed, research became a section of /work, and the first essay was retitled.
   redirects: {
     '/blog': '/writing/',
     '/blog/tags': '/topics/',
     '/topics/ai-safety': '/topics/ai-systems/',
+    '/topics/security-communication': '/topics/cybersecurity-communication/',
     '/research': '/work/#research',
     '/writing/the-model-is-finishing-your-sentence': '/writing/what-a-language-model-learns-from-language/',
   },
