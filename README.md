@@ -38,7 +38,7 @@ The site leads with a point of view, not a job title. Everything hangs off four 
 | `/now/` | What you're doing now | `src/data/profile.ts` (`now`) |
 | `/rss.xml`, `/sitemap-index.xml`, `/robots.txt` | Feeds for readers and crawlers | `src/pages/` |
 
-`/blog/` and `/blog/tags/` redirect to `/writing/` and `/topics/`, `/topics/ai-safety/` and `/topics/security-communication/` (old topic names) redirect to `/topics/ai-systems/` and `/topics/cybersecurity-communication/`, and `/research/` redirects to `/work/#research`.
+`/blog/` and `/blog/tags/` redirect to `/writing/` and `/topics/`, `/topics/ai-safety/` and `/topics/security-communication/` (old topic names) redirect to `/topics/ai-systems/` and `/topics/cybersecurity-communication/`, and `/research/` redirects to `/work/#research`. The language model essay's old address, `/writing/the-model-is-finishing-your-sentence/`, redirects to `/writing/` while that essay is a draft.
 
 ## Where things live
 
