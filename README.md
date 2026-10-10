@@ -1,6 +1,6 @@
 # raghunath-ra.github.io
 
-Personal site of **Raghunath Reddy**: essays on AI adoption at work, how AI systems work, security communication, and marketing technical products.
+Personal site of **Raghunath Reddy**: essays on AI adoption at work, how AI systems work, cybersecurity communication, and marketing technical products.
 Live at <https://raghunath-ra.github.io>.
 
 Built with [Astro](https://astro.build) and plain CSS. No client-side framework; the only JavaScript is the theme toggle.
@@ -24,7 +24,7 @@ The site leads with a point of view, not a job title. Everything hangs off four 
 | --- | --- |
 | AI adoption at work | `ai-adoption` |
 | How AI systems work | `ai-systems` |
-| Security communication | `security-communication` |
+| Cybersecurity communication | `cybersecurity-communication` |
 | Marketing technical products | `technical-marketing` |
 
 | Page | What it is | Source |
@@ -38,7 +38,7 @@ The site leads with a point of view, not a job title. Everything hangs off four 
 | `/now/` | What you're doing now | `src/data/profile.ts` (`now`) |
 | `/rss.xml`, `/sitemap-index.xml`, `/robots.txt` | Feeds for readers and crawlers | `src/pages/` |
 
-`/blog/` and `/blog/tags/` redirect to `/writing/` and `/topics/`, `/topics/ai-safety/` (a topic's old name) redirects to `/topics/ai-systems/`, and `/research/` redirects to `/work/#research`.
+`/blog/` and `/blog/tags/` redirect to `/writing/` and `/topics/`, `/topics/ai-safety/` and `/topics/security-communication/` (old topic names) redirect to `/topics/ai-systems/` and `/topics/cybersecurity-communication/`, and `/research/` redirects to `/work/#research`. The language model essay's old address, `/writing/the-model-is-finishing-your-sentence/`, redirects to `/writing/` while that essay is a draft.
 
 ## Where things live
 
@@ -58,7 +58,7 @@ Search `src/data/profile.ts` for `TODO` to find what still needs filling in (for
 
 ## Write an essay
 
-Five drafts are waiting in `src/content/writing/`, each with a working title, a thesis built from what you have said, and an outline that marks the gaps. To publish one, replace the outline with your prose, set the real `pubDate` and flip `draft` to `false`.
+Six drafts are waiting in `src/content/writing/`. Five are written up as prose from what you have said, with each gap marked by a "Note for Raghunath" block and the editorial additions listed in the opening comment; the language model essay is being written up in a separate thread. To publish one, replace or remove the notes, confirm the editorial additions, set the real `pubDate` and flip `draft` to `false`.
 
 ```md
 ---
@@ -66,7 +66,7 @@ title: 'Essay title'
 description: 'One or two sentences. Used as the dek, in lists, RSS, search results and the social card.'
 pubDate: 2026-10-20
 updatedDate: 2026-11-02            # optional
-topics: ['security-communication'] # one or more of the four slugs; the first is the primary topic
+topics: ['cybersecurity-communication'] # one or more of the four slugs; the first is the primary topic
 toc: true                          # optional; by default long essays get a table of contents
 draft: false                       # true = only visible in `npm run dev`
 ---
@@ -93,9 +93,9 @@ Append to `research` or `caseStudies` in `src/data/work.ts`. A case study says w
 ```ts
 {
   title: 'What the project was',
-  kind: 'Security education',          // small red label
+  kind: 'Cybersecurity education',          // small red label
   context: 'Company · 2026',
-  topics: ['security-communication'],  // first topic = its group on /work
+  topics: ['cybersecurity-communication'],  // first topic = its group on /work
   summary: 'One or two sentences on the problem and what you did.',
   lesson: 'What it taught you, in your words.',  // optional
   outcome: '2× something',             // optional, only numbers you can stand behind

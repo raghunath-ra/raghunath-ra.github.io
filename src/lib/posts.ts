@@ -6,6 +6,11 @@ export type Post = CollectionEntry<'writing'>;
 /** Published essays, newest first. Drafts are included only in `astro dev`. */
 export async function getPosts(): Promise<Post[]> {
   const posts = await getCollection('writing', ({ data }) => import.meta.env.DEV || !data.draft);
+  // A gap note left for the owner must never reach the live site.
+  const unfinished = posts.filter((p) => !p.data.draft && p.body?.includes('Note for Raghunath'));
+  if (unfinished.length) {
+    throw new Error(`Replace or remove the "Note for Raghunath" blocks before publishing: ${unfinished.map((p) => p.id).join(', ')}`);
+  }
   return posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 }
 
@@ -25,4 +30,4 @@ export function readingTime(body = ''): number {
 }
 
 export const formatDate = (d: Date) =>
-  d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' });
+  d.toLocaleDateString('en-US', { day: '2-digit', month: 'short', year: 'numeric', timeZone: 'UTC' });

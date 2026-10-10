@@ -4,6 +4,7 @@ import PageHead from '../../components/PageHead.astro';
 import TopicGrid from '../../components/TopicGrid.astro';
 import { getPosts, postsOnTopic } from '../../lib/posts';
 import { topics } from '../../data/topics';
+import { profile } from '../../data/profile';
 import { breadcrumbNode } from '../../lib/schema';
 
 const posts = await getPosts();
@@ -13,7 +14,7 @@ const crumbs = [{ name: 'Topics', href: '/topics/' }];
 
 <Base
   title="Topics"
-  description="The four topics Raghunath Reddy writes about: AI adoption at work, how AI systems work, security communication, and marketing technical products."
+  description={`The four topics ${profile.name} writes about: AI adoption at work, how AI systems work, cybersecurity communication, and marketing technical products.`}
   schema={[breadcrumbNode(Astro.site!, crumbs)]}
 >
   <PageHead

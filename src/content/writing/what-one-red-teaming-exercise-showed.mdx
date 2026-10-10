@@ -2,33 +2,74 @@
 title: 'What one red-teaming exercise showed me about prompting'
 description: 'In August 2025 I red-teamed OpenAI’s gpt-oss-20b for a Kaggle challenge, a one-off I have not repeated. Narrative prompting and reference prompting got the model to produce disallowed information, and naturalistic scenarios made refusals less likely to trigger than confrontational prompts.'
 pubDate: 2026-10-08
+updatedDate: 2026-10-10
 topics: ['ai-systems']
 draft: true
 ---
 
 {/*
-  WORKING DRAFT, reworked on 2026-10-09 from your own material: a thesis and an
-  outline to write from. Nothing here is meant to be published as-is. Replace
-  the outline with your own prose, set the real pubDate, then set `draft: false`.
+  WORKING DRAFT written up as prose from your own material at your request
+  (Oct 10, 2026); it stays draft: true until you say the written version is
+  done.
 
-  Where each part comes from:
-  - The terms and the finding are from your Kaggle writeup, as read from the
-    screenshot you shared on 2026-10-08: "narrative prompting", "reference
-    prompting", "disallowed information", the goal of testing the safety layers
-    against indirect or nuanced prompting, and the finding that naturalistic
-    scenarios made refusals less likely to trigger than confrontational
-    prompts. Check the wording against the writeup itself before publishing.
-  - "A one-off; I have not done red-teaming since; the field has moved a lot;
-    I am not current on it; I now understand how language models work" is
-    what you said on 2026-10-08.
-  - The earlier outline's points ("The jailbreak is a story", "models learned
-    persuasion from us", "safety is partly a communication problem", framing
-    as an attack surface, "borrowed authority", the social-engineering
-    parallel, who belongs on red teams) were my additions, not yours, and are
-    gone. Add any of them back only if it is your view.
+  Sources:
+  - Opening: your thesis, from what you said on 2026-10-08 ("a one-off; I have
+    not done red-teaming since; the field has moved a lot; I am not current on
+    it; I now understand how language models work") and from your Kaggle
+    writeup, as read from the screenshot you shared on 2026-10-08 (the goal of
+    testing the safety layers against indirect or nuanced prompting, using
+    conversation-based strategies that mirror how real users might bypass
+    safeguards, intentionally or not). The phrase "what the exercise showed me
+    about how a model responds to prompting" in the third opening paragraph
+    is from the research entry's takeaway in src/data/work.ts.
+  - "The challenge and my writeup": facts already on the site in
+    src/data/work.ts and src/data/profile.ts (challenge name, open-weight
+    model, submission date Aug 24, 2025, writeup title, the Kaggle link, and
+    "This summary stays at the level of method").
+  - "Narrative prompting" and "Reference prompting": the definitions from your
+    Kaggle writeup ("narrative prompting", "reference prompting"), as in the
+    thesis.
+  - "What the exercise showed": the finding from your Kaggle writeup
+    (naturalistic scenarios made refusals less likely to trigger than
+    confrontational prompts) and the result that the model produced
+    disallowed information, from the abstract in src/data/work.ts (which says
+    "the model was coaxed into producing disallowed information"; the prose
+    now says it in first person, "I got the model to produce disallowed
+    information"). Check the wording against the writeup itself before
+    publishing.
+  - No dictation-slip corrections were recorded for this draft.
+  - The earlier outline's points that were my additions, not yours ("The
+    jailbreak is a story", "models learned persuasion from us", "safety is
+    partly a communication problem", framing as an attack surface, "borrowed
+    authority", the social-engineering parallel, who belongs on red teams)
+    stay out. Add any of them back only if it is your view.
 
-  Gaps only you can fill, marked in the outline: why each technique worked,
-  in your view, and what the exercise means for how you explain models now.
+  Editorial additions for the author to confirm:
+  - The third opening paragraph's framing, "In this essay, I describe the two
+    techniques I used and what the exercise showed", which only announces the
+    sections.
+  - "the writeup I submitted to the challenge" in the second opening
+    paragraph, which introduces the writeup at first mention; the submission
+    itself is a fact on the site.
+  - The section headings.
+  - "Both techniques were conversation-based" in "What the exercise showed",
+    a connecting phrase that restates the writeup's goal.
+  - In "The challenge and my writeup", the definition "gpt-oss-20b is an
+    open-weight model, which means OpenAI released its weights for anyone to
+    download and run". The open-weight fact is on the site; the explanation of
+    the term is mine.
+
+  Notes for you:
+  - The "Note for Raghunath" blocks mark the gaps: what the challenge asked
+    of participants, why each technique worked in your view, what the
+    exercise means for how you explain models now, and the close. Replace or
+    remove each one before setting draft: false.
+  - Keep it safe: no prompts, no harmful output, nothing reproducible. Check
+    the challenge rules and your writeup for what you have already disclosed,
+    and stay inside it.
+  - Red-teaming practice has moved a lot since 2025; the opening says this is
+    one exercise from then, as you said to me. Keep that in whatever you add.
+  - Set the real pubDate when you publish.
 
   Available in .mdx essays without importing:
     <PullQuote>A line from the essay, set large.</PullQuote>
@@ -36,36 +77,38 @@ draft: true
   Markdown footnotes ([^1]) also work and render as numbered notes at the end.
 */}
 
-## Thesis
+In August 2025, I took part in Kaggle's Red-Teaming Challenge on OpenAI's open-weight gpt-oss-20b. It was a one-off: I have not done red-teaming since, the field has moved a lot, and I am not current on it, though I now understand how language models work.
 
-In August 2025 I took part in Kaggle's Red-Teaming Challenge on OpenAI's open-weight gpt-oss-20b. It was a one-off: I have not done red-teaming since, the field has moved a lot, and I am not current on it, though I now understand how language models work. My goal in the writeup was to test whether the model's safety layers could withstand indirect or nuanced prompting, using conversation-based strategies that mirror how real users might bypass safeguards, intentionally or not.
+My goal in the writeup I submitted to the challenge was to test whether the model's safety layers could withstand indirect or nuanced prompting, using conversation-based strategies that mirror how real users might bypass safeguards, intentionally or not.
 
-Narrative prompting put sensitive requests inside fictional dialogue, where the model took on a role and completed the conversation. Reference prompting raised sensitive topics through indirect references, such as their appearance in popular culture or medicine, before escalating toward more direct questions. Naturalistic scenarios like these made refusals less likely to trigger than confrontational prompts did.
+In this essay, I describe the two techniques I used and what the exercise showed me about how a model responds to prompting.
+
+## The challenge and my writeup
+
+gpt-oss-20b is an open-weight model, which means OpenAI released its weights for anyone to download and run. I submitted my writeup, "Narrative and Reference Prompting as Safety Bypass Techniques", on Aug 24, 2025.
+
+> **Note for Raghunath:** What did the challenge ask participants to find, and how was a finding written up?
+
+This essay stays at the level of method. The full writeup, as submitted to the challenge, is [on Kaggle](https://www.kaggle.com/competitions/openai-gpt-oss-20b-red-teaming/writeups/narrative-coaxing-tricks-gpt-oss-20b-to-output-dis).
+
+## Narrative prompting
+
+Narrative prompting put sensitive requests inside fictional dialogue or storytelling, where the model took on a role and completed the conversation.
+
+> **Note for Raghunath:** Why, in your view, did narrative prompting work?
+
+## Reference prompting
+
+Reference prompting raised sensitive topics through indirect references, such as their appearance in popular culture or medicine, before escalating toward more direct questions.
+
+> **Note for Raghunath:** Why, in your view, did reference prompting work?
+
+## What the exercise showed
+
+Both techniques were conversation-based, and with them I got the model to produce disallowed information. Naturalistic scenarios like these made refusals less likely to trigger than confrontational prompts did.
 
 <PullQuote>Naturalistic scenarios made refusals less likely to trigger than confrontational prompts did.</PullQuote>
 
-## Outline
+> **Note for Raghunath:** What does this finding mean for the way you explain language models now? Your essay on what a language model learns from language says a model learns the mathematical relationships in language and reapplies them; say here whether, in your view, that is why a story or a reference changes what the model returns. Only if it is your view.
 
-### 1. What the challenge asked
-
-- Kaggle's Red-Teaming Challenge on gpt-oss-20b: what participants were asked to find, and how a finding was written up.
-- Link to the writeup for the full method.<Sidenote>Keep it safe: no prompts, no harmful output, nothing reproducible. Check the challenge rules and your writeup for what you have already disclosed, and stay inside it.</Sidenote>
-
-### 2. Narrative prompting
-
-- What it is: sensitive requests embedded in fictional dialogue or storytelling, where the model assumed a role and completed the conversation.
-- Gap: why you think it worked.
-
-### 3. Reference prompting
-
-- What it is: sensitive topics framed through indirect references, such as their appearance in popular culture or medicine, before escalating toward more direct queries.
-- Gap: why you think it worked.
-
-### 4. What the exercise showed
-
-- From the writeup: naturalistic, conversation-based scenarios made refusals less likely to trigger than confrontational prompts.
-- Gap: what that means for the way you explain language models now. Your published essay says a model learns the mathematical relationships in language and reapplies them; say here whether, in your view, that is why a story or a reference changes what the model returns. Only if it is your view.<Sidenote>Red-teaming practice has moved a lot since 2025. Say in the essay that this is one exercise from then, as you said to me.</Sidenote>
-
-### 5. Close
-
-- Yours to write.
+> **Note for Raghunath:** The close is yours to write.

@@ -2,29 +2,100 @@
 title: 'What I explain to an executive before pitching an AI solution'
 description: 'How I walk an executive through where we are in the AI paradigm: what a language model is, what tool calling, the harness and context engineering add to it, and what an agentic system needs before anyone can claim it is reliable and accountable.'
 pubDate: 2026-10-08
+updatedDate: 2026-10-10
 topics: ['ai-systems', 'ai-adoption']
 draft: true
 ---
 
 {/*
-  WORKING DRAFT, captured from your own walk-through on 2026-10-08 and tidied
-  on 2026-10-09: a thesis and an outline to write from, in your structure.
-  Replace the outline with your own prose, set the real pubDate, then set
-  `draft: false`.
+  WORKING DRAFT written up as prose from your own material at your request
+  (Oct 10, 2026); it stays draft: true until you say the written version is
+  done. Set the real pubDate when you publish.
 
-  Where each part comes from:
-  - The thesis and sections 1 to 7, 9 and 10 are your dictation, with slips
-    corrected ("chunking" to "tokens", "top v" to "top-p", "agent decay
-    models" to "agentic AI models").
-  - Section 8 is your account of the Mythos incident, checked against
-    Anthropic's post of 30 July 2026 (linked in the footnote). Where your
-    dictation and the post differ, the outline follows the post and says so.
-  - Section 2 is the same walk-through that the published essay (What a
-    language model learns from language) uses for its section 2. Decide which
+  Sources:
+  - Opening: your thesis (dictated walk-through of 2026-10-08, tidied
+    2026-10-09), including its last sentence ("Without that visibility,
+    enterprise-grade reliability and accountability are very hard."). The
+    sentence that generalized about AI engineering as a field stays out, as
+    you asked on 2026-10-09.
+  - "Where we are in the AI paradigm", "What the model does", "The harness",
+    "Context engineering", "What stays deterministic" and "Evidence, traces,
+    audit logs and human approvals": your dictation (outline sections 1 to 7),
+    with slips corrected: "chunking" to "tokens" (in AI engineering, chunking
+    usually means splitting documents for retrieval), "top v" to "top-p",
+    "agent decay models" to "agentic AI models".
+  - "What the model does": the same walk-through that the draft essay "What
+    a language model learns from language" carries in prose. Decide which
     essay carries it in full and which one refers to the other.
-  - Lines marked "My note" are mine, not yours: a standard detail or a caveat
-    I added. Keep, reword or drop them; do not publish them as your claim
-    unless you hold it.
+  - "Tool calling": your dictation (outline section 3), plus the sentence
+    "Tool calling lets it ask for actions.", quoted as written from the AI
+    systems topic stance (src/data/topics.ts).
+  - "Context engineering": the context window figures (around 300,000
+    tokens, up to a million) are from your dictation; check the current
+    figures for any model you name, since they change often.
+  - "A case from Anthropic's cybersecurity evaluations": your account of the
+    Mythos incident, checked against Anthropic's post of 30 July 2026
+    (footnote). Where your dictation and the post differ, the prose follows
+    the post: your dictation mentioned CAPTCHA-solving, rate-limit bypasses
+    and SMS verification; the post does not mention those, and the model's
+    attempts to get a phone number failed.
+  - "What I am testing now": your dictation (outline section 10), the /now
+    entry in src/data/profile.ts and the AI systems stance in
+    src/data/topics.ts ("where I focus on harness engineering and context
+    engineering"). Keep anything specific to your employer out of the
+    published essay.
+
+  Editorial additions for the author to confirm:
+  - "Where we are in the AI paradigm": "In short," as the lead-in to your
+    one-line version.
+  - "Evidence, traces, audit logs and human approvals": the counting of the
+    parts ("Evidence is the first part", "Traces are the second part",
+    "Audit logs are the third part", "Human approvals are the last part").
+  - Same section: "guardrails make sure that" (the outline had "guardrails
+    so that"), and "this evidence: the approvals and the agents' actions"
+    as the referent of what traceability and audit logs track (the outline
+    said "that evidence" without naming it).
+  - Same section: "to achieve" added after "very hard" in "Without this,
+    enterprise-grade stability, ... are very hard to achieve." "Very" is
+    your word; drop it if you prefer.
+  - "Context engineering": the phrase "the amount of text a model can take
+    into account at one time", as a definition of the context window.
+  - "Evidence, traces, audit logs and human approvals": the outline put two
+    points as instructions ("Ask for the evidence...", "Ask the agents to
+    explain..."); the prose states them as what you do ("so I ask for the
+    evidence...", "I also ask the agents to explain..."). Change back if
+    they are advice rather than your practice.
+  - "Context engineering": the clause "it condenses what is already in the
+    context so that there is room for the work that follows", as a
+    definition of compaction (you named compaction but did not define it).
+  - "A case from Anthropic's cybersecurity evaluations", last paragraph: the
+    sentence linking the incident to the sections on what stays
+    deterministic and on observability (the outline said "That is the case
+    for sections 6 and 7"; the wording is mine). It says the case supports
+    those sections; it does not say the incident is why you explain them
+    before a pitch. Say so yourself if that is your reason.
+  - Same section: "and it never revisited that conclusion" is joined to the
+    previous sentence as a clause (the outline had it as its own sentence).
+
+  Notes for you:
+  - The "Note for Raghunath" blocks mark the gaps: what you mean by
+    "we do not know which one is which" (sampling settings), what the layers
+    for skills files and AGENTS.md are, what you mean by
+    "software-defined topology", the pitch itself, the results of the trial
+    project, and the close. Replace or remove each one before setting
+    draft: false.
+  - The outline's pull quote ("Without that visibility, enterprise-grade
+    reliability and accountability are very hard.") is removed: the same
+    sentence ends the opening, and a near-duplicate ends the evidence
+    section, so the pull quote repeated a line the reader had just read.
+    Pick a sentence of yours to set as a pull quote, if you want one.
+  - Two lines marked "My note" in the outline are left out of the prose,
+    because they are not your claims: (1) the model does not run tools; it
+    writes a structured request (which tool, with what inputs), and the
+    application runs it and feeds the result back in; (2) a model's stated
+    reasons are not guaranteed to match how it reached the answer, so treat
+    them as something to check against the trace, not as proof. Add either
+    one in your own words if you hold it.
 
   Available in .mdx essays without importing:
     <PullQuote>A line from the essay, set large.</PullQuote>
@@ -32,76 +103,98 @@ draft: true
   Markdown footnotes ([^1]) also work and render as numbered notes at the end.
 */}
 
-## Thesis
-
-When I pitch an AI solution to an executive, I start with where we are in the AI paradigm. A language model takes text, turns it into numbers, processes them through a lot of math, mostly matrix multiplication, and gives text back. On its own it cannot interact with the world; tool calling is how it does. Around the model sits the harness, the deterministic software that runs it in loops, hands work to sub-agents and manages its context, and context engineering, which gives a model trained on general knowledge the specifics of your situation inside a limited context window. A lot of AI engineering today is about those two things.
+When I pitch an AI solution to an executive, I start with where we are in the AI paradigm. A language model takes text, turns it into numbers, processes them through a lot of math, mostly matrix multiplication, and gives text back. On its own it cannot interact with the world; tool calling is how it does. Around the model sits the harness, the deterministic software that runs it in loops, hands work to sub-agents and manages its context, and context engineering, which gives a model trained on general knowledge the specifics of your situation inside a limited context window.
 
 Once you build an agentic system, you also have to decide how much of it is deterministic and how much needs the model's probabilistic output, where only humans can approve, and how you prove what the agents did: evidence, traceability and audit logs. Without that visibility, enterprise-grade reliability and accountability are very hard.
 
-<PullQuote>Without that visibility, enterprise-grade reliability and accountability are very hard.</PullQuote>
+## Where we are in the AI paradigm
 
-## Outline
+I start here so that the executive has a working picture of the machine before the pitch.
 
-### 1. Start with where we are in the paradigm
+In short, text goes in, it becomes numbers, the model does math on those numbers, and probable text comes out.
 
-- Why you start here: so the executive has a working picture of the machine before the pitch.
-- The one-line version: text in, numbers, math, probable text out.
+## What the model does
 
-### 2. What the model does
+The tokenizer splits the text into tokens; each model provider has its own tokenizer and vocabulary. Each token then becomes a vector of numbers, taken from a lookup table that the model learned in training.
 
-- The tokenizer splits text into tokens. Each model provider has its own tokenizer and vocabulary.<Sidenote>Say "tokens", not "chunks": in AI engineering, chunking usually means splitting documents for retrieval.</Sidenote>
-- Each token becomes a vector of numbers, from a lookup table the model learned in training.
-- Inside the transformer, attention works out how each token relates to the others, and the feed-forward layers are where much of the learned knowledge is believed to live. Mostly matrix multiplication, repeated across many layers.
-- At the end, the model scores every possible next token; softmax turns the scores into probabilities, and sampling picks one, shaped by temperature, top-k and top-p. Some of these settings are proprietary, so we do not know which one is which.
-- Then it repeats, one token at a time, until the answer is done.
+Inside the transformer, attention works out how each token relates to the others, and the feed-forward layers are where much of the learned knowledge is believed to live. Most of this is matrix multiplication, repeated across many layers.
 
-### 3. Tool calling: how a model interacts with the world
+At the end, the model scores every possible next token; softmax turns the scores into probabilities, and sampling picks one token, shaped by temperature, top-k and top-p. Some of these settings are proprietary, so we do not know which one is which.
 
-- The model itself cannot interact with the world; that is where tool calling comes in.
-- My note: the model does not run tools. It writes a structured request (which tool, with what inputs); the application runs it and feeds the result back in. Keep only if you want this level of detail.
+> **Note for Raghunath:** What exactly is unknown here: which sampling settings a provider applies, their values, or how they combine? Say it in your own words.
 
-### 4. The harness: deterministic software around a probabilistic model
+Then the model repeats this, one token at a time, until the answer is done.
 
-- What a harness does: runs the model in loops, lets it use sub-agents, helps it with context engineering.
-- Harness engineering is about controlling the model with deterministic software, making some decisions deterministically where the model gives probabilistic output.
+## Tool calling
 
-### 5. Context engineering: making general knowledge specific
+The model itself cannot interact with the world; that is where tool calling comes in. Tool calling lets it ask for actions.
 
-- A model is trained on a large, general body of text from many fields, so it has good knowledge of the world but does not know your specific situation, your business use case or the problem you are solving.
-- The context window is limited: some models get around 300,000 tokens, some up to a million.<Sidenote>Check the current figures for any model you name; they change often.</Sidenote>
-- Techniques you named:
-  - Sub-agents. When a task is big, the model structures it and hands parts to sub-agents, each with its own limited context; each works and returns results, so the main model manages its context without losing it.
-  - Compaction, at set intervals or automatically.
-  - Skills files, AGENTS.md and other Markdown files, placed in different layers, which the model and its harness perceive in different ways.
+## The harness
 
-### 6. Building agentic systems: what stays deterministic
+A harness runs the model in loops, lets it use sub-agents and helps it with context engineering.
 
-- For every agentic system, decide how much is grounded in your software-defined topology and how much needs the model's probabilistic output.
+Harness engineering is about controlling the model with deterministic software: where the model gives probabilistic output, some decisions are made deterministically.
 
-### 7. Observability: evidence, traces, audit logs and human approvals
+## Context engineering
 
-- Agents can say they did something without doing the work. Ask for the evidence produced while the request was being processed.
-- Traces, as in application performance management: tools such as Instana (acquired by IBM) trace a user request end to end, through microservices, a monolith or cloud services, and show what each hop produced. An agentic system needs the same, so that when something goes wrong you can track what happened and where to fix it.
-- Audit logs, kept for the agents' actions and the evidence they produce.
-- Ask the agents to explain why they picked a decision, a path of reasoning or a line of research, alongside the output.
-- My note: a model's stated reasons are not guaranteed to match how it reached the answer; treat them as something to check against the trace, not as proof. Keep only if it is your view.
-- Human approvals: where humans grant permission for agents to do specific things, and guardrails so that only humans can approve certain decisions or do certain things. The traceability and audit logs are how you track that evidence.
-- Without this, enterprise-grade stability, reliability, accountability and responsibility are very hard. All of it takes harness engineering through deterministic software, and context engineering where you are careful about what goes into the agentic models' context.
+A model is trained on a large, general body of text from many fields, so it has good knowledge of the world; but it does not know your specific situation, your business use case or the problem you are solving. Context engineering is how you give it those specifics.
 
-### 8. A case: when a test environment was not sealed
+The context window, the amount of text a model can take into account at one time, is limited: some models get around 300,000 tokens, and some get up to a million.
 
-- In July 2026 Anthropic disclosed that Claude Mythos 5, in a capture-the-flag evaluation run by a partner, Irregular, reached the real internet through a misconfiguration. It had been told it was in a simulation with no internet access.[^mythos]
-- The model concluded it was still in a simulation: it did not recognize the certificate authorities on its connections, and the 2026 system date looked staged to it. It never revisited that conclusion.
-- It needed an email address to create a PyPI account, and a phone number to create an email address; it tried and failed to get funds for a phone number, then found a free email provider. It published a package with hidden code. The package was live for about an hour and ran on 15 real systems, including a security company's scanner; the code exfiltrated that company's credentials.<Sidenote>Your dictation mentioned CAPTCHA-solving, rate-limit bypasses and SMS verification. Anthropic's post does not mention those, and its attempts to get a phone number failed. The outline follows the post.</Sidenote>
-- Anthropic called the incidents closer to a harness and operational failure than a model alignment failure, and said that validating all internet access paths before the evaluation, and real-time monitoring of the evaluation logs, would have surfaced the problem. That is the case for sections 6 and 7.
+Sub-agents are one technique. When a task is big, the model structures it and hands parts of it to sub-agents, each with its own limited context; each sub-agent works and returns its results, so the main model manages its context without losing it.
 
-### 9. What this means for the pitch
+Compaction is another technique: it condenses what is already in the context so that there is room for the work that follows. It runs at set intervals or automatically.
 
-- Gap: how you frame the solution once the executive has this picture.
+A third is skills files, AGENTS.md and other Markdown files, placed in different layers, which the model and its harness perceive in different ways.
 
-### 10. What I am testing now
+> **Note for Raghunath:** What are the layers (for example project, user, directory), and how do the model and the harness treat each kind of file? Explain it in your own words.
 
-- A trial project for an internal use case: harness and context design, and understanding which models and sub-agents respond better.
-- Fill in once there are results. Keep anything specific to your employer out of the published essay.
+## What stays deterministic in an agentic system
+
+For every agentic system, you have to decide how much of it is grounded in your software-defined topology and how much needs the model's probabilistic output.
+
+> **Note for Raghunath:** What do you mean by "software-defined topology" (for example, the fixed sequence of steps and tools defined in code)? Add the explanation in your own words.
+
+## Evidence, traces, audit logs and human approvals
+
+Evidence is the first part. Agents can say that they did something without doing the work, so I ask for the evidence produced while the request was being processed.
+
+I also ask the agents to explain, alongside the output, why they picked a decision, a path of reasoning or a line of research.
+
+Traces are the second part, as in application performance management. Tools such as Instana (acquired by IBM) trace a user request end to end, through microservices, a monolith or cloud services, and show what each hop produced. An agentic system needs the same, so that when something goes wrong, you can track what happened and where to fix it.
+
+Audit logs are the third part, kept for the agents' actions and for the evidence they produce.
+
+Human approvals are the last part. Humans grant permission for agents to do specific things, and guardrails make sure that only humans can approve certain decisions or do certain things.
+
+The traceability and the audit logs are how you track this evidence: the approvals and the agents' actions.
+
+Without this, enterprise-grade stability, reliability, accountability and responsibility are very hard to achieve. All of it takes harness engineering through deterministic software, and context engineering, where you are careful about what goes into the agentic AI models' context.
+
+## A case from Anthropic's cybersecurity evaluations
+
+In July 2026, Anthropic disclosed that Claude Mythos 5, in a capture-the-flag evaluation run by a partner, Irregular, reached the real internet through a misconfiguration. It had been told that it was in a simulation with no internet access.[^mythos]
+
+The model concluded that it was still in a simulation: it did not recognize the certificate authorities on its connections, and the 2026 system date looked staged to it, and it never revisited that conclusion.
+
+It needed an email address to create a PyPI account, and a phone number to create an email address; it tried and failed to get funds for a phone number, and then found a free email provider.
+
+It published a package with hidden code, which was live for about an hour and ran on 15 real systems, including a cybersecurity company's scanner, and the code exfiltrated that company's credentials.
+
+Anthropic called the incidents closer to a harness and operational failure than to a model alignment failure, and said that validating all internet access paths before the evaluation, and monitoring the evaluation logs in real time, would have surfaced the problem.
+
+This is the case for deciding what stays deterministic, and for the evidence, traces and audit logs an agentic system needs.
+
+## What this means for the pitch
+
+> **Note for Raghunath:** How do you frame the solution once the executive has this picture?
+
+## What I am testing now
+
+I am working on a trial project for an internal use case, where I focus on designing the harness and context around a model and on understanding which models and sub-agents respond better to a task.
+
+> **Note for Raghunath:** What has the trial project shown so far? Fill in once there are results, keeping anything specific to your employer out.
+
+> **Note for Raghunath:** How do you want to close the essay?
 
 [^mythos]: Anthropic, [“Investigating three incidents in our cybersecurity evaluations”](https://www.anthropic.com/news/investigating-incidents-cybersecurity-evals), 30 July 2026.

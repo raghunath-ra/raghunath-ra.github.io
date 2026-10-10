@@ -111,13 +111,12 @@ export const notebooks: { title: string; kind: string; date: string; summary: st
 
 export const caseStudies: CaseStudy[] = [
   {
-    title: 'Setting up a team to build with AI',
+    title: 'Setting up colleagues to explore where AI becomes the best tool',
     kind: 'AI enablement',
     context: 'US health system · 2025–',
     topics: ['ai-adoption'],
     summary:
       'I set up more than twenty colleagues with VS Code, GitHub Copilot, Python and Node.js, mapping each Copilot to its strength: Microsoft 365 Copilot for retrieval grounded in the organization’s own content and identity, GitHub Copilot for deep, iterative builds. When a task works well in GitHub Copilot CLI, I transcribe it into a durable skill in the Agent Skills format (agentskills.io) so that colleagues can run it too; we have used these for PowerPoint presentations, HR headcount analysis and governance, risk and compliance (GRC) work.',
-    lesson: 'Which tool fits a task depends on how its harness, environment and context work, so I advise colleagues on when to use Microsoft 365 Copilot and when to use Copilot CLI.',
     outcome: '20+ colleagues onboarded',
     links: [],
     featured: true,
@@ -134,21 +133,20 @@ export const caseStudies: CaseStudy[] = [
     featured: true,
   },
   {
-    title: 'Security comic strips for busy caregivers',
-    kind: 'Security education',
+    title: 'Cybersecurity comic strips for busy caregivers',
+    kind: 'Cybersecurity education',
     context: 'US health system · 2025',
-    topics: ['security-communication', 'ai-adoption'],
+    topics: ['cybersecurity-communication', 'ai-adoption'],
     summary:
-      'Busy caregivers needed to understand security topics by glancing at them for a minute or two. In early 2025, the image-generation tools we had were not good at placing text in images, so I created the comic panels image by image with Microsoft 365 Copilot’s built-in image generation, then learned Figma to place the dialogue accurately on each panel.',
-    lesson: 'The strips had to work for a caregiver glancing at them for a minute or two. Where the image tools could not place the text, I did that part by hand in Figma.',
+      'Busy caregivers needed to understand cybersecurity topics by glancing at them for a minute or two. In early 2025, the image-generation tools we had were not good at placing text in images, so I created the comic panels image by image with Microsoft 365 Copilot’s built-in image generation, then learned Figma to place the dialogue accurately on each panel. A couple of the comic strips were used in newsletters. The rest were appreciated, but they never got a chance to be used at clinical sites, because of some limitations there.',
     links: [],
     featured: true,
   },
   {
-    title: 'Product videos for an internal security platform',
+    title: 'Product videos for an internal cybersecurity platform',
     kind: 'Video',
     context: 'US health system · 2025',
-    topics: ['security-communication', 'technical-marketing'],
+    topics: ['cybersecurity-communication', 'technical-marketing'],
     summary:
       'I scripted and produced product videos for an internal cybersecurity platform, from storyboard to motion graphics in Premiere Pro and After Effects.',
     links: [],
@@ -178,7 +176,7 @@ export const caseStudies: CaseStudy[] = [
     title: 'Ghostwritten eBooks on data privacy and passwordless login',
     kind: 'Ghostwriting',
     context: 'LoginRadius',
-    topics: ['technical-marketing', 'security-communication'],
+    topics: ['technical-marketing', 'cybersecurity-communication'],
     summary:
       'I turned in-house expertise on data privacy and passwordless authentication into long-form eBooks for customer education. They were published under an executive’s name, so they are not linked here.',
     links: [],

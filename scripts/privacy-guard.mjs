@@ -32,10 +32,15 @@ const RULES = [
   // International numbers: +91 98765 43210, +1 (555) 123-4567, +44 20 7946 0958 …
   // (not CSS unicode ranges such as U+2010-2011, which follow a letter).
   { name: 'phone number', re: /(?<![\w+])\+\d{1,3}[\s.-]?\(?\d{1,5}\)?(?:[\s.-]?\d{2,5}){2,3}\b/g },
-  // Indian mobile numbers without a country code: 9876543210, 98765 43210, 98765-43210.
-  { name: 'phone number', re: /(?<![\w.\/#-])[6-9]\d{4}[\s-]?\d{5}(?!\w|\.\d)/g },
-  // North American style: (555) 123-4567, 555-123-4567, 555.123.4567.
-  { name: 'phone number', re: /(?<![\w.\/#-])\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}(?!\w|\.\d)/g },
+  // Indian mobile numbers without a '+': 9876543210, 98765 43210, 98765-43210,
+  // with the trunk prefix (09876543210) or the country code (91-98765-43210).
+  { name: 'phone number', re: /(?<![\w.\/#-])(?:0|91[\s-]?)?[6-9]\d{4}[\s-]?\d{5}(?!\w|\.\d)/g },
+  // Indian landlines with an STD code: 040-23456789, 040 2345 6789.
+  { name: 'phone number', re: /(?<![\w.\/#-])0\d{2,4}[\s-]\d{3,4}[\s-]?\d{4}(?!\w|\.\d)/g },
+  // North American style: (555) 123-4567, 555-123-4567, 555.123.4567, 1-555-123-4567.
+  { name: 'phone number', re: /(?<![\w.\/#-])(?:1[\s.-])?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}(?!\w|\.\d)/g },
+  // WhatsApp click-to-chat links carry a phone number: wa.me/919876543210.
+  { name: 'phone link', re: /wa\.me\/\d/gi },
   { name: '"/resume" link', re: /\/resume/gi },
 ];
 
@@ -77,6 +82,12 @@ const MUST_CATCH = [
   'call 9876543210 today',
   'call 98765-43210 today',
   'call (555) 123-4567.',
+  'call 1-555-123-4567',
+  'call 09876543210',
+  'call 91-98765-43210',
+  'call 040-23456789',
+  'call 040 2345 6789',
+  'chat at wa.me/919876543210',
   'tel:+15551234567',
   '<a href="/resume/">',
   'by Forbidden Example Token, 2026', // dummy entry in NAME_HASHES: proves the hash check runs
