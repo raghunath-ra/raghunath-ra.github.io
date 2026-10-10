@@ -2,40 +2,69 @@
 title: 'Helping colleagues explore where AI becomes the best tool'
 description: 'How I help colleagues at a US health system explore where AI becomes the best tool and gives productivity and efficiency gains: which tool fits which work, why the department newsletters are built with GitHub Copilot CLI and not Microsoft 365 Copilot, and how a task that works once becomes a skill colleagues can run.'
 pubDate: 2026-10-08
+updatedDate: 2026-10-10
 topics: ['ai-adoption', 'ai-systems']
 draft: true
 ---
 
 {/*
-  WORKING DRAFT, reworked on 2026-10-09 from your own material: a thesis and an
-  outline to write from. Replace the outline with your own prose, set the real
-  pubDate, then set `draft: false`.
+  WORKING DRAFT written up as prose from your own material at your request
+  (Oct 10, 2026); it stays draft: true until you say the written version is
+  done.
 
-  Where each part comes from:
-  - The title and the opening of the thesis are from your message of
-    2026-10-09: the work is less about building with AI and more about
-    exploring things first, and helping colleagues explore where AI becomes
-    the best tool and gives productivity and efficiency gains. They replace
-    the earlier framing from your brief, "getting teams to build with AI, not
-    just try it".
-  - The thesis is your dictated account of the newsletters, the Copilot choice
-    and the skills (2026-10-08), tidied, with dictation slips corrected: "MCP
-    Copilot" to "Microsoft 365 Copilot", "head condolences" to "HR headcount
-    analysis", "GS related work" to "GRC work", "agent skills.io" to the Agent
-    Skills format (agentskills.io).
-  - The facts in section 6 (more than twenty colleagues; VS Code, GitHub
-    Copilot, Python and Node.js; which Copilot for which strength) are from
-    your resume.
-  - The earlier outline's points (the license-to-habit gap, "adoption depends
-    on fit more than enthusiasm", doing the setup together, measuring what
-    people build, guardrails, "Most organizations have rolled out AI
-    assistants") were my additions, not yours, and are gone. Add any of them
-    back only if it is your view.
+  Sources:
+  - Opening: the first sentence is from your message of 2026-10-09: the work
+    is less about building with AI and more about exploring things first, and
+    helping colleagues explore where AI becomes the best tool and gives
+    productivity and efficiency gains. It replaces the earlier framing from
+    your brief, "getting teams to build with AI, not just try it". The title
+    uses the same wording.
+  - "The department newsletters", "Why Microsoft 365 Copilot does not fit
+    this work", "Why GitHub Copilot CLI fits this work", "Turning a task into a skill
+    colleagues can run" and the first sentence of "Advising on which
+    tool for which job": your dictated account of the newsletters, the Copilot
+    choice and the skills (2026-10-08), tidied, with dictation slips
+    corrected: "MCP Copilot" to "Microsoft 365 Copilot", "head condolences"
+    to "HR headcount analysis", "GS related work" to "GRC work", "agent
+    skills.io" to the Agent Skills format (agentskills.io). "Each one created
+    at the department level" is from the earlier outline of your account.
+  - The definition of the harness ("the deterministic software around the
+    model") and of context engineering ("gives the model the specifics of
+    your situation inside a limited context window") are from your stance for
+    the AI systems topic (src/data/topics.ts); "the model itself is
+    probabilistic" is from your hero line.
+  - "Setting colleagues up": your resume (more than twenty colleagues; VS
+    Code, GitHub Copilot, Python and Node.js; which Copilot for which
+    strength), as already stated in src/data/work.ts. The second sentence
+    restates the resume's "Microsoft 365 Copilot for retrieval grounded in the
+    organization's own content and identity, GitHub Copilot for deep,
+    iterative builds" in plainer words.
 
-  Gaps only you can fill, marked in the outline: what exploring first looks
-  like in practice, what in the harness, environment and context made the
-  difference, what a skill contains, the rule you give colleagues for
-  choosing a tool, and the close.
+  Editorial additions for the author to confirm:
+  - The second paragraph of the opening, which says what the essay covers
+    ("In this essay, I describe one example of this work...").
+  - Placing the definition of context engineering in "Why GitHub Copilot CLI
+    fits this work"; your account names context there but does not define it.
+    The lead-in "By context, I mean the specifics of my situation that the
+    model is given" is mine, built from your topic stance.
+  - The plain restatement in "Setting colleagues up": "Microsoft 365 Copilot
+    is for finding and using the organization's own content, within each
+    person's own access; GitHub Copilot is for builds where I iterate on the
+    same files many times." Confirm it says what you mean.
+  - The section headings.
+
+  Notes for you:
+  - The "Note for Raghunath" blocks mark the gaps: what exploring first looks
+    like in practice, what in the harness, environment and context made the
+    difference, what a skill contains and how a colleague runs one, what the
+    setup involves, the rule you give colleagues for choosing a tool, and the
+    close. Replace each one with your own text, or remove it, before setting
+    draft: false. Set the real pubDate at the same time.
+  - The earlier outline's points that were my additions (the license-to-habit
+    gap, "adoption depends on fit more than enthusiasm", doing the setup
+    together, measuring what people build, guardrails, "Most organizations
+    have rolled out AI assistants") stay out. Add any of them back only if it
+    is your view.
 
   Available in .mdx essays without importing:
     <PullQuote>A line from the essay, set large.</PullQuote>
@@ -43,55 +72,54 @@ draft: true
   Markdown footnotes ([^1]) also work and render as numbered notes at the end.
 */}
 
-## Thesis
+My work with colleagues at a US health system is about exploring things first, and helping them explore where AI becomes the best tool and gives productivity and efficiency gains.
 
-My work with colleagues at a US health system is about exploring things first, and helping them explore where AI becomes the best tool and gives productivity and efficiency gains. There has been a need for internal newsletters, monthly and half-yearly, one for each department, and I build them with GitHub Copilot CLI; they come out engaging and professional, close to what a designer would produce. Without AI, we would not have thought of the task this way, and we would not have done it.
+In this essay, I describe one example of this work, the department newsletters; why I build them with GitHub Copilot CLI and not with Microsoft 365 Copilot; how a task that works in Copilot CLI becomes a skill that colleagues can run; how I set colleagues up; and how I advise on which tool to use for which job.
 
-Microsoft 365 Copilot does not work for this, because its harness is not built for repetitive work where I keep iterating on the same files and folders under Git version control. GitHub Copilot in VS Code, or GitHub Copilot CLI, is the better tool because of how its harness, environment and context work.
+> **Note for Raghunath:** What does exploring first look like in practice? How do you and a colleague find out whether AI is the best tool for a task, and how do you judge the productivity and efficiency gains?
 
-When a task works in Copilot CLI, I transcribe it into a durable skill in the Agent Skills format, so that I can distribute it to colleagues and they can run it. We have used these skills for PowerPoint presentations, HR headcount analysis and governance, risk and compliance (GRC) work. I champion Copilot CLI internally, and I advise on when to use Microsoft 365 Copilot and when to use Copilot CLI.
+## The department newsletters
 
-<PullQuote>Without AI, we would not have thought of the task this way, and we would not have done it.</PullQuote>
+There has been a need for internal newsletters, monthly and half-yearly, one for each department, each one created at the department level.
 
-## Outline
+I build them with GitHub Copilot CLI, and they come out engaging and professional, close to what a designer would produce.
 
-### 1. Exploring first
+Without AI, we would not have thought of the task this way, and we would not have done it.
 
-- The framing, as you put it: exploring things first, and helping colleagues explore where AI becomes the best tool and gives productivity and efficiency gains.
-- Gap: what exploring first looks like in practice: how you and a colleague find out whether AI is the best tool for a task, and how you judge the productivity and efficiency gains.
+## Why Microsoft 365 Copilot does not fit this work
 
-### 2. The newsletters
+Microsoft 365 Copilot does not work for this, because its harness is not built for repetitive work where I keep iterating on the same files and folders under Git version control.
 
-- The need: internal newsletters, monthly and half-yearly, one for each department, each one created at the department level.
-- What they come out like with Copilot CLI: engaging and professional, close to what a designer would produce.
-- The point you made: without AI, we would not have thought of the task this way, and we would not have done it.
+By harness, I mean the deterministic software around the model; the model itself is probabilistic.
 
-### 3. Why Microsoft 365 Copilot did not fit
+## Why GitHub Copilot CLI fits this work
 
-- Its harness is not built for repetitive work where you keep iterating on the same files and folders under Git version control.
-- Say what the harness is, in your terms, for a reader who has not met the word: the deterministic software around the model.
+GitHub Copilot in VS Code, or GitHub Copilot CLI, is the better tool for this work because of how its harness, environment and context work.
 
-### 4. Why Copilot CLI did
+By context, I mean the specifics of my situation that the model is given. Context engineering is giving the model those specifics inside a limited context window.
 
-- GitHub Copilot in VS Code, or Copilot CLI, is the better tool because of how its harness, environment and context work.
-- Gap: say what in the harness, the environment and the context made the difference for this task. The dictation names the three but does not say how each one helped.
+> **Note for Raghunath:** What in the harness, the environment and the context made the difference for the newsletters? Your account names the three but does not yet say how each one helped.
 
-### 5. From a task that works to a skill colleagues can run
+## Turning a task into a skill colleagues can run
 
-- When a task works in Copilot CLI, you transcribe it into a durable skill in the Agent Skills format (agentskills.io) and distribute it to colleagues.
-- What the skills have been used for: PowerPoint presentations, HR headcount analysis, GRC work.
-- Gap: what a skill contains, and what a colleague has to do to run one.
+When a task works in Copilot CLI, I transcribe it into a durable skill in the Agent Skills format (agentskills.io), so that I can distribute it to colleagues and they can run it.
 
-### 6. Setting colleagues up
+We have used these skills for PowerPoint presentations, HR headcount analysis and governance, risk and compliance (GRC) work.
 
-- From your resume: more than twenty colleagues set up with VS Code, GitHub Copilot, Python and Node.js, each Copilot mapped to its strength (Microsoft 365 Copilot for retrieval grounded in the organization's own content and identity, GitHub Copilot for deep, iterative builds).
-- Gap: what the setup involves and where people get stuck, if you want to say.
+> **Note for Raghunath:** What does a skill contain, and what does a colleague have to do to run one?
 
-### 7. Advising on which tool for which job
+## Setting colleagues up
 
-- You champion Copilot CLI internally and advise on when to use Microsoft 365 Copilot and when to use Copilot CLI.
-- Gap: the rule you give people, in one or two sentences.
+I have set up more than twenty colleagues with VS Code, GitHub Copilot, Python and Node.js.
 
-### 8. Close
+I match each Copilot to the work it does best. Microsoft 365 Copilot is for finding and using the organization's own content, within each person's own access; GitHub Copilot is for builds where I iterate on the same files many times.
 
-- Yours to write.
+> **Note for Raghunath:** What does the setup involve, and where do people get stuck, if you want to say?
+
+## Advising on which tool for which job
+
+I champion Copilot CLI internally, and I advise on when to use Microsoft 365 Copilot and when to use Copilot CLI.
+
+> **Note for Raghunath:** What is the rule you give colleagues for choosing between them, in one or two sentences?
+
+> **Note for Raghunath:** The close is yours to write.
