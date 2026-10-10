@@ -8,7 +8,7 @@ import StudyFeature from '../../components/StudyFeature.astro';
 import TopicGrid from '../../components/TopicGrid.astro';
 import { getPosts, postsOnTopic } from '../../lib/posts';
 import { topics, topicHref, type Topic } from '../../data/topics';
-import { elsewhere } from '../../data/profile';
+import { elsewhere, profile } from '../../data/profile';
 import { caseStudies, research, notebooks } from '../../data/work';
 import Icon from '../../components/Icon.astro';
 import { breadcrumbNode } from '../../lib/schema';
@@ -41,7 +41,7 @@ const num = () => `§ ${String(++n).padStart(2, '0')}`;
 
 <Base
   title={topic.title}
-  description={`${topic.thesis} Essays, research and work by Raghunath Reddy filed under ${topic.title}.`}
+  description={`${topic.thesis} Essays, research and work by ${profile.name} filed under ${topic.title}.`}
   image={`/og/topics/${topic.slug}.png`}
   imageAlt={`${topic.title}: ${topic.question}`}
   schema={[breadcrumbNode(Astro.site!, crumbs)]}
