@@ -138,7 +138,7 @@ export const caseStudies: CaseStudy[] = [
     context: 'US health system · 2025',
     topics: ['cybersecurity-communication', 'ai-adoption'],
     summary:
-      'Busy caregivers needed to understand cybersecurity topics by glancing at them for a minute or two. In early 2025, the image-generation tools we had were not good at placing text in images, so I created the comic panels image by image with Microsoft 365 Copilot’s built-in image generation, then learned Figma to place the dialogue accurately on each panel.',
+      'Busy caregivers needed to understand cybersecurity topics by glancing at them for a minute or two. In early 2025, the image-generation tools we had were not good at placing text in images, so I created the comic panels image by image with Microsoft 365 Copilot’s built-in image generation, then learned Figma to place the dialogue accurately on each panel. A couple of the comic strips were used in newsletters. The rest were appreciated, but they never got a chance to be used at clinical sites, because of some limitations there.',
     links: [],
     featured: true,
   },
