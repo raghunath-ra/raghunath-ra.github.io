@@ -41,7 +41,7 @@ const imageUrl = new URL(image, base);
 
 <title>{fullTitle}</title>
 <meta name="description" content={description} />
-<link rel="canonical" href={canonical} />
+{!noindex && <link rel="canonical" href={canonical} />}
 <meta name="robots" content={noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large'} />
 <meta name="author" content={profile.name} />
 {site.googleSiteVerification && <meta name="google-site-verification" content={site.googleSiteVerification} />}
@@ -50,7 +50,7 @@ const imageUrl = new URL(image, base);
 <meta property="og:site_name" content={profile.name} />
 <meta property="og:title" content={fullTitle} />
 <meta property="og:description" content={description} />
-<meta property="og:url" content={canonical} />
+{!noindex && <meta property="og:url" content={canonical} />}
 <meta property="og:image" content={imageUrl} />
 <meta property="og:image:type" content="image/png" />
 <meta property="og:image:width" content="1200" />
