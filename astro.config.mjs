@@ -10,13 +10,15 @@ export default defineConfig({
   trailingSlash: 'ignore',
   // The blog moved to /writing, tags became the four topics, two topics were
   // renamed, research became a section of /work, and the first essay was retitled.
+  // That essay is a draft again, so its old address points to /writing/ until it
+  // is published; then point it back at /writing/what-a-language-model-learns-from-language/.
   redirects: {
     '/blog': '/writing/',
     '/blog/tags': '/topics/',
     '/topics/ai-safety': '/topics/ai-systems/',
     '/topics/security-communication': '/topics/cybersecurity-communication/',
     '/research': '/work/#research',
-    '/writing/the-model-is-finishing-your-sentence': '/writing/what-a-language-model-learns-from-language/',
+    '/writing/the-model-is-finishing-your-sentence': '/writing/',
   },
   integrations: [
     mdx(),
