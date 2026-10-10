@@ -91,7 +91,7 @@ export const profile = {
     {
       heading: 'Working in cybersecurity',
       paragraphs: [
-        'Today I work in cybersecurity for a US health system, in a program role. Part of the work is turning dense cybersecurity program detail into briefings that lay out risks, dependencies and decisions for senior leadership. Alongside it, I have made comic strips so that busy caregivers can take in a cybersecurity topic by glancing at them for a minute or two, produced videos for an internal cybersecurity platform, and helped colleagues use GitHub Copilot CLI and turn tasks that work into skills they can run.',
+        'Today I work in cybersecurity for a US health system, in a program role. Alongside it, I have made comic strips so that busy caregivers can take in a cybersecurity topic by glancing at them for a minute or two, produced videos for an internal cybersecurity platform, and helped colleagues use GitHub Copilot CLI and turn tasks that work into skills they can run.',
       ],
     },
     {
