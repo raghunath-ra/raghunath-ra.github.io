@@ -117,7 +117,6 @@ export const caseStudies: CaseStudy[] = [
     topics: ['ai-adoption'],
     summary:
       'I set up more than twenty colleagues with VS Code, GitHub Copilot, Python and Node.js, mapping each Copilot to its strength: Microsoft 365 Copilot for retrieval grounded in the organization’s own content and identity, GitHub Copilot for deep, iterative builds. When a task works well in GitHub Copilot CLI, I transcribe it into a durable skill in the Agent Skills format (agentskills.io) so that colleagues can run it too; we have used these for PowerPoint presentations, HR headcount analysis and governance, risk and compliance (GRC) work.',
-    lesson: 'Which tool fits a task depends on how its harness, environment and context work, so I advise colleagues on when to use Microsoft 365 Copilot and when to use Copilot CLI.',
     outcome: '20+ colleagues onboarded',
     links: [],
     featured: true,
@@ -140,7 +139,6 @@ export const caseStudies: CaseStudy[] = [
     topics: ['cybersecurity-communication', 'ai-adoption'],
     summary:
       'Busy caregivers needed to understand cybersecurity topics by glancing at them for a minute or two. In early 2025, the image-generation tools we had were not good at placing text in images, so I created the comic panels image by image with Microsoft 365 Copilot’s built-in image generation, then learned Figma to place the dialogue accurately on each panel.',
-    lesson: 'The strips had to work for a caregiver glancing at them for a minute or two. Where the image tools could not place the text, I did that part by hand in Figma.',
     links: [],
     featured: true,
   },
