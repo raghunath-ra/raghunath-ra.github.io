@@ -1,30 +1,37 @@
 ---
 title: 'What a language model learns from language'
-description: 'How I explain what a language model does: it learns the mathematical relationships in human language and reapplies them. Language itself keeps changing, so the words a model returns can drift from what they mean today.'
+description: 'A language model learns the patterns of human language as mathematics and reapplies them. Language keeps changing, and the model learns from text written at different times, so its answers can drift from what words and things mean today.'
 pubDate: 2026-10-08
-updatedDate: 2026-10-09
+updatedDate: 2026-10-10
 topics: ['ai-systems', 'ai-adoption']
 draft: true
 ---
 
 {/*
-  Working draft, written section by section from the author's own material.
-  It stays unpublished (draft: true) until the full text is done.
+  Working draft, written from the author's own material and edited more
+  freely at the author's request (Oct 10, 2026). It stays unpublished
+  (draft: true) until the author says the written version is done.
 
   Sources:
-  - Thesis: the author's guide for AI agents (shared Oct 09, 2026), in the
-    author's own sentences and paragraphs, with spelling and grammar slips
-    corrected and nothing added.
-  - Section 2: the author's walk-through of the model, also used in
-    what-i-explain-before-pitching-ai.mdx. Which essay carries it in full is
-    still open.
-  - Section 5: the author's dictated answer of Oct 10, 2026, with spelling and
-    grammar slips corrected. The Omarchy update cycle was checked against
-    Omarchy's own manual; the two Omarchy footnotes are editorial notes taken
-    from that manual.
+  - Opening, "Language is not born out of rules", "What the training data
+    carries", "Why this is not a case for restricting the model" and "What I
+    ask of an AI system": the author's guide for AI agents (shared Oct 09,
+    2026), edited for flow.
+  - "What the model does with your words": the author's walk-through of the
+    model, also captured in what-i-explain-before-pitching-ai.mdx. This essay
+    now carries it in prose; the other draft can refer to it.
+  - "Meaning drift": the author's dictated answers of Oct 10, 2026. Omarchy
+    facts are checked against Omarchy's own manual; the two Omarchy footnotes
+    are editorial notes from that manual.
 
-  Still open: why the drift subsides as a subject becomes popular (section 5),
-  the remaining outline sections, and the close.
+  Editorial additions for the author to confirm or change:
+  - The working definition of meaning drift at the start of that section.
+  - The reason given for why drift subsides as a subject becomes popular
+    (fewer and older texts about less popular subjects).
+  - The note that a model learns text only up to the point its training data
+    was collected, while it answers later.
+  - The link between the Omarchy answer and "honest to the current times".
+  - The close.
 
   Available in .mdx essays without importing:
     <PullQuote>A line from the essay, set large.</PullQuote>
@@ -32,72 +39,65 @@ draft: true
   Markdown footnotes ([^1]) also work and render as numbered notes at the end.
 */}
 
-## Thesis
+Over the past few months, I have observed one peculiarity with AI, especially with large language models, or LLMs (as future AI systems may grow beyond LLMs): a model relies on attributing mathematical logic and relationships to language and its intricacies, and it then reapplies this gigantic mathematical modeling when it interacts with its users, both agentic users and humans.
 
-Over the past few months, I have observed one peculiarity with AI, especially LLMs (as future AI systems may grow beyond LLMs): it relies on attributing mathematical logic and relationships to the language and its intricacies, and it then reapplies this gigantic mathematical modeling in interacting with the users, both agentic users and humans.
+All of this translates to learning patterns and reapplying them, based on mathematics-powered computational logic. In this essay, I explain what that means for the words a model gives back to you: where those words come from, why their meaning can drift from what you mean today, and what I ask of an AI system because of it.
 
-All of this translates to learning patterns and reapplying them, based on mathematics-powered computational logic.
+## What the model does with your words
 
-The language itself has a nuance: it is not born out of rules. It is born out of human evolution and humans becoming societal. Then rules are derived from known literature and language artifacts for learning purposes and standardization.
+This is how I explain it. A language model takes your text, and its tokenizer breaks the text into tokens; each model provider has its own tokenizer and vocabulary. Each token then becomes a vector of numbers, taken from a lookup table that the model learned in training.
 
-This paradigm of language means that it evolves continuously and changes direction at a different pace at different times. This is well noted by Bryan Garner's *Garner's Modern English Usage*.[^garner]
+The numbers go through the transformer. Attention works out how each token relates to the others, and the feed-forward layers are where much of what the model learned is believed to be stored. Most of this work is matrix multiplication, repeated across many layers.
 
-During the LLM training phase, I presume, the model is trained on language patterns created during different times, with many English language words taking different meanings. The human societies themselves in different geographies interpret word meaning and word combinations (phrases) in different ways.
+At the end, the model scores every possible next token; softmax turns those scores into probabilities, and sampling picks one token, shaped by settings such as temperature, top-k and top-p. Then the model does it again, one token at a time, until the answer is done.
 
-This doesn't have to mean an AI model should be restricted to using words or phrases that only have concrete meanings, with a strong assumption that most human societies understand them as concrete without meaning drift.
+Every step is mathematics applied to patterns found in text. What the model has for a word is the set of relationships it learned from the text it was trained on, and it reapplies those relationships when it answers you.
 
-This is only for my use case, where I want the agentic AI systems to communicate back or write in words, phrases, and sentence lengths that carry concrete meaning and information to the maximum possible extent, and stay honest to the current times at which the model or AI system is responding.
+## Language is not born out of rules
+
+Language itself has a nuance: it is not born out of rules. It is born out of human evolution and humans becoming societal. The rules come afterwards; they are derived from known literature and language artifacts, for learning purposes and for standardization.
+
+This means that language evolves continuously, and it changes direction at a different pace at different times. This is well noted by Bryan Garner's *Garner's Modern English Usage*.[^garner]
 
 <PullQuote>Language is not born out of rules. It is born out of human evolution and humans becoming societal.</PullQuote>
 
-## Outline
+## What the training data carries
 
-### 1. The peculiarity I noticed
+During the LLM training phase, I presume, the model is trained on language patterns created at different times, with many English words taking different meanings over those times. Human societies in different geographies also interpret words, and combinations of words (phrases), in different ways.
 
-- Where the observation comes from: months of working with language models, directly and through agents.
-- The observation itself: the model treats language as mathematical logic and relationships, learns those relationships, and reapplies them to whoever is on the other side, a person or another agent.
+The model learns all of these meanings as relationships and reapplies them when it answers. It learns them only up to the point at which its training text was collected, and it answers its users at a later time, sometimes much later.
 
-### 2. What the model does with your words
+## Meaning drift
 
-- The tokenizer splits text into tokens. Each model provider has its own tokenizer and vocabulary.
-- Each token becomes a vector of numbers, from a lookup table the model learned in training.
-- Inside the transformer, attention works out how each token relates to the others, and the feed-forward layers are where much of the learned knowledge is believed to live. Mostly matrix multiplication, repeated across many layers.
-- At the end, the model scores every possible next token; softmax turns the scores into probabilities, and sampling picks one, shaped by temperature, top-k and top-p.
-- Then it repeats, one token at a time, until the answer is done.
-- The point to make here: every step is mathematics applied to patterns found in text.
+By meaning drift, I mean the gap between what a word or a name means to you at the time you ask, and what it meant in the text the model learned it from.
 
-### 3. Where language comes from
+When you explain something to a T, the model will most likely follow what you have asked. But sometimes a user would say, "I would like to know something about Omarchy,"[^omarchy] and the model answers about an older version of Omarchy instead of the latest version. Omarchy also follows a lagged update cycle of the rolling releases of Arch,[^omarchy-updates] and the model might or might not have gotten this into its context.
 
-- Not from rules. From human evolution, and from people becoming societal.
-- The rules come afterwards: derived from known literature and language artifacts, for learning and standardization.
-- Language keeps evolving, at a different pace at different times. *Garner's Modern English Usage* as the record of that.
+Omarchy is just one example. The pattern behind it is that meaning drift happens when something is not as popular. I presume the reason is the training data: a subject that is not as popular has fewer texts written about it, and fewer recent ones, so the patterns the model learned for it are fewer and older. As the subject becomes more popular, more people write about it, newer patterns reach the training data, and the issue subsides. I expect this to happen with Omarchy itself as it becomes more popular.
 
-### 4. What the training data carries
+<PullQuote>Meaning drift happens when something is not as popular.</PullQuote>
 
-- Patterns written at different times, so one English word arrives with several meanings.
-- The same words and phrases, read differently in different geographies and societies.
-- What follows, as I presume it: the model learns all of this as relationships and reapplies it when it answers.
+Things like this can be fixed with early instructions or context engineering. For example, I can tell the model at the start, "When I ask something about Omarchy, always use the latest version." That instruction puts the meaning I intend into the model's context, so the model does not depend only on the patterns it learned in training.
 
-### 5. Meaning drift
+## Why this is not a case for restricting the model
 
-When you explain something to a T, the model will most likely follow what you have asked. But sometimes a user would say, "I would like to know something about Omarchy,"[^omarchy] and in one example, the model referred to the older version of Omarchy instead of the latest version. Things like this can be fixed with early instructions or context engineering; for example, "When I ask something about Omarchy, always use the latest version."
+This doesn't have to mean an AI model should be restricted to using words or phrases that only have concrete meanings, with a strong assumption that most human societies understand them as concrete, without meaning drift. Language keeps changing, for the reasons above.
 
-Also, Omarchy follows a lagged update cycle of the rolling releases of Arch.[^omarchy-updates] The model might or might not have gotten this into its context. As Omarchy itself becomes more popular, this issue would subside. So meaning drift happens when something is not as popular.
+What I ask for below is only for my use case.
 
-### 6. Why this is not a case for restricting the model
+## What I ask of an AI system
 
-- A model should not be limited to words with only concrete meanings, on the assumption that every society reads them as concrete.
-- The constraint below is for your use case, not a general rule for models.
+In my use case, I want agentic AI systems to communicate back, or write, in words, phrases and sentence lengths that carry concrete meaning and information to the maximum possible extent, and that stay honest to the current times at which the model or AI system is responding.
 
-### 7. What I ask of an AI system
+The Omarchy answer is an example of an answer that was not honest to the current times: a newer version existed when the question was asked, and the model answered from an older one.
 
-- Words, phrases and sentence lengths that carry concrete meaning and information to the greatest extent possible.
-- Honest to the time at which the system is responding.
-- How you put this to agents: a guide written by hand, as a lightly constrained train of thought with minimal editing, in a fixed-width layout. Say why that layout.
+I put this to AI agents in a guide that I am writing for them. The guide contains no AI-generated text; I am writing it with keyboard typing and my own thinking, mostly as a lightly constrained train of thought with minimal editorial changes. Because its readers are AI agents, it is set up in an unusual layout size and a fixed-width font. It is my attempt to convey to AI how I want it to work, and to limit meaning drift to the extent the English language permits.
 
-### 8. Close
+## What I can control
 
-- Yours to write.
+The meanings a model returns come from the text it was trained on, and that text was written at different times, in different places, and in larger amounts about popular subjects than about others. That part is set when the model is trained.
+
+The part I control is what I give the model when I ask: the instructions and the context that say what my words mean today. In my own work, this is where I put my effort, through context engineering and through guides like the one I am writing for agents.
 
 [^garner]: Bryan A. Garner, *Garner's Modern English Usage*, Oxford University Press.
 [^omarchy]: Omarchy is a Linux distribution by DHH, based on Arch Linux. See [Welcome to Omarchy](https://github.com/omacom/omarchy/blob/master/manual/01-welcome-to-omarchy.md) in the Omarchy manual.
