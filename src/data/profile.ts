@@ -128,11 +128,6 @@ export const profile = {
         home: true,
         text: 'Colleagues use GitHub Copilot CLI, and choose between it and Microsoft 365 Copilot for each job; turning tasks that work into skills they can run.',
       },
-      {
-        label: 'Studying',
-        home: true,
-        text: 'Harness engineering and context engineering: the deterministic software that runs a model in loops and manages its context, and how to give the model the specifics of your situation inside a limited context window.',
-      },
     ],
   } as { updated: string; items: { label: string; text: string; home?: boolean }[] } | null,
 
