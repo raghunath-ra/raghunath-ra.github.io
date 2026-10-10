@@ -58,7 +58,7 @@ Search `src/data/profile.ts` for `TODO` to find what still needs filling in (for
 
 ## Write an essay
 
-Six drafts are waiting in `src/content/writing/`, each with a working title, a thesis built from what you have said, and an outline that marks the gaps. To publish one, replace the outline with your prose, set the real `pubDate` and flip `draft` to `false`.
+Six drafts are waiting in `src/content/writing/`. Five are written up as prose from what you have said, with each gap marked by a "Note for Raghunath" block and the editorial additions listed in the opening comment; the language model essay is being written up in a separate thread. To publish one, replace or remove the notes, confirm the editorial additions, set the real `pubDate` and flip `draft` to `false`.
 
 ```md
 ---
