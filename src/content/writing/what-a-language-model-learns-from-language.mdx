@@ -8,25 +8,23 @@ draft: true
 ---
 
 {/*
-  WORKING DRAFT, reworked on 2026-10-09 from your own material: a thesis and an
-  outline to write from. Replace the outline with your own prose.
+  Working draft, written section by section from the author's own material.
+  It stays unpublished (draft: true) until the full text is done.
 
-  Where each part comes from:
-  - The thesis is your guide for AI agents (the sample you pasted on
-    2026-10-09), in your sentences, with three slips corrected: "pecuniarily"
-    to "peculiarity", "based off" to "based on", "reapplied" to "reapplies".
-    Nothing was added to it.
-  - Section 2 is your walk-through of the model, as captured in
-    what-i-explain-before-pitching-ai.mdx (the draft on pitching AI to an
-    executive). Decide which essay carries it in full.
-  - The earlier outline's points (the autocomplete comparison, pre-training and
-    post-training, confident wrong answers, sensitivity to phrasing, framing,
-    the three wrong pictures) were my additions, not yours, and are gone. Add
-    any of them back only if it is your view.
+  Sources:
+  - Thesis: the author's guide for AI agents (shared Oct 09, 2026), in the
+    author's own sentences and paragraphs, with spelling and grammar slips
+    corrected and nothing added.
+  - Section 2: the author's walk-through of the model, also used in
+    what-i-explain-before-pitching-ai.mdx. Which essay carries it in full is
+    still open.
+  - Section 5: the author's dictated answer of Oct 10, 2026, with spelling and
+    grammar slips corrected. The Omarchy update cycle was checked against
+    Omarchy's own manual; the two Omarchy footnotes are editorial notes taken
+    from that manual.
 
-  Gaps only you can fill, marked in the outline: a definition of meaning drift
-  in your words, examples of drift you have seen, what "honest to the current
-  times" looks like in practice, and the close.
+  Still open: why the drift subsides as a subject becomes popular (section 5),
+  the remaining outline sections, and the close.
 
   Available in .mdx essays without importing:
     <PullQuote>A line from the essay, set large.</PullQuote>
@@ -36,11 +34,19 @@ draft: true
 
 ## Thesis
 
-Over the past few months I have observed one peculiarity with AI, and with large language models in particular (future AI systems may grow beyond LLMs): a model attributes mathematical logic and relationships to language and its intricacies, and it then reapplies that gigantic mathematical modeling when it interacts with users, whether those users are humans or other agents. All of this translates to learning patterns and reapplying them, based on mathematics-powered computational logic.
+Over the past few months, I have observed one peculiarity with AI, especially LLMs (as future AI systems may grow beyond LLMs): it relies on attributing mathematical logic and relationships to the language and its intricacies, and it then reapplies this gigantic mathematical modeling in interacting with the users, both agentic users and humans.
 
-Language itself has a nuance: it is not born out of rules. It is born out of human evolution and humans becoming societal. The rules are derived afterwards, from known literature and language artifacts, for learning and standardization. This means language evolves continuously and changes direction at a different pace at different times, which Bryan Garner records in *Garner's Modern English Usage*.[^garner] During training, I presume, a model is trained on language patterns created at different times, in which many English words carry different meanings, and the human societies that use those words, in different geographies, read words and phrases in different ways again. That is where meaning drift comes from.
+All of this translates to learning patterns and reapplying them, based on mathematics-powered computational logic.
 
-This does not mean a model should be restricted to words and phrases that have only one concrete meaning, on the assumption that most human societies read them as concrete and without drift. It does mean that, for my own use, I want an AI system to write back in words, phrases and sentence lengths that carry concrete meaning and information to the greatest extent possible, and that stay honest to the time at which the system is responding.
+The language itself has a nuance: it is not born out of rules. It is born out of human evolution and humans becoming societal. Then rules are derived from known literature and language artifacts for learning purposes and standardization.
+
+This paradigm of language means that it evolves continuously and changes direction at a different pace at different times. This is well noted by Bryan Garner's *Garner's Modern English Usage*.[^garner]
+
+During the LLM training phase, I presume, the model is trained on language patterns created during different times, with many English language words taking different meanings. The human societies themselves in different geographies interpret word meaning and word combinations (phrases) in different ways.
+
+This doesn't have to mean an AI model should be restricted to using words or phrases that only have concrete meanings, with a strong assumption that most human societies understand them as concrete without meaning drift.
+
+This is only for my use case, where I want the agentic AI systems to communicate back or write in words, phrases, and sentence lengths that carry concrete meaning and information to the maximum possible extent, and stay honest to the current times at which the model or AI system is responding.
 
 <PullQuote>Language is not born out of rules. It is born out of human evolution and humans becoming societal.</PullQuote>
 
@@ -74,9 +80,9 @@ This does not mean a model should be restricted to words and phrases that have o
 
 ### 5. Meaning drift
 
-- Define meaning drift in your own words. The guide uses the term without defining it.
-- Examples you have seen: a word or phrase in an answer that meant one thing when the training text was written and means another now, or in your context.
-- Why it matters more when the reader is an agent than when the reader is a person.
+When you explain something to a T, the model will most likely follow what you have asked. But sometimes a user would say, "I would like to know something about Omarchy,"[^omarchy] and in one example, the model referred to the older version of Omarchy instead of the latest version. Things like this can be fixed with early instructions or context engineering; for example, "When I ask something about Omarchy, always use the latest version."
+
+Also, Omarchy follows a lagged update cycle of the rolling releases of Arch.[^omarchy-updates] The model might or might not have gotten this into its context. As Omarchy itself becomes more popular, this issue would subside. So meaning drift happens when something is not as popular.
 
 ### 6. Why this is not a case for restricting the model
 
@@ -94,3 +100,5 @@ This does not mean a model should be restricted to words and phrases that have o
 - Yours to write.
 
 [^garner]: Bryan A. Garner, *Garner's Modern English Usage*, Oxford University Press.
+[^omarchy]: Omarchy is a Linux distribution by DHH, based on Arch Linux. See [Welcome to Omarchy](https://github.com/omacom/omarchy/blob/master/manual/01-welcome-to-omarchy.md) in the Omarchy manual.
+[^omarchy-updates]: The Omarchy manual says new installations start on the stable channel, which takes Arch packages from an Omarchy mirror "running one month behind the latest", while the edge channel takes them "as soon as they're available". See [Updates](https://github.com/omacom/omarchy/blob/master/manual/30-updates.md) in the Omarchy manual.
