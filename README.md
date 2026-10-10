@@ -58,7 +58,7 @@ Search `src/data/profile.ts` for `TODO` to find what still needs filling in (for
 
 ## Write an essay
 
-Five drafts are waiting in `src/content/writing/`, each with a working title, a thesis built from what you have said, and an outline that marks the gaps. To publish one, replace the outline with your prose, set the real `pubDate` and flip `draft` to `false`.
+Six drafts are waiting in `src/content/writing/`, each with a working title, a thesis built from what you have said, and an outline that marks the gaps. To publish one, replace the outline with your prose, set the real `pubDate` and flip `draft` to `false`.
 
 ```md
 ---
