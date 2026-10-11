@@ -6,7 +6,7 @@
  * robots.txt and the RSS feed all derive from it. To move to a custom domain,
  * change it here (see "Custom domain" in README.md).
  */
-export const SITE_URL = 'https://raghunath-ra.github.io';
+export const SITE_URL = 'https://raghunathreddy.com';
 
 export const site = {
   url: SITE_URL,

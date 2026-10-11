@@ -9,9 +9,8 @@
  *  Anything marked `TODO` is a placeholder. Set optional values to `null` to
  *  hide them on the site.
  *
- *  Privacy: never add an email address, phone number, resume or any name
- *  other than "Raghunath Reddy" here (see the Privacy section of CLAUDE.md).
- *  `npm run build` fails if any of them reach the built site.
+ *  Contact is through the links below only; `npm run build` fails if contact
+ *  details reach the built site.
  * ─────────────────────────────────────────────────────────────────────────────
  */
 import type { TopicSlug } from './topics';
@@ -72,8 +71,7 @@ export const profile = {
 
   /**
    * The /about page: a career arc in prose, not a dated timeline. The full,
-   * dated history lives on LinkedIn. Facts only: what the work was and what
-   * he has said about it. No lessons or positions written on his behalf.
+   * dated history lives on LinkedIn.
    */
   story: [
     {

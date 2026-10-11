@@ -1,17 +1,14 @@
 #!/usr/bin/env node
 /**
- * Privacy guard: runs after `astro build` (see `npm run build`) and fails the
- * build if the output in dist/ contains anything the site must never publish:
- * an email address, a phone number, a link to a resume, or any form of the
- * owner's name other than the public one, "Raghunath Reddy".
+ * Output check: runs after `astro build` (see `npm run build`) and fails the
+ * build if the output in dist/ contains content the site does not publish:
+ * contact details, blocked links or blocked terms.
  *
- * The forms of the name that must not appear are not written in this file.
- * They are checked by SHA-256 hash of the lower-cased letters, for single words
- * and for runs of two and three consecutive words, so the strings themselves
- * are not in the repository. To add one, hash it the same way and append the
- * digest to NAME_HASHES. Never add the plain string.
+ * Blocked terms are listed as SHA-256 hashes of the lower-cased letters, for
+ * single words and for runs of two and three consecutive words. To add one,
+ * hash it the same way and append the digest to BLOCKED_HASHES.
  *
- * Usage: node scripts/privacy-guard.mjs [dir]   (default: dist)
+ * Usage: node scripts/check-output.mjs [dir]   (default: dist)
  */
 import { readdir, readFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
@@ -41,16 +38,16 @@ const RULES = [
   { name: 'phone number', re: /(?<![\w.\/#-])(?:1[\s.-])?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}(?!\w|\.\d)/g },
   // WhatsApp click-to-chat links carry a phone number: wa.me/919876543210.
   { name: 'phone link', re: /wa\.me\/\d/gi },
-  { name: '"/resume" link', re: /\/resume/gi },
+  { name: 'blocked link', re: /\/resume/gi },
 ];
 
 /**
- * SHA-256 digests of lower-cased, letters-only forms of the name that the site
- * must not publish, as single words and as two- and three-word runs with the
+ * SHA-256 digests of lower-cased, letters-only blocked terms, as single
+ * words and as two- and three-word runs with the
  * spaces and punctuation removed. The last entry is a dummy used by the
  * self-test below.
  */
-const NAME_HASHES = new Set([
+const BLOCKED_HASHES = new Set([
   "7458c423bef74af8624bce6269818d8a50bb7f183c41d12136566bc815f7258e",
   "5b1e33cfc66c54f504200d47690c931b0251bf09578872837dafbfca9257e7da",
   "53925c311158ccbd766595dfbccf85b4ae0cda37e2aee6938ea5c74cc1a476f0",
@@ -60,21 +57,21 @@ const NAME_HASHES = new Set([
 ]);
 const sha256 = (s) => createHash('sha256').update(s).digest('hex');
 
-/** Every forbidden name form found in `text`, as the lower-cased words that matched. */
-function nameHits(text) {
+/** Every blocked term found in `text`, as the lower-cased words that matched. */
+function termHits(text) {
   const words = text.toLowerCase().match(/[a-z]+/g) ?? [];
   const found = [];
   for (let i = 0; i < words.length; i++) {
     for (let n = 1; n <= 3 && i + n <= words.length; n++) {
       const run = words.slice(i, i + n);
-      if (NAME_HASHES.has(sha256(run.join('')))) found.push(run.join(' '));
+      if (BLOCKED_HASHES.has(sha256(run.join('')))) found.push(run.join(' '));
     }
   }
   return found;
 }
 
-// Self-test: every forbidden sample must be caught and every allowed one must
-// pass, so a later edit to the patterns can't quietly weaken the guard.
+// Self-test: every blocked sample must be caught and every allowed one must
+// pass, so a later edit to the patterns can't quietly weaken the check.
 const MUST_CATCH = [
   'write to someone@example.com',
   'call +91 98765 43210',
@@ -90,7 +87,7 @@ const MUST_CATCH = [
   'chat at wa.me/919876543210',
   'tel:+15551234567',
   '<a href="/resume/">',
-  'by Forbidden Example Token, 2026', // dummy entry in NAME_HASHES: proves the hash check runs
+  'by Forbidden Example Token, 2026', // dummy entry in BLOCKED_HASHES: proves the hash check runs
 ];
 const MUST_PASS = [
   'unicode-range:U+0000-00FF,U+2010-2011,U+2000-206F',
@@ -100,11 +97,11 @@ const MUST_PASS = [
   'Raghunath Reddy · Hyderabad, India',
   'import "@fontsource/cascadia-mono/400.css"',
 ];
-const hits = (text) => RULES.some((r) => ((r.re.lastIndex = 0), r.re.test(text))) || nameHits(text).length > 0;
+const hits = (text) => RULES.some((r) => ((r.re.lastIndex = 0), r.re.test(text))) || termHits(text).length > 0;
 const missed = MUST_CATCH.filter((t) => !hits(t));
 const falsePositives = MUST_PASS.filter((t) => hits(t));
 if (missed.length || falsePositives.length) {
-  console.error('privacy-guard: self-test failed.');
+  console.error('check-output: self-test failed.');
   for (const t of missed) console.error(`  should catch: ${t}`);
   for (const t of falsePositives) console.error(`  should allow: ${t}`);
   process.exit(1);
@@ -119,7 +116,7 @@ async function* walk(dir) {
 }
 
 if (!existsSync(root)) {
-  console.error(`privacy-guard: ${root} does not exist. Run \`astro build\` first.`);
+  console.error(`check-output: ${root} does not exist. Run \`astro build\` first.`);
   process.exit(1);
 }
 
@@ -128,13 +125,13 @@ let scanned = 0;
 
 for await (const file of walk(root)) {
   const rel = relative(root, file);
-  // Filenames count too: a file called resume.pdf is a resume whatever its contents.
+  // Filenames are checked too.
   for (const rule of RULES) {
     rule.re.lastIndex = 0;
     if (rule.re.test(`/${rel}`)) problems.push({ file: rel, rule: rule.name, match: rel });
   }
   // The matched words are not printed: build logs are public too.
-  if (nameHits(rel).length) problems.push({ file: rel, rule: 'name form not for publication', match: '(not shown)' });
+  if (termHits(rel).length) problems.push({ file: rel, rule: 'blocked term', match: '(not shown)' });
   if (!TEXT_EXTENSIONS.has(extname(file).toLowerCase())) continue;
   scanned++;
   const text = await readFile(file, 'utf8');
@@ -145,18 +142,17 @@ for await (const file of walk(root)) {
       problems.push({ file: rel, rule: rule.name, match: m[0], context });
     }
   }
-  if (nameHits(text).length) problems.push({ file: rel, rule: 'name form not for publication', match: '(not shown)' });
+  if (termHits(text).length) problems.push({ file: rel, rule: 'blocked term', match: '(not shown)' });
 }
 
 if (problems.length > 0) {
-  console.error(`\nprivacy-guard: ${problems.length} problem(s) in ${relative(process.cwd(), root) || '.'}/\n`);
+  console.error(`\ncheck-output: ${problems.length} problem(s) in ${relative(process.cwd(), root) || '.'}/\n`);
   for (const p of problems) {
     console.error(`  ✗ ${p.rule} in ${p.file}: "${p.match}"`);
     if (p.context) console.error(`      …${p.context}…`);
   }
-  console.error('\nThe site must not publish email addresses, phone numbers, resumes or any form of the name other than "Raghunath Reddy".');
-  console.error('See the Privacy section of CLAUDE.md.\n');
+  console.error('\nRemove the flagged content and build again.\n');
   process.exit(1);
 }
 
-console.log(`privacy-guard: scanned ${scanned} text files in ${relative(process.cwd(), root) || '.'}/, nothing to report.`);
+console.log(`check-output: scanned ${scanned} text files in ${relative(process.cwd(), root) || '.'}/, nothing to report.`);

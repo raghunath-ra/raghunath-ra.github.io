@@ -17,5 +17,5 @@ npm-debug.log*
 .idea/
 .DS_Store
 
-# local AI tool config
-.claude/
+# unpublished essay drafts
+src/content/writing/drafts/

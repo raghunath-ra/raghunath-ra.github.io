@@ -7,11 +7,7 @@
  * items reference topics by slug. The order here is the order on the site:
  * current practice first.
  *
- * `stance` is the opening of the hub page. It is written in the first person
- * and holds only what the owner has said or done: the themes as he set them,
- * his own account of the work, and facts from his career. Where his view on a
- * topic has not been given, the stance states the facts and stops; it does not
- * argue a position for him.
+ * `stance` is the opening of the hub page, written in the first person.
  */
 
 export const TOPIC_SLUGS = ['ai-adoption', 'ai-systems', 'cybersecurity-communication', 'technical-marketing'] as const;
