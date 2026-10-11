@@ -1,6 +1,6 @@
 # raghunath-ra.github.io
 
-Personal site of **Raghunath Reddy**: essays on AI adoption at work, how AI systems work, cybersecurity communication, and marketing technical products.
+Personal site of **Raghunath Reddy**: essays on LLMs, context and harness engineering for agentic AI, using AI effectively at work, and the crossroads of AI and cybersecurity in B2B technology. The essays are organized around four topics: AI adoption at work, how AI systems work, cybersecurity communication, and marketing technical products.
 Live at <https://raghunath-ra.github.io>.
 
 Built with [Astro](https://astro.build) and plain CSS. No client-side framework; the only JavaScript is the theme toggle.
