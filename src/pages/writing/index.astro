@@ -17,8 +17,8 @@ const posts = await getPosts();
 >
   <PageHead
     kicker="Writing"
-    title="Essays & notes"
-    lede="Essays on the four topics this site is organized around. Each essay is filed under a topic, so you can follow only the ones you care about."
+    title="Essays and other writing"
+    lede="My essays are on the four topics this site is organized around. Each essay is filed under at least one of them, so you can follow only the topics you care about."
   >
     <p class="actions mono">
       <a href="/rss.xml"><Icon name="rss" /> Subscribe by RSS</a>
@@ -36,7 +36,7 @@ const posts = await getPosts();
         <PostList posts={posts} headingLevel="h3" />
       ) : (
         <div class="empty">
-          <p class="lead">The first essays are being written now, one for each topic:</p>
+          <p class="lead">The first essays are being written now, at least one on each topic:</p>
           <ul>
             {topics.map((t) => (
               <li>
@@ -46,8 +46,9 @@ const posts = await getPosts();
             ))}
           </ul>
           <p class="muted">
-            Subscribe to the <a href="/rss.xml">RSS feed</a> to get them as they’re published. Until then, the{' '}
-            <a href="/work/#research">research</a> and the pieces below show how I think.
+            Subscribe to the <a href="/rss.xml">RSS feed</a> to get them as they’re published. Until then, the pieces I
+            have published elsewhere under my own name are below, and my research and notebooks are on the{' '}
+            <a href="/work/#research">work page</a>.
           </p>
         </div>
       )
