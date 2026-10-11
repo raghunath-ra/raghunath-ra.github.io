@@ -47,8 +47,8 @@ export const profile = {
 
   /**
    * The home page leads with this instead of a job title. `statement` is the
-   * point of view in one sentence; `emphasis` is the phrase in it that gets
-   * the hand-drawn underline (must appear verbatim in `statement`).
+   * point of view in one sentence; `emphasis` is the phrase in it that is set
+   * in the accent color (must appear verbatim in `statement`).
    */
   pov: {
     statement: 'Proving what an AI agent did takes evidence, traces and audit logs.',
