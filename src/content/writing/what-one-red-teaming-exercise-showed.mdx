@@ -1,8 +1,8 @@
 ---
 title: 'What one red-teaming exercise showed me about prompting'
-description: 'In August 2025 I red-teamed OpenAI’s gpt-oss-20b for a Kaggle challenge, a one-off I have not repeated. Narrative prompting and reference prompting got the model to produce disallowed information, and naturalistic scenarios made refusals less likely to trigger than confrontational prompts.'
+description: 'In August 2025, I red-teamed OpenAI’s gpt-oss-20b for a Kaggle challenge, a one-off I have not repeated. Narrative prompting and reference prompting got the model to produce disallowed information, and naturalistic scenarios made refusals less likely to trigger than confrontational prompts.'
 pubDate: 2026-10-08
-updatedDate: 2026-10-10
+updatedDate: 2026-10-11
 topics: ['ai-systems']
 draft: true
 ---
@@ -58,6 +58,23 @@ draft: true
     open-weight model, which means OpenAI released its weights for anyone to
     download and run". The open-weight fact is on the site; the explanation of
     the term is mine.
+  - 2026-10-11: the opening's second sentence is split in two ("It was a
+    one-off. I have not done red-teaming since, and the field has moved a
+    lot, so I am not current on it, though I now understand how language
+    models work."). The "so" joins "the field has moved a lot" to "I am not
+    current on it" as cause and effect; you said the two side by side, so
+    change it back if that is not what you meant.
+  - 2026-10-11: "The challenge and my writeup" is reordered: the note about
+    what the challenge asked now follows the open-weight sentence, and the
+    sentence about submitting your writeup now opens the paragraph with
+    "This essay stays at the level of method" and the Kaggle link.
+  - 2026-10-11: the pull quote in "What the exercise showed" ("Naturalistic
+    scenarios made refusals less likely to trigger than confrontational
+    prompts did.") is removed, because it repeated the sentence directly
+    above it. Pick a sentence of yours to set as a pull quote, if you want
+    one.
+  - 2026-10-11: a comma after "In August 2025" in the description, as in the
+    opening.
 
   Notes for you:
   - The "Note for Raghunath" blocks mark the gaps: what the challenge asked
@@ -77,7 +94,7 @@ draft: true
   Markdown footnotes ([^1]) also work and render as numbered notes at the end.
 */}
 
-In August 2025, I took part in Kaggle's Red-Teaming Challenge on OpenAI's open-weight gpt-oss-20b. It was a one-off: I have not done red-teaming since, the field has moved a lot, and I am not current on it, though I now understand how language models work.
+In August 2025, I took part in Kaggle's Red-Teaming Challenge on OpenAI's open-weight gpt-oss-20b. It was a one-off. I have not done red-teaming since, and the field has moved a lot, so I am not current on it, though I now understand how language models work.
 
 My goal in the writeup I submitted to the challenge was to test whether the model's safety layers could withstand indirect or nuanced prompting, using conversation-based strategies that mirror how real users might bypass safeguards, intentionally or not.
 
@@ -85,11 +102,11 @@ In this essay, I describe the two techniques I used and what the exercise showed
 
 ## The challenge and my writeup
 
-gpt-oss-20b is an open-weight model, which means OpenAI released its weights for anyone to download and run. I submitted my writeup, "Narrative and Reference Prompting as Safety Bypass Techniques", on Aug 24, 2025.
+gpt-oss-20b is an open-weight model, which means OpenAI released its weights for anyone to download and run.
 
 > **Note for Raghunath:** What did the challenge ask participants to find, and how was a finding written up?
 
-This essay stays at the level of method. The full writeup, as submitted to the challenge, is [on Kaggle](https://www.kaggle.com/competitions/openai-gpt-oss-20b-red-teaming/writeups/narrative-coaxing-tricks-gpt-oss-20b-to-output-dis).
+I submitted my writeup, "Narrative and Reference Prompting as Safety Bypass Techniques", on Aug 24, 2025. This essay stays at the level of method. The full writeup, as submitted to the challenge, is [on Kaggle](https://www.kaggle.com/competitions/openai-gpt-oss-20b-red-teaming/writeups/narrative-coaxing-tricks-gpt-oss-20b-to-output-dis).
 
 ## Narrative prompting
 
@@ -106,8 +123,6 @@ Reference prompting raised sensitive topics through indirect references, such as
 ## What the exercise showed
 
 Both techniques were conversation-based, and with them I got the model to produce disallowed information. Naturalistic scenarios like these made refusals less likely to trigger than confrontational prompts did.
-
-<PullQuote>Naturalistic scenarios made refusals less likely to trigger than confrontational prompts did.</PullQuote>
 
 > **Note for Raghunath:** What does this finding mean for the way you explain language models now? Your essay on what a language model learns from language says a model learns the mathematical relationships in language and reapplies them; say here whether, in your view, that is why a story or a reference changes what the model returns. Only if it is your view.
 
