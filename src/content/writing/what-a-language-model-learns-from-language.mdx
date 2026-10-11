@@ -1,8 +1,8 @@
 ---
 title: 'What a language model learns from language'
-description: 'A language model learns the patterns of human language as mathematics and reapplies them. Language keeps changing, and the model learns from text written at different times, so its answers can drift from what words and things mean today.'
+description: 'I have observed that a language model learns the patterns of human language as mathematics and reapplies them. Language keeps changing, and, I presume, the model learns from text written at different times, so its answers can drift from what words and things mean today.'
 pubDate: 2026-10-08
-updatedDate: 2026-10-10
+updatedDate: 2026-10-11
 topics: ['ai-systems', 'ai-adoption']
 draft: true
 ---
@@ -14,12 +14,18 @@ draft: true
 
   Sources:
   - Opening, "Language is not born out of rules", "What the training data
-    carries", "Why this is not a case for restricting the model" and "What I
-    ask of an AI system": the author's guide for AI agents (shared Oct 09,
-    2026), edited for flow.
+    carries" and "What I ask of an AI system": the author's guide for AI
+    agents (shared Oct 09, 2026), edited for flow. On 2026-10-11 the former
+    section "Why this is not a case for restricting the model" was merged
+    into "What I ask of an AI system", after your paragraph on what you want
+    from agentic AI systems, so that "This doesn't have to mean..." refers
+    to it.
   - "What the model does with your words": the author's walk-through of the
-    model, also captured in what-i-explain-before-pitching-ai.mdx. This essay
-    now carries it in prose; the other draft can refer to it.
+    model. what-i-explain-before-pitching-ai.mdx carries the same
+    walk-through, including your sentence "Some of these settings are
+    proprietary, so we do not know which one is which.", which this essay
+    leaves out. Decide which essay carries it in full and which one refers
+    to the other; the one published first could carry it.
   - "Meaning drift": the author's dictated answers of Oct 10, 2026. Omarchy
     facts are checked against Omarchy's own manual; the two Omarchy footnotes
     are editorial notes from that manual.
@@ -32,6 +38,31 @@ draft: true
     was collected, while it answers later.
   - The link between the Omarchy answer and "honest to the current times".
   - The close.
+  - The last paragraph of "What the model does with your words" ("Every step
+    is mathematics applied to patterns found in text...").
+  - "That instruction puts the meaning I intend into the model's context, so
+    the model does not depend only on the patterns it learned in training."
+  - "Language keeps changing, for the reasons above."
+  - The section headings.
+  - 2026-10-11: the description keeps your "I have observed" and "I presume",
+    which it had dropped.
+  - 2026-10-11: "and in one example, the model referred to an older version
+    of Omarchy instead of the latest version", in place of "and the model
+    answers about an older version...", which turned your one example into
+    general behavior.
+  - 2026-10-11: "What I ask for is only for my use case." (it read "What I
+    ask for below...", before the merged section).
+  - 2026-10-11: "Because its readers are AI agents," is cut from the
+    sentence about the guide's layout; it gave a reason you have not given
+    (see the note there).
+
+  Notes for you:
+  - Three "Note for Raghunath" blocks (2026-10-11) mark the gaps: how
+    Omarchy's lagged update cycle bears on the older-version answer, whether
+    you count a product version as meaning drift (and an example of a word
+    whose meaning drifted), and why the guide uses its layout size and
+    fixed-width font. Replace or remove each one before setting
+    draft: false.
 
   Available in .mdx essays without importing:
     <PullQuote>A line from the essay, set large.</PullQuote>
@@ -71,27 +102,31 @@ The model learns all of these meanings as relationships and reapplies them when 
 
 By meaning drift, I mean the gap between what a word or a name means to you at the time you ask, and what it meant in the text the model learned it from.
 
-When you explain something to a T, the model will most likely follow what you have asked. But sometimes a user would say, "I would like to know something about Omarchy,"[^omarchy] and the model answers about an older version of Omarchy instead of the latest version. Omarchy also follows a lagged update cycle of the rolling releases of Arch,[^omarchy-updates] and the model might or might not have gotten this into its context.
+When you explain something to a T, the model will most likely follow what you have asked. But sometimes a user would say, "I would like to know something about Omarchy,"[^omarchy] and in one example, the model referred to an older version of Omarchy instead of the latest version. Omarchy also follows a lagged update cycle of the rolling releases of Arch,[^omarchy-updates] and the model might or might not have gotten this into its context.
+
+> **Note for Raghunath:** How does the lagged update cycle bear on the older-version answer? And what does "this" refer to in "might or might not have gotten this into its context": the latest version, or the lag itself? Say it in your own words.
 
 Omarchy is just one example. The pattern behind it is that meaning drift happens when something is not as popular. I presume the reason is the training data: a subject that is not as popular has fewer texts written about it, and fewer recent ones, so the patterns the model learned for it are fewer and older. As the subject becomes more popular, more people write about it, newer patterns reach the training data, and the issue subsides. I expect this to happen with Omarchy itself as it becomes more popular.
 
 <PullQuote>Meaning drift happens when something is not as popular.</PullQuote>
 
+> **Note for Raghunath:** The essay is about word meanings that change, but its one example is a product version. Do you count a product's version as meaning drift? If you have an example of a word or phrase whose meaning drifted, it would fit here.
+
 Things like this can be fixed with early instructions or context engineering. For example, I can tell the model at the start, "When I ask something about Omarchy, always use the latest version." That instruction puts the meaning I intend into the model's context, so the model does not depend only on the patterns it learned in training.
-
-## Why this is not a case for restricting the model
-
-This doesn't have to mean an AI model should be restricted to using words or phrases that only have concrete meanings, with a strong assumption that most human societies understand them as concrete, without meaning drift. Language keeps changing, for the reasons above.
-
-What I ask for below is only for my use case.
 
 ## What I ask of an AI system
 
 In my use case, I want agentic AI systems to communicate back, or write, in words, phrases and sentence lengths that carry concrete meaning and information to the maximum possible extent, and that stay honest to the current times at which the model or AI system is responding.
 
+This doesn't have to mean an AI model should be restricted to using words or phrases that only have concrete meanings, with a strong assumption that most human societies understand them as concrete, without meaning drift. Language keeps changing, for the reasons above.
+
+What I ask for is only for my use case.
+
 The Omarchy answer is an example of an answer that was not honest to the current times: a newer version existed when the question was asked, and the model answered from an older one.
 
-I put this to AI agents in a guide that I am writing for them. The guide contains no AI-generated text; I am writing it with keyboard typing and my own thinking, mostly as a lightly constrained train of thought with minimal editorial changes. Because its readers are AI agents, it is set up in an unusual layout size and a fixed-width font. It is my attempt to convey to AI how I want it to work, and to limit meaning drift to the extent the English language permits.
+I put this to AI agents in a guide that I am writing for them. The guide contains no AI-generated text; I am writing it with keyboard typing and my own thinking, mostly as a lightly constrained train of thought with minimal editorial changes. It is set up in an unusual layout size and a fixed-width font. It is my attempt to convey to AI how I want it to work, and to limit meaning drift to the extent the English language permits.
+
+> **Note for Raghunath:** Why is the guide set up in an unusual layout size and a fixed-width font? The earlier outline asked you to say why; the reason is yours to add.
 
 ## What I can control
 
