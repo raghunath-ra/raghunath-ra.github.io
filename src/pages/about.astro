@@ -16,11 +16,11 @@ const profiles = [
 
 <Base
   title="About"
-  description={`About ${profile.name}: from software testing to technical writing, product marketing and cybersecurity, and how that led to writing about AI and security.`}
+  description={`About ${profile.name}: from software testing to technical writing, product marketing and cybersecurity, and the four topics he writes about.`}
   type="profile"
   schema={[breadcrumbNode(Astro.site!, crumbs)]}
 >
-  <PageHead crumbs={crumbs} kicker="About" title={`I’m ${profile.shortName}.`} lede={profile.intro} />
+  <PageHead crumbs={crumbs} kicker="About" title={`I’m ${profile.shortName}.`} />
 
   <div class="wrap layout">
     <div class="story prose">

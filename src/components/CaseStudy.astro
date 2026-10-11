@@ -20,7 +20,7 @@ const { item, headingLevel: H = 'h3', compact = false } = Astro.props;
       </p>
       <div>
         <H class="title">{item.title}</H>
-        {item.lesson ? <p class="lesson">{item.lesson}</p> : <p class="lesson">{item.summary}</p>}
+        <p class="lesson">{item.short ?? item.summary}</p>
       </div>
     </article>
   ) : (
