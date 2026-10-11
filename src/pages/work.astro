@@ -18,14 +18,14 @@ const groups = topics
 
 <Base
   title="Work"
-  description={`Selected work by ${profile.name} in AI adoption at work, cybersecurity communication and technical marketing, plus research and notebooks on how language models work.`}
+  description={`Selected work by ${profile.name} in AI adoption at work, cybersecurity communication and marketing technical products, plus research and notebooks on how language models work.`}
   schema={[breadcrumbNode(Astro.site!, crumbs)]}
 >
   <PageHead
     crumbs={crumbs}
     kicker="Work"
     title="Selected work"
-    lede="Selected projects, grouped by the topic they belong to. Where a project taught me something, that follows the summary."
+    lede="These are selected projects, grouped by the topic they belong to."
   >
     <p class="note mono">
       Research and notebooks are <a href="#research">at the end</a>. Dates, titles and the full history are on{' '}
@@ -57,7 +57,7 @@ const groups = topics
     <div class="section-head">
       <span class="num">§ {String(groups.length + 1).padStart(2, '0')}</span>
       <h2 id="research-title">Research &amp; notebooks</h2>
-      <p>What I learned about how language models work by building and probing them: a one-off red-teaming exercise from 2025, and notebooks from implementing and fine-tuning models.</p>
+      <p>I learned how language models work by building and probing them. This section has a one-off red-teaming exercise from 2025 and notebooks from implementing and fine-tuning models.</p>
     </div>
     <div class="studies">
       {research.map((s) => <StudyFeature study={s} headingLevel="h3" />)}
