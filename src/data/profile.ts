@@ -41,9 +41,9 @@ export const profile = {
    */
   jobTitle: 'Cybersecurity program role at a US health system',
   /** Follows your name in the home page <title> and the default social card. */
-  descriptor: 'AI, cybersecurity & technical marketing',
+  descriptor: 'AI, cybersecurity & B2B technology',
   /** Follows your name in the masthead line at the top of the home page. */
-  masthead: 'Essays on AI, cybersecurity and technical marketing',
+  masthead: 'Essays on AI, cybersecurity and B2B technology',
   /** Keep this to city and country at most. */
   location: 'Hyderabad, India',
 
@@ -64,11 +64,11 @@ export const profile = {
 
   /** Used for <meta name="description"> on the home page and as the site default. */
   seoDescription:
-    'Raghunath Reddy writes about AI adoption at work, how AI systems work, cybersecurity communication and marketing technical products.',
+    'Raghunath Reddy writes about LLMs, context and harness engineering for agentic AI, using AI effectively at work, and the crossroads of AI and cybersecurity in B2B technology.',
 
   /** Short about for the home page. */
   intro:
-    'I started in software testing, spent years writing and marketing for cloud, identity and cybersecurity companies, and now work in cybersecurity for a US health system from Hyderabad.',
+    'I started in software testing, spent years writing and marketing for B2B cloud, identity and cybersecurity companies, and now work in cybersecurity for a US health system from Hyderabad.',
 
   /**
    * The /about page: a career arc in prose, not a dated timeline. The full,
@@ -103,7 +103,7 @@ export const profile = {
     {
       heading: 'AI systems, and this site',
       paragraphs: [
-        'I understand how AI systems work from building and probing them: a transformer written from scratch, small models fine-tuned on Kaggle, a one-off red-teaming exercise on OpenAI’s gpt-oss-20b in 2025, and now harness engineering and context engineering on a trial project for an internal use case at work. This site is organized around four topics, and it is where I write about them.',
+        'I understand how AI systems work from building and probing them: a transformer written from scratch, small models fine-tuned on Kaggle, a one-off red-teaming exercise on OpenAI’s gpt-oss-20b in 2025, and now harness engineering and context engineering on a trial project for an internal use case at work. I am a generalist first, and then a specialist. This site is organized around four topics, and it is where I write about them.',
       ],
     },
   ],
