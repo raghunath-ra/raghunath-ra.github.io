@@ -22,8 +22,9 @@ export default defineConfig({
   },
   integrations: [
     mdx(),
-    // /now/ only redirects to /about/ while profile.now is null, so leave it out then.
-    sitemap({ filter: (page) => profile.now !== null || !page.endsWith('/now/') }),
+    // /now/ redirects to /about/ whenever profile.now is unset (the same check
+    // as src/pages/now.astro), so leave it out then.
+    sitemap({ filter: (page) => Boolean(profile.now) || !page.endsWith('/now/') }),
   ],
   markdown: {
     shikiConfig: {
