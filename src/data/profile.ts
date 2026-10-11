@@ -42,6 +42,8 @@ export const profile = {
   jobTitle: 'Cybersecurity program role at a US health system',
   /** Follows your name in the home page <title> and the default social card. */
   descriptor: 'AI, cybersecurity & technical marketing',
+  /** Follows your name in the masthead line at the top of the home page. */
+  masthead: 'Essays on AI, cybersecurity and technical marketing',
   /** Keep this to city and country at most. */
   location: 'Hyderabad, India',
 
