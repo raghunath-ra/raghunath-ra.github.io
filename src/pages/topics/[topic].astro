@@ -41,7 +41,7 @@ const num = () => `§ ${String(++n).padStart(2, '0')}`;
 
 <Base
   title={topic.title}
-  description={`${topic.thesis} This page collects the writing and work I have filed under ${topic.title}.`}
+  description={`${topic.thesis} This page collects the writing and work I have filed under this topic.`}
   image={`/og/topics/${topic.slug}.png`}
   imageAlt={`${topic.title}: ${topic.question}`}
   schema={[breadcrumbNode(Astro.site!, crumbs)]}

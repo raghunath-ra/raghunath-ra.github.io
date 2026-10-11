@@ -124,7 +124,7 @@ export const caseStudies: CaseStudy[] = [
     summary:
       'I set up more than twenty colleagues with VS Code, GitHub Copilot, Python and Node.js, mapping each Copilot to its strength: Microsoft 365 Copilot for retrieval grounded in the organization’s own content and identity, GitHub Copilot for deep, iterative builds. When a task works well in GitHub Copilot CLI, I transcribe it into a durable skill in the Agent Skills format (agentskills.io) so that colleagues can run it too; we have used these for PowerPoint presentations, HR headcount analysis and governance, risk and compliance (GRC) work.',
     short:
-      'I set up more than twenty colleagues with VS Code, GitHub Copilot, Python and Node.js, and when a task works well in GitHub Copilot CLI, I transcribe it into a skill that colleagues can run.',
+      'I set up more than twenty colleagues with VS Code, GitHub Copilot, Python and Node.js, and mapped each Copilot to its strength.',
     outcome: '20+ colleagues onboarded',
     links: [],
     featured: true,
