@@ -1,18 +1,24 @@
 name: Deploy to GitHub Pages
 
+# Pushes to main (and manual runs) build and deploy. Pull requests into main
+# run the same build, which includes astro check and the privacy guard, and
+# stop there: the deploy job is skipped for them.
 on:
   push:
+    branches: [main]
+  pull_request:
     branches: [main]
   workflow_dispatch:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
+# Pull request runs are grouped per pull request and cancel older runs of the
+# same pull request. Deploy runs share one group and never cancel each other,
+# so a pull request can never cancel or hold up a deployment.
 concurrency:
-  group: pages
-  cancel-in-progress: false
+  group: ${{ github.event_name == 'pull_request' && format('pr-{0}', github.event.pull_request.number) || 'pages' }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   build:
@@ -22,10 +28,17 @@ jobs:
         uses: actions/checkout@v7
       - name: Build with Astro
         uses: withastro/action@v6
+        with:
+          # Pinned to the Node LTS line that satisfies "engines" in package.json.
+          node-version: 22
 
   deploy:
+    if: github.event_name != 'pull_request'
     needs: build
     runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

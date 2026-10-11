@@ -8,19 +8,23 @@ import { profile } from './src/data/profile.ts';
 export default defineConfig({
   site: SITE_URL,
   trailingSlash: 'ignore',
-  // The blog moved to /writing, tags became the four topics, a topic was renamed,
-  // research became a section of /work, and the first essay was retitled.
+  // The blog moved to /writing, tags became the four topics, two topics were
+  // renamed, research became a section of /work, and the first essay was retitled.
+  // That essay is a draft again, so its old address points to /writing/ until it
+  // is published; then point it back at /writing/what-a-language-model-learns-from-language/.
   redirects: {
     '/blog': '/writing/',
     '/blog/tags': '/topics/',
     '/topics/ai-safety': '/topics/ai-systems/',
+    '/topics/security-communication': '/topics/cybersecurity-communication/',
     '/research': '/work/#research',
-    '/writing/the-model-is-finishing-your-sentence': '/writing/what-a-language-model-learns-from-language/',
+    '/writing/the-model-is-finishing-your-sentence': '/writing/',
   },
   integrations: [
     mdx(),
-    // /now/ only redirects to /about/ while profile.now is null, so leave it out then.
-    sitemap({ filter: (page) => profile.now !== null || !page.endsWith('/now/') }),
+    // /now/ redirects to /about/ whenever profile.now is unset (the same check
+    // as src/pages/now.astro), so leave it out then.
+    sitemap({ filter: (page) => Boolean(profile.now) || !page.endsWith('/now/') }),
   ],
   markdown: {
     shikiConfig: {

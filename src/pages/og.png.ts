@@ -8,7 +8,7 @@ export async function GET() {
       kicker: 'Essays & research',
       title: profile.pov.statement,
       emphasis: profile.pov.emphasis,
-      subtitle: 'On AI adoption at work, how AI systems work, security communication and technical marketing.',
+      subtitle: 'At the crossroads of AI and cybersecurity, with B2B technology as the primary focus.',
     }),
   );
 }

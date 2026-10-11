@@ -173,9 +173,16 @@ export async function renderCard({ kicker, title, emphasis, subtitle }: Card): P
   return new Resvg(svg, { fitTo: { mode: 'width', value: 1200 } }).render().asPng();
 }
 
-/** Clip long text for a card without cutting a word in half. */
-export const clip = (text: string, max: number) =>
-  text.length <= max ? text : `${text.slice(0, text.lastIndexOf(' ', max)).replace(/[,.;:]$/, '')}…`;
+/**
+ * Clip long text for a card without cutting a word in half. When there is no
+ * space to break at before `max`, cut at `max` instead.
+ */
+export const clip = (text: string, max: number) => {
+  if (text.length <= max) return text;
+  const space = text.lastIndexOf(' ', max);
+  const end = space > 0 ? space : max;
+  return `${text.slice(0, end).replace(/[,.;:]$/, '')}…`;
+};
 
 export const pngResponse = (png: Uint8Array) =>
   new Response(png as unknown as BodyInit, {

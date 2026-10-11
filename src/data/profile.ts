@@ -35,31 +35,40 @@ export interface Elsewhere {
 export const profile = {
   name: 'Raghunath Reddy',
   shortName: 'Raghunath',
-  /** Current job title. Used for Person.jobTitle in structured data. */
-  jobTitle: 'Senior Cybersecurity Program Manager',
+  /**
+   * Used for Person.jobTitle in structured data. Kept at the level of the
+   * visible copy ("a program role" in cybersecurity), not the exact title.
+   */
+  jobTitle: 'Cybersecurity program role at a US health system',
   /** Follows your name in the home page <title> and the default social card. */
-  descriptor: 'AI, security & technical marketing',
+  descriptor: 'AI, cybersecurity & B2B technology',
+  /** Follows your name in the masthead line at the top of the home page. */
+  masthead: 'Essays on AI, cybersecurity and B2B technology',
   /** Keep this to city and country at most. */
   location: 'Hyderabad, India',
 
   /**
    * The home page leads with this instead of a job title. `statement` is the
-   * point of view in one sentence; `emphasis` is the phrase in it that gets
-   * the hand-drawn underline (must appear verbatim in `statement`).
+   * point of view in one sentence; `emphasis` is the phrase in it that is set
+   * in the accent color (must appear verbatim in `statement`); `position`
+   * follows the statement in the hero.
    */
   pov: {
-    statement: 'The model is probabilistic. The software around it doesn’t have to be.',
-    emphasis: 'doesn’t have to be',
-    dek: 'I’m Raghunath Reddy. I work in cybersecurity at a US health system, where I also help colleagues build with AI. Before that, I spent years explaining identity and security products to developers and the people who buy for them. My focus in AI engineering is harness engineering, context engineering and understanding which models and sub-agents respond better to a task, and I am applying this on a trial project for an internal use case. This site is where I write about these subjects.',
+    statement:
+      'I explore the frontier of LLMs, along with context and harness engineering for agentic AI, and help colleagues use AI effectively at work.',
+    emphasis: 'context and harness engineering for agentic AI',
+    position:
+      'I operate at the crossroads of AI and cybersecurity, with B2B technology as the primary focus. I am a generalist first, and then a specialist.',
+    dek: 'I’m Raghunath Reddy. I work in cybersecurity at a US health system, where I am applying harness and context engineering on a trial project for an internal use case, and testing which models and sub-agents respond better to a task. Before my current role, I spent years in B2B technology marketing, explaining identity and cybersecurity products to developers and the people who buy for them. This site is where I write about these subjects.',
   },
 
   /** Used for <meta name="description"> on the home page and as the site default. */
   seoDescription:
-    'Raghunath Reddy writes about AI adoption at work, how AI systems work, making security understandable to executives and non-experts, and marketing technical products.',
+    'Raghunath Reddy writes about LLMs, context and harness engineering for agentic AI, using AI effectively at work, and the crossroads of AI and cybersecurity in B2B technology.',
 
-  /** Short about for the home page, and the lede of /about. */
+  /** Short about for the home page. */
   intro:
-    'I started in software testing, spent years writing and marketing for cloud, identity and security companies, and now work in cybersecurity for a US health system from Hyderabad. At work I also help colleagues use AI: setting them up with the tools, advising on which tool fits which job, and turning tasks that work into skills they can run.',
+    'I started in software testing, spent years writing and marketing for B2B cloud, identity and cybersecurity companies, and now work in cybersecurity for a US health system from Hyderabad.',
 
   /**
    * The /about page: a career arc in prose, not a dated timeline. The full,
@@ -86,15 +95,15 @@ export const profile = {
       ],
     },
     {
-      heading: 'Working in security',
+      heading: 'Working in cybersecurity',
       paragraphs: [
-        'Today I work in cybersecurity for a US health system, in a program role. Part of the work is turning dense security program detail into briefings that lay out risks, dependencies and decisions for senior leadership. Alongside it, I have made comic strips so that busy caregivers can take in a security topic by glancing at them for a minute or two, produced videos for an internal security platform, and helped colleagues use GitHub Copilot CLI and turn tasks that work into skills they can run.',
+        'Today I work in cybersecurity for a US health system, in a program role. Alongside it, I have made comic strips on cybersecurity topics for busy caregivers, so that they could understand a topic by glancing at a strip for a minute or two, and I have produced videos for an internal cybersecurity platform. I also help colleagues use GitHub Copilot CLI, and I turn tasks that work into skills they can run.',
       ],
     },
     {
       heading: 'AI systems, and this site',
       paragraphs: [
-        'I understand how AI systems work from building and probing them: a transformer written from scratch, small models fine-tuned on Kaggle, a one-off red-teaming exercise on OpenAI’s gpt-oss-20b in 2025, and now harness engineering and context engineering on a trial project for an internal use case at work. This site is organized around four topics, and it is where I write about them.',
+        'I understand how AI systems work from building and probing them: a transformer written from scratch, small models fine-tuned on Kaggle, a one-off red-teaming exercise on OpenAI’s gpt-oss-20b in 2025, and now harness engineering and context engineering on a trial project for an internal use case at work. I am a generalist first, and then a specialist. This site is organized around four topics, and it is where I write about them.',
       ],
     },
   ],
@@ -105,30 +114,26 @@ export const profile = {
    * under "What I'm working on now". Set `now` to null to remove the page.
    */
   now: {
-    updated: '2026-10-09',
+    updated: '2026-10-11',
     items: [
       {
         label: 'Working',
-        text: 'In cybersecurity at a US health system.',
-      },
-      {
-        label: 'Writing',
-        text: 'The essays for this site, one for each of its four topics.',
+        text: 'I work in cybersecurity at a US health system.',
       },
       {
         label: 'Building',
         home: true,
-        text: 'A trial project for an internal use case at work: designing the harness and context around a model, and comparing how different models and sub-agents respond.',
+        text: 'I am working on a trial project for an internal use case at work, designing the harness and context around a model and comparing how different models and sub-agents respond.',
       },
       {
         label: 'Helping',
         home: true,
-        text: 'Colleagues use GitHub Copilot CLI, and choose between it and Microsoft 365 Copilot for each job; turning tasks that work into skills they can run.',
+        text: 'I help colleagues use GitHub Copilot CLI and choose between it and Microsoft 365 Copilot for each job, and I turn tasks that work into skills they can run.',
       },
       {
-        label: 'Studying',
+        label: 'Writing',
         home: true,
-        text: 'Harness engineering and context engineering: the deterministic software that runs a model in loops and manages its context, and how to give the model the specifics of your situation inside a limited context window.',
+        text: 'I am writing the first essays for this site, at least one on each of its four topics.',
       },
     ],
   } as { updated: string; items: { label: string; text: string; home?: boolean }[] } | null,
@@ -158,7 +163,7 @@ export const profile = {
     {
       title: 'Narrative and Reference Prompting as Safety Bypass Techniques',
       outlet: 'Kaggle',
-      kind: 'Hackathon writeup',
+      kind: 'Challenge writeup',
       year: '2025',
       href: 'https://www.kaggle.com/competitions/openai-gpt-oss-20b-red-teaming/writeups/narrative-coaxing-tricks-gpt-oss-20b-to-output-dis',
       topics: ['ai-systems'],
@@ -169,7 +174,7 @@ export const profile = {
       kind: 'Article',
       year: '2024',
       href: 'https://www.loginradius.com/blog/engineering/identity-impact-of-google-chrome-thirdparty-cookie-restrictions/',
-      topics: ['security-communication', 'technical-marketing'],
+      topics: ['cybersecurity-communication', 'technical-marketing'],
     },
     {
       title: 'What is Risk-Based Authentication? And Why Should You Implement It?',
@@ -177,7 +182,7 @@ export const profile = {
       kind: 'Article',
       year: '2021',
       href: 'https://www.loginradius.com/blog/engineering/risk-based-authentication/',
-      topics: ['security-communication', 'technical-marketing'],
+      topics: ['cybersecurity-communication', 'technical-marketing'],
     },
     {
       title: 'Everything I published on the LoginRadius blog',
