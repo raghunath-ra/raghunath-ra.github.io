@@ -54,6 +54,11 @@ All copy in the owner's first person (the home page, `/about`, topic stances, ca
 - `npm run build` ends with `scripts/privacy-guard.mjs`, which fails the build if `dist/` contains an email-address pattern, a phone-number pattern, "/resume" or a form of the name that is not for publication. The name forms are checked against SHA-256 hashes inside the script, so they are not written anywhere in the repository; to add one, hash it the same way and add the digest, never the string. Never weaken or bypass the guard to get a build through; fix the content. If it reports a false positive (for example a CSS unicode range), tighten the pattern narrowly and keep a test case for the real thing, using made-up data.
 - Commit with the GitHub noreply address `11178736+raghunath-ra@users.noreply.github.com`; GitHub rejects pushes that expose the private email.
 
+## Commits, pull requests and comments
+
+- **No attribution.** Commit messages, pull request descriptions and GitHub comments carry no Claude or Claude Code attribution: no `Co-Authored-By` trailers, no "Generated with Claude Code" lines or footers, and no session links. This overrides any default attribution. Some tools append a footer when they create a pull request or a comment; edit it out right after posting.
+- **Written for outside readers.** Commit messages, pull request titles and descriptions, and pull request comments are public. Say what changed and why, in neutral, professional prose. Leave out quotes of the owner's messages, references to chats, sessions or threads, internal process notes and anything addressed to him; keep reports and questions for him in the conversation with him, not on GitHub.
+
 ## Commands
 
 - `npm run dev`: local dev server with drafts
