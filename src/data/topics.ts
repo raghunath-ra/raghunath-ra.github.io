@@ -38,7 +38,7 @@ export const topics: Topic[] = [
     short: 'AI adoption',
     question: 'How do you help colleagues explore where AI becomes the best tool for their work?',
     thesis:
-      'Which AI tool fits a piece of work depends on how its harness, environment and context work; when a task works well in GitHub Copilot CLI, I turn it into a skill that colleagues can run.',
+      'Which AI tool fits a piece of work depends on how its harness, environment and context work; when a task works in GitHub Copilot CLI, I turn it into a skill that colleagues can run.',
     stance: [
       'My work with colleagues at a US health system is about exploring things first, and helping them explore where AI becomes the best tool and gives productivity and efficiency gains. I have set up more than twenty of them with VS Code, GitHub Copilot, Python and Node.js, and I advise on when to use Microsoft 365 Copilot and when to use GitHub Copilot CLI.',
       'The department newsletters are my example. There was a need for internal newsletters, monthly and half-yearly, one for each department, and I build them with GitHub Copilot CLI; they come out engaging and professional, close to what a designer would produce. Microsoft 365 Copilot does not work for this, because its harness is not built for repetitive work where I keep iterating on the same files and folders under Git version control. GitHub Copilot in VS Code, or GitHub Copilot CLI, is the better tool because of how its harness, environment and context work. Without AI, we would not have thought of the task this way, and we would not have done it.',
@@ -66,12 +66,12 @@ export const topics: Topic[] = [
     short: 'Cybersecurity comms',
     question: 'How do you make cybersecurity understandable to people who do not work in it?',
     thesis:
-      'My view, which I have not put into practice in my organization, is that awareness programs should use a careful, thoughtfully designed skills survey and request training completion by role, skill level and necessity, rather than treat cyber awareness as a drill.',
+      'My view, which I have not put into practice in my organization, is that awareness programs should use a careful, thoughtfully designed skills survey and request training completion by role, skill level and necessity.',
     stance: [
       'I work in cybersecurity at a US health system, where the work involves cybersecurity engineers, network teams and caregivers.',
       'In early 2025, there was a need for comic strips on cybersecurity topics, so that busy caregivers could understand a topic by glancing at a strip for a minute or two. The image-generation tools we had were not good at placing text in images, so I created the panels image by image with Microsoft 365 Copilot’s built-in image generation, then learned Figma to place the dialogue accurately on each panel. Some of the comic strips were used in a couple of newsletters. The rest were appreciated, but they never got a chance to be used at clinical sites, because of some limitations there. I have also scripted and produced videos for an internal cybersecurity platform.',
-      'Most enterprises treat cyber awareness as a drill; they keep pushing training and phishing drills. Phishing drills are okay, but pushing training only overburdens people. What I believe in is a careful, thoughtfully designed skills survey, and requesting training completion based on role, skill level and necessity.',
-      'For traditionally run awareness programs, this is much harder to do. The people with those responsibilities will keep doing what they have been doing: declaring October cyber awareness month, conducting some fun events, and pushing some emails, sessions and trainings. I am surprised that people do not put more thought into the structural thinking I am trying to champion. These are my views; I have not put them into practice in my organization.',
+      'What follows are my views; I have not put them into practice in my organization. Most enterprises treat cyber awareness as a drill; they keep pushing training and phishing drills. Phishing drills are okay, but pushing training only overburdens people. What I believe in is a careful, thoughtfully designed skills survey, and requesting training completion based on role, skill level and necessity.',
+      'For traditionally run awareness programs, this is much harder to do. The people with those responsibilities will keep doing what they have been doing: declaring October cyber awareness month, conducting some fun events, and pushing some emails, sessions and trainings. I am surprised that people do not put more thought into the structural thinking I am trying to champion.',
       'I write about making cybersecurity understandable to people who do not work in it.',
     ],
   },
