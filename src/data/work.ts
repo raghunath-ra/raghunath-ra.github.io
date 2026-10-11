@@ -122,9 +122,9 @@ export const caseStudies: CaseStudy[] = [
     context: 'US health system · 2025–',
     topics: ['ai-adoption'],
     summary:
-      'I set up more than twenty colleagues with VS Code, GitHub Copilot, Python and Node.js, mapping each Copilot to its strength: Microsoft 365 Copilot for retrieval grounded in the organization’s own content and identity, GitHub Copilot for deep, iterative builds. When a task works well in GitHub Copilot CLI, I transcribe it into a durable skill in the Agent Skills format (agentskills.io) so that colleagues can run it too; we have used these for PowerPoint presentations, HR headcount analysis and governance, risk and compliance (GRC) work.',
+      'I set up more than twenty colleagues with VS Code, GitHub Copilot, Python and Node.js, and showed them which Copilot fits which work. Microsoft 365 Copilot is for finding and using the organization’s own content, within each person’s own access; GitHub Copilot is for builds where I iterate on the same files many times. When a task works well in GitHub Copilot CLI, I transcribe it into a durable skill in the Agent Skills format (agentskills.io) so that colleagues can run it too; we have used these for PowerPoint presentations, HR headcount analysis and governance, risk and compliance (GRC) work.',
     short:
-      'I set up more than twenty colleagues with VS Code, GitHub Copilot, Python and Node.js, and mapped each Copilot to its strength.',
+      'I set up more than twenty colleagues with VS Code, GitHub Copilot, Python and Node.js, and showed them which Copilot fits which work.',
     outcome: '20+ colleagues onboarded',
     links: [],
     featured: true,
