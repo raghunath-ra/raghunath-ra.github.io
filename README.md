@@ -127,7 +127,7 @@ The site's address lives in one constant, `SITE_URL` in `src/data/site.ts`. Cano
 
 ## Deploy
 
-Pushing to `main` runs `.github/workflows/deploy.yml`, which builds with the official [`withastro/action`](https://github.com/withastro/action) (it runs `npm run build`, so the privacy guard runs in CI too) and publishes with `actions/deploy-pages`.
+Pushing to `main` runs `.github/workflows/deploy.yml`, which builds with the official [`withastro/action`](https://github.com/withastro/action) (it runs `npm run build`, so the privacy guard runs in CI too) and publishes with `actions/deploy-pages`. CI builds with Node 22, and pull requests into `main` run the same build, privacy guard included, without deploying.
 
 One-time setup: in the repo's **Settings → Pages**, set **Source** to **GitHub Actions**.
 
