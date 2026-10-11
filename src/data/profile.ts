@@ -53,16 +53,16 @@ export const profile = {
   pov: {
     statement: 'The model is probabilistic. The software around it doesn’t have to be.',
     emphasis: 'doesn’t have to be',
-    dek: 'I’m Raghunath Reddy. I work in cybersecurity at a US health system, and I also help colleagues there explore where AI becomes the best tool for their work. Before that, I spent years explaining identity and cybersecurity products to developers and the people who buy for them. My focus in AI engineering is harness engineering, context engineering and understanding which models and sub-agents respond better to a task, and I am applying this on a trial project for an internal use case. This site is where I write about these subjects.',
+    dek: 'I’m Raghunath Reddy. I work in cybersecurity at a US health system, and I also help colleagues there explore where AI becomes the best tool for their work. My focus in AI engineering is harness engineering, context engineering and understanding which models and sub-agents respond better to a task, and I am applying this on a trial project for an internal use case. Before my current role in cybersecurity, I spent years explaining identity and cybersecurity products to developers and the people who buy for them. This site is where I write about these subjects.',
   },
 
   /** Used for <meta name="description"> on the home page and as the site default. */
   seoDescription:
     'Raghunath Reddy writes about AI adoption at work, how AI systems work, cybersecurity communication and marketing technical products.',
 
-  /** Short about for the home page, and the lede of /about. */
+  /** Short about for the home page. */
   intro:
-    'I started in software testing, spent years writing and marketing for cloud, identity and cybersecurity companies, and now work in cybersecurity for a US health system from Hyderabad. At work I also help colleagues use AI: setting them up with the tools, advising on which tool fits which job, and turning tasks that work into skills they can run.',
+    'I started in software testing, spent years writing and marketing for cloud, identity and cybersecurity companies, and now work in cybersecurity for a US health system from Hyderabad.',
 
   /**
    * The /about page: a career arc in prose, not a dated timeline. The full,
@@ -91,7 +91,7 @@ export const profile = {
     {
       heading: 'Working in cybersecurity',
       paragraphs: [
-        'Today I work in cybersecurity for a US health system, in a program role. Alongside it, I have made comic strips so that busy caregivers can take in a cybersecurity topic by glancing at them for a minute or two, produced videos for an internal cybersecurity platform, and helped colleagues use GitHub Copilot CLI and turn tasks that work into skills they can run.',
+        'Today I work in cybersecurity for a US health system, in a program role. Alongside it, I have made comic strips on cybersecurity topics for busy caregivers, so that they could understand a topic by glancing at a strip for a minute or two, and I have produced videos for an internal cybersecurity platform. I also help colleagues use GitHub Copilot CLI, and I turn tasks that work into skills they can run.',
       ],
     },
     {
@@ -108,25 +108,25 @@ export const profile = {
    * under "What I'm working on now". Set `now` to null to remove the page.
    */
   now: {
-    updated: '2026-10-09',
+    updated: '2026-10-11',
     items: [
       {
         label: 'Working',
-        text: 'In cybersecurity at a US health system.',
+        text: 'I work in cybersecurity at a US health system.',
       },
       {
         label: 'Writing',
-        text: 'The essays for this site, one for each of its four topics.',
+        text: 'I am writing the first essays for this site, at least one on each of its four topics.',
       },
       {
         label: 'Building',
         home: true,
-        text: 'A trial project for an internal use case at work: designing the harness and context around a model, and comparing how different models and sub-agents respond.',
+        text: 'I am working on a trial project for an internal use case at work, designing the harness and context around a model and comparing how different models and sub-agents respond.',
       },
       {
         label: 'Helping',
         home: true,
-        text: 'Colleagues use GitHub Copilot CLI, and choose between it and Microsoft 365 Copilot for each job; turning tasks that work into skills they can run.',
+        text: 'I help colleagues use GitHub Copilot CLI and choose between it and Microsoft 365 Copilot for each job, and I turn tasks that work into skills they can run.',
       },
     ],
   } as { updated: string; items: { label: string; text: string; home?: boolean }[] } | null,
@@ -156,7 +156,7 @@ export const profile = {
     {
       title: 'Narrative and Reference Prompting as Safety Bypass Techniques',
       outlet: 'Kaggle',
-      kind: 'Hackathon writeup',
+      kind: 'Challenge writeup',
       year: '2025',
       href: 'https://www.kaggle.com/competitions/openai-gpt-oss-20b-red-teaming/writeups/narrative-coaxing-tricks-gpt-oss-20b-to-output-dis',
       topics: ['ai-systems'],
