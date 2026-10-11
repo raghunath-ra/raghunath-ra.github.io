@@ -8,10 +8,9 @@ import { profile } from './src/data/profile.ts';
 export default defineConfig({
   site: SITE_URL,
   trailingSlash: 'ignore',
-  // The blog moved to /writing, tags became the four topics, two topics were
-  // renamed, research became a section of /work, and the first essay was retitled.
-  // That essay is a draft again, so its old address points to /writing/ until it
-  // is published; then point it back at /writing/what-a-language-model-learns-from-language/.
+  // Old addresses: the blog moved to /writing, tags became the four topics, two
+  // topics were renamed, research became a section of /work, and an essay was
+  // retitled (its old address points to /writing/ until the essay is published).
   redirects: {
     '/blog': '/writing/',
     '/blog/tags': '/topics/',

@@ -1,7 +1,7 @@
 name: Deploy to GitHub Pages
 
 # Pushes to main (and manual runs) build and deploy. Pull requests into main
-# run the same build, which includes astro check and the privacy guard, and
+# run the same build, which includes astro check and the output check, and
 # stop there: the deploy job is skipped for them.
 on:
   push:

@@ -5,9 +5,7 @@
  * - `notebooks`: hands-on code and notebooks, shown with them.
  * - `caseStudies`: shown on /work, grouped by their first topic, and on topic pages.
  *
- * A case study says what the work was. `lesson` is optional: it holds only
- * what the owner has himself said the work taught him, in his words. Leave it
- * out rather than write one for him. `featured: true` also puts a case study
+ * A case study says what the work was. `lesson` is optional. `featured: true` also puts a case study
  * on the home page. Order in each array = order on the page.
  */
 import type { TopicSlug } from './topics';

@@ -1,9 +1,12 @@
-# raghunath-ra.github.io
+# Raghunath Reddy
 
-Personal site of **Raghunath Reddy**: essays on LLMs, context and harness engineering for agentic AI, using AI effectively at work, and the crossroads of AI and cybersecurity in B2B technology. The essays are organized around four topics: AI adoption at work, how AI systems work, cybersecurity communication, and marketing technical products.
-Live at <https://raghunath-ra.github.io>.
+**[raghunathreddy.com](https://raghunathreddy.com)** · [LinkedIn](https://www.linkedin.com/in/raghunathreddy)
 
-Built with [Astro](https://astro.build) and plain CSS. No client-side framework; the only JavaScript is the theme toggle.
+> I explore the frontier of LLMs, along with context and harness engineering for agentic AI, and help colleagues use AI effectively at work. I operate at the crossroads of AI and cybersecurity, with B2B technology as the primary focus.
+
+This repository is the source of my site: essays and work organized around four topics, which are AI adoption at work, how AI systems work, cybersecurity communication, and marketing technical products.
+
+The site is built with [Astro](https://astro.build) and plain CSS. No client-side framework; the only JavaScript is the theme toggle.
 
 ## Run locally
 
@@ -12,7 +15,7 @@ Requires Node.js 22.12 or newer.
 ```bash
 npm install
 npm run dev       # http://localhost:4321 (drafts are visible here)
-npm run build     # astro check, production build to ./dist, then the privacy guard
+npm run build     # astro check, production build to ./dist, then the output check
 npm run preview   # serves ./dist
 ```
 
@@ -35,7 +38,7 @@ The site leads with a point of view, not a job title. Everything hangs off four 
 | `/topics/` and `/topics/<slug>/` | One hub per topic: stance, essays, research, related work | `src/pages/topics/`, `src/data/topics.ts` |
 | `/work/` | Case studies grouped by topic, then research (a 2025 red-teaming exercise) and notebooks under `#research` | `src/data/work.ts` (`caseStudies`, `research`, `notebooks`) |
 | `/about/` | Career story in prose | `src/data/profile.ts` (`story`) |
-| `/now/` | What you're doing now | `src/data/profile.ts` (`now`) |
+| `/now/` | What I am working on now | `src/data/profile.ts` (`now`) |
 | `/rss.xml`, `/sitemap-index.xml`, `/robots.txt` | Feeds for readers and crawlers | `src/pages/` |
 
 `/blog/` and `/blog/tags/` redirect to `/writing/` and `/topics/`, `/topics/ai-safety/` and `/topics/security-communication/` (old topic names) redirect to `/topics/ai-systems/` and `/topics/cybersecurity-communication/`, and `/research/` redirects to `/work/#research`. The language model essay's old address, `/writing/the-model-is-finishing-your-sentence/`, redirects to `/writing/` while that essay is a draft.
@@ -44,7 +47,7 @@ The site leads with a point of view, not a job title. Everything hangs off four 
 
 | What | File |
 | --- | --- |
-| **You**: name, point of view, about story, /now, links, "published elsewhere" | `src/data/profile.ts` |
+| **Author**: name, point of view, about story, /now, links, "published elsewhere" | `src/data/profile.ts` |
 | **The four topics**: title, question, thesis, stance | `src/data/topics.ts` |
 | Research, notebooks, case studies | `src/data/work.ts` |
 | Essays | `src/content/writing/*.mdx` (schema in `src/content.config.ts`) |
@@ -52,13 +55,13 @@ The site leads with a point of view, not a job title. Everything hangs off four 
 | Colors, fonts, spacing (design tokens) | `src/styles/global.css` (top of file) |
 | Social cards (OG images) | `src/lib/og.ts`, rendered by `src/pages/og.png.ts` and `src/pages/og/` |
 | Structured data (JSON-LD) | `src/lib/schema.ts` |
-| Privacy guard | `scripts/privacy-guard.mjs` |
+| Output check | `scripts/check-output.mjs` |
 
-Search `src/data/profile.ts` for `TODO` to find what still needs filling in (for example a headshot).
+Placeholders in `src/data/profile.ts` are marked `TODO`.
 
 ## Write an essay
 
-Six drafts are waiting in `src/content/writing/`. Five are written up as prose from what you have said, with each gap marked by a "Note for Raghunath" block and the editorial additions listed in the opening comment; the language model essay is being written up in a separate thread. To publish one, replace or remove the notes, confirm the editorial additions, set the real `pubDate` and flip `draft` to `false`.
+Essays live in `src/content/writing/` as MDX files. Unpublished drafts go in `src/content/writing/drafts/`, which is not committed, and are visible only in `npm run dev`. To publish one, move it up into `src/content/writing/`, set the real `pubDate` and flip `draft` to `false`; the build fails if a published essay still contains an editorial note.
 
 ```md
 ---
@@ -88,7 +91,7 @@ Publishing an essay automatically adds it to `/writing/`, its topic pages, the h
 
 ## Add research or a case study
 
-Append to `research` or `caseStudies` in `src/data/work.ts`. A case study says what the work was; `lesson` is optional and is for what you yourself said it taught you:
+Append to `research` or `caseStudies` in `src/data/work.ts`. A case study says what the work was; `lesson` is optional and holds only a lesson the author has stated:
 
 ```ts
 {
@@ -96,18 +99,18 @@ Append to `research` or `caseStudies` in `src/data/work.ts`. A case study says w
   kind: 'Cybersecurity education',          // small red label
   context: 'Company · 2026',
   topics: ['cybersecurity-communication'],  // first topic = its group on /work
-  summary: 'One or two sentences on the problem and what you did.',
+  summary: 'One or two sentences on the problem and what was done.',
   short: 'One sentence restating the summary.',  // optional; compact rows on the home and topic pages
-  lesson: 'What it taught you, in your words.',  // optional
-  outcome: '2× something',             // optional, only numbers you can stand behind
+  lesson: 'What it taught, in the author's words.',  // optional
+  outcome: '2× something',             // optional, only verifiable numbers
   links: [],
   featured: true,                      // also list it on the home page
 }
 ```
 
-## Privacy
+## Output check
 
-The build enforces the rules in `CLAUDE.md`: after `astro build`, `scripts/privacy-guard.mjs` scans every text file in `dist/` and fails the build if it finds an email address, a phone number, a link to `/resume`, or a form of the owner’s name that is not for publication (checked by hash, so the strings are not in the repository). Contact is through LinkedIn and GitHub only. Run it on its own with `npm run privacy-guard`.
+After `astro build`, `scripts/check-output.mjs` scans the files in `dist/` and fails the build if it finds contact details or other content the site does not publish. Contact is through LinkedIn and GitHub only. Run it on its own with `npm run check-output`.
 
 ## SEO
 
@@ -117,7 +120,7 @@ The build enforces the rules in `CLAUDE.md`: after `astro build`, `scripts/priva
 
 ## Custom domain
 
-The site's address lives in one constant, `SITE_URL` in `src/data/site.ts`. Canonical URLs, social cards, the sitemap, robots.txt, RSS and JSON-LD all follow it. To move to, say, `www.example.com`:
+The site is served at `raghunathreddy.com`, set under **Settings → Pages → Custom domain**; `raghunath-ra.github.io` redirects there. The address lives in one constant, `SITE_URL` in `src/data/site.ts`. Canonical URLs, social cards, the sitemap, robots.txt, RSS and JSON-LD all follow it. To move to another domain, say `www.example.com`:
 
 1. **DNS**: at your registrar, add a `CNAME` record for `www` pointing to `raghunath-ra.github.io`. For the apex domain (`example.com`), add `A` records for `185.199.108.153`, `185.199.109.153`, `185.199.110.153` and `185.199.111.153` (and `AAAA` records if you want IPv6; see [GitHub's docs](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site)).
 2. **GitHub**: in the repo's **Settings → Pages**, enter the domain under **Custom domain**, wait for the DNS check, then tick **Enforce HTTPS**. It's worth [verifying the domain](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/verifying-your-custom-domain-for-github-pages) for your account too.
@@ -127,7 +130,7 @@ The site's address lives in one constant, `SITE_URL` in `src/data/site.ts`. Cano
 
 ## Deploy
 
-Pushing to `main` runs `.github/workflows/deploy.yml`, which builds with the official [`withastro/action`](https://github.com/withastro/action) (it runs `npm run build`, so the privacy guard runs in CI too) and publishes with `actions/deploy-pages`. CI builds with Node 22, and pull requests into `main` run the same build, privacy guard included, without deploying.
+Pushing to `main` runs `.github/workflows/deploy.yml`, which builds with the official [`withastro/action`](https://github.com/withastro/action) (it runs `npm run build`, so the output check runs in CI too) and publishes with `actions/deploy-pages`. CI builds with Node 22, and pull requests into `main` run the same build, privacy guard included, without deploying.
 
 One-time setup: in the repo's **Settings → Pages**, set **Source** to **GitHub Actions**.
 
