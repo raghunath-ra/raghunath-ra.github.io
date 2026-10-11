@@ -115,10 +115,6 @@ export const profile = {
         text: 'I work in cybersecurity at a US health system.',
       },
       {
-        label: 'Writing',
-        text: 'I am writing the first essays for this site, at least one on each of its four topics.',
-      },
-      {
         label: 'Building',
         home: true,
         text: 'I am working on a trial project for an internal use case at work, designing the harness and context around a model and comparing how different models and sub-agents respond.',
@@ -127,6 +123,11 @@ export const profile = {
         label: 'Helping',
         home: true,
         text: 'I help colleagues use GitHub Copilot CLI and choose between it and Microsoft 365 Copilot for each job, and I turn tasks that work into skills they can run.',
+      },
+      {
+        label: 'Writing',
+        home: true,
+        text: 'I am writing the first essays for this site, at least one on each of its four topics.',
       },
     ],
   } as { updated: string; items: { label: string; text: string; home?: boolean }[] } | null,
