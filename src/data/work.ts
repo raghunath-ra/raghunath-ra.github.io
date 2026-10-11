@@ -80,7 +80,7 @@ export const research: Study[] = [
       'Naturalistic, conversation-based scenarios got further than confrontational prompts: putting a request inside a story, or approaching it through an indirect reference before getting more direct, made refusals less likely to trigger.',
     ],
     notes: [
-      'This was a one-off in August 2025. I have not done red-teaming since, and the field has moved a lot, so I am not current on it. The exercise stays here for what it showed me about how a model responds to prompting, not as a claim to current red-teaming work.',
+      'This was a one-off in August 2025. I have not done red-teaming since, the field has moved a lot, and I am not current on it. The exercise stays here for what it showed me about how a model responds to prompting, not as a claim to current red-teaming work.',
       'This summary stays at the level of method. The full writeup, as submitted to the challenge, is on Kaggle.',
     ],
     pullQuote: 'Naturalistic, conversation-based scenarios made refusals less likely to trigger than confrontational prompts.',
