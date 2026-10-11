@@ -97,6 +97,7 @@ Append to `research` or `caseStudies` in `src/data/work.ts`. A case study says w
   context: 'Company · 2026',
   topics: ['cybersecurity-communication'],  // first topic = its group on /work
   summary: 'One or two sentences on the problem and what you did.',
+  short: 'One sentence restating the summary.',  // optional; compact rows on the home and topic pages
   lesson: 'What it taught you, in your words.',  // optional
   outcome: '2× something',             // optional, only numbers you can stand behind
   links: [],

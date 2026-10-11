@@ -29,9 +29,12 @@ const { study, headingLevel: H = 'h3', teaser = false } = Astro.props;
               </div>
             ))}
           </dl>
-          <p class="kicker why">What it taught me</p>
+          <p class="kicker why">What it showed me</p>
           {study.takeaways.map((t) => (
             <p class="takeaway">{t}</p>
+          ))}
+          {study.notes?.map((t) => (
+            <p class="scope">{t}</p>
           ))}
         </>
       )
@@ -105,6 +108,12 @@ const { study, headingLevel: H = 'h3', teaser = false } = Astro.props;
   .takeaway {
     margin-top: 0.6rem;
     max-width: 60ch;
+  }
+  .scope {
+    margin-top: 1rem;
+    max-width: 60ch;
+    color: var(--muted);
+    font-size: 0.95em;
   }
   .links {
     display: flex;

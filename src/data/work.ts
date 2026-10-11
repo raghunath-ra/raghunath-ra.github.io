@@ -27,6 +27,8 @@ export interface CaseStudy {
   topics: TopicSlug[];
   /** What happened, in a sentence or two. */
   summary: string;
+  /** One sentence for compact rows on the home and topic pages, restating the summary. Falls back to `summary`. */
+  short?: string;
   /** What it taught you, in your own words. Optional; leave it out rather than invent one. */
   lesson?: string;
   /** Optional result. Keep it short and only use numbers you can stand behind. */
@@ -50,6 +52,8 @@ export interface Study {
   facts: { label: string; value: string }[];
   /** Why it matters: the stance this research supports. */
   takeaways: string[];
+  /** Scope notes shown after the takeaways. */
+  notes?: string[];
   /** A line from the takeaways worth setting large. */
   pullQuote?: string;
   links: WorkLink[];
@@ -74,6 +78,8 @@ export const research: Study[] = [
     ],
     takeaways: [
       'Naturalistic, conversation-based scenarios got further than confrontational prompts: putting a request inside a story, or approaching it through an indirect reference before getting more direct, made refusals less likely to trigger.',
+    ],
+    notes: [
       'This was a one-off in August 2025. I have not done red-teaming since, and the field has moved a lot, so I am not current on it. The exercise stays here for what it showed me about how a model responds to prompting, not as a claim to current red-teaming work.',
       'This summary stays at the level of method. The full writeup, as submitted to the challenge, is on Kaggle.',
     ],
@@ -117,6 +123,8 @@ export const caseStudies: CaseStudy[] = [
     topics: ['ai-adoption'],
     summary:
       'I set up more than twenty colleagues with VS Code, GitHub Copilot, Python and Node.js, mapping each Copilot to its strength: Microsoft 365 Copilot for retrieval grounded in the organization’s own content and identity, GitHub Copilot for deep, iterative builds. When a task works well in GitHub Copilot CLI, I transcribe it into a durable skill in the Agent Skills format (agentskills.io) so that colleagues can run it too; we have used these for PowerPoint presentations, HR headcount analysis and governance, risk and compliance (GRC) work.',
+    short:
+      'I set up more than twenty colleagues with VS Code, GitHub Copilot, Python and Node.js, and when a task works well in GitHub Copilot CLI, I transcribe it into a skill that colleagues can run.',
     outcome: '20+ colleagues onboarded',
     links: [],
     featured: true,
@@ -127,8 +135,9 @@ export const caseStudies: CaseStudy[] = [
     context: 'US health system · 2025–',
     topics: ['ai-adoption', 'ai-systems'],
     summary:
-      'Departments needed internal newsletters, monthly and half-yearly, one for each department. I build them with GitHub Copilot CLI, and they come out engaging and professional, close to what a designer would produce. Microsoft 365 Copilot was not the right tool: its harness is not built for repetitive work where I keep iterating on the same files and folders under Git version control. GitHub Copilot in VS Code, or Copilot CLI, is the better tool because of how its harness, environment and context work.',
-    lesson: 'Without AI, we would not have thought of the task this way, and we would not have done it.',
+      'There was a need for internal newsletters, monthly and half-yearly, one for each department. I build them with GitHub Copilot CLI, and they come out engaging and professional, close to what a designer would produce. Microsoft 365 Copilot does not work for this, because its harness is not built for repetitive work where I keep iterating on the same files and folders under Git version control. GitHub Copilot in VS Code, or GitHub Copilot CLI, is the better tool because of how its harness, environment and context work. Without AI, we would not have thought of the task this way, and we would not have done it.',
+    short:
+      'There was a need for internal newsletters, monthly and half-yearly, one for each department, and I build them with GitHub Copilot CLI and not Microsoft 365 Copilot, whose harness is not built for repetitive work where I keep iterating on the same files and folders under Git version control.',
     links: [],
     featured: true,
   },
@@ -138,7 +147,9 @@ export const caseStudies: CaseStudy[] = [
     context: 'US health system · 2025',
     topics: ['cybersecurity-communication', 'ai-adoption'],
     summary:
-      'Busy caregivers needed to understand cybersecurity topics by glancing at them for a minute or two. In early 2025, the image-generation tools we had were not good at placing text in images, so I created the comic panels image by image with Microsoft 365 Copilot’s built-in image generation, then learned Figma to place the dialogue accurately on each panel. A couple of the comic strips were used in newsletters. The rest were appreciated, but they never got a chance to be used at clinical sites, because of some limitations there.',
+      'In early 2025, there was a need for comic strips on cybersecurity topics, so that busy caregivers could understand a topic by glancing at a strip for a minute or two. The image-generation tools we had were not good at placing text in images, so I created the comic panels image by image with Microsoft 365 Copilot’s built-in image generation, then learned Figma to place the dialogue accurately on each panel. Some of the comic strips were used in a couple of newsletters. The rest were appreciated, but they never got a chance to be used at clinical sites, because of some limitations there.',
+    short:
+      'In early 2025, I made comic strips on cybersecurity topics for busy caregivers, with Microsoft 365 Copilot’s image generation for the panels and Figma for the dialogue.',
     links: [],
     featured: true,
   },
@@ -152,13 +163,13 @@ export const caseStudies: CaseStudy[] = [
     links: [],
   },
   {
-    title: 'Doubling a developer blog by writing for search intent',
+    title: 'Rebuilding a developer blog’s editorial strategy around search intent',
     kind: 'Content growth',
     context: 'LoginRadius · 2021–2024',
     topics: ['technical-marketing'],
     summary:
       'I rebuilt the engineering blog’s editorial strategy around developer search intent and identity education, alongside messaging and positioning for the company’s customer identity (CIAM) platform.',
-    outcome: '2× organic growth in six months',
+    outcome: 'Organic traffic doubled in six months',
     links: [{ label: 'My LoginRadius posts', href: 'https://www.loginradius.com/blog/author/raghunath-reddy' }],
     featured: true,
   },
@@ -169,6 +180,8 @@ export const caseStudies: CaseStudy[] = [
     topics: ['technical-marketing'],
     summary:
       'I ran the engineering blog as an open-source GitHub project with a paid guest-author program. Every post went through engineering review, and 144 merged pull requests on the repository trace the editorial work.',
+    short:
+      'I ran the engineering blog as an open-source GitHub project with a paid guest-author program, and every post went through engineering review.',
     outcome: '30+ posts from 12+ external developers',
     links: [{ label: 'Repository', href: 'https://github.com/LoginRadius/engineering-portal' }],
   },
