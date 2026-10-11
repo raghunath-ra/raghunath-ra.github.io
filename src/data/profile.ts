@@ -50,12 +50,16 @@ export const profile = {
   /**
    * The home page leads with this instead of a job title. `statement` is the
    * point of view in one sentence; `emphasis` is the phrase in it that is set
-   * in the accent color (must appear verbatim in `statement`).
+   * in the accent color (must appear verbatim in `statement`); `position`
+   * follows the statement in the hero.
    */
   pov: {
-    statement: 'Proving what an AI agent did takes evidence, traces and audit logs.',
-    emphasis: 'evidence, traces and audit logs',
-    dek: 'I’m Raghunath Reddy. I work in cybersecurity at a US health system, and I also help colleagues there explore where AI becomes the best tool for their work. My focus in AI engineering is harness engineering, context engineering and understanding which models and sub-agents respond better to a task, and I am applying this on a trial project for an internal use case. Before my current role in cybersecurity, I spent years explaining identity and cybersecurity products to developers and the people who buy for them. This site is where I write about these subjects.',
+    statement:
+      'I explore the frontier of LLMs, along with context and harness engineering for agentic AI, and help colleagues use AI effectively at work.',
+    emphasis: 'context and harness engineering for agentic AI',
+    position:
+      'I operate at the crossroads of AI and cybersecurity, with B2B technology as the primary focus. I am a generalist first, and then a specialist.',
+    dek: 'I’m Raghunath Reddy. I work in cybersecurity at a US health system, where I am applying harness and context engineering on a trial project for an internal use case, and testing which models and sub-agents respond better to a task. Before my current role, I spent years in B2B technology marketing, explaining identity and cybersecurity products to developers and the people who buy for them. This site is where I write about these subjects.',
   },
 
   /** Used for <meta name="description"> on the home page and as the site default. */
