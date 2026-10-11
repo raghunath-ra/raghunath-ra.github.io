@@ -28,6 +28,12 @@ draft: true
   - "What the model does": the same walk-through that the draft essay "What
     a language model learns from language" also carries. Decide which
     essay carries it in full and which one refers to the other.
+  - "Instana (acquired by IBM)" in "Evidence, traces, audit logs and human
+    approvals": your dictation (outline section 7). The acquisition is
+    checked against IBM's newsroom (footnote, added 2026-10-11). IBM's
+    announcement of November 2020 is no longer online, so the footnote cites
+    IBM's release of June 17, 2021, which refers to "IBM's recent acquisition
+    of Instana".
   - "Tool calling": your dictation (outline section 3), plus the sentence
     "Tool calling lets it ask for actions.", quoted as written from the AI
     systems topic stance (src/data/topics.ts).
@@ -119,13 +125,11 @@ draft: true
     reasons are not guaranteed to match how it reached the answer, so treat
     them as something to check against the trace, not as proof. Add either
     one in your own words if you hold it.
-  - The title, the description and the opening say that you pitch AI
-    solutions to an executive, while your message of 2026-10-11 says you were
-    never involved in giving briefings to senior leadership. Confirm that
-    pitching to an executive is something you have done, or reword them.
-  - "Instana (acquired by IBM)" in the evidence section is an external fact
-    without a footnote. Add a primary source for it, or remove the
-    parenthesis.
+  - The title, the description and the opening keep your dictated sentence
+    "When I pitch an AI solution to an executive" (2026-10-08). Your message
+    of 2026-10-11 is about briefings to senior leadership on cybersecurity,
+    which this essay does not claim, so the framing stays (2026-10-11). If you
+    have not pitched AI solutions to executives, reword those three parts.
 
   Available in .mdx essays without importing:
     <PullQuote>A line from the essay, set large.</PullQuote>
@@ -193,7 +197,7 @@ Evidence is the first part. Agents can say that they did something without doing
 
 I also ask the agents to explain, alongside the output, why they picked a decision, a path of reasoning or a line of research.
 
-Traces are the second part, as in application performance management. Tools such as Instana (acquired by IBM) trace a user request end to end, through microservices, a monolith or cloud services, and show what each hop produced. An agentic system needs the same, so that when something goes wrong, you can track what happened and where to fix it.
+Traces are the second part, as in application performance management. Tools such as Instana (acquired by IBM)[^instana] trace a user request end to end, through microservices, a monolith or cloud services, and show what each hop produced. An agentic system needs the same, so that when something goes wrong, you can track what happened and where to fix it.
 
 Audit logs are the third part, kept for the agents' actions and for the evidence they produce.
 
@@ -228,5 +232,7 @@ I am working on a trial project for an internal use case, where I focus on desig
 > **Note for Raghunath:** What has the trial project shown so far? Fill in once there are results, keeping anything specific to your employer out.
 
 > **Note for Raghunath:** How do you want to close the essay?
+
+[^instana]: IBM, [“IBM Closes Acquisition of Turbonomic to Deliver Comprehensive AIOps Capabilities for Hybrid Cloud”](https://newsroom.ibm.com/2021-06-17-IBM-Closes-Acquisition-of-Turbonomic-to-Deliver-Comprehensive-AIOps-Capabilities-for-Hybrid-Cloud), June 17, 2021. The release refers to “IBM's recent acquisition of Instana for application performance monitoring (APM) and observability”.
 
 [^mythos]: Anthropic, [“Investigating three incidents in our cybersecurity evaluations”](https://www.anthropic.com/news/investigating-incidents-cybersecurity-evals), July 30, 2026.
