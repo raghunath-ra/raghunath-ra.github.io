@@ -59,7 +59,7 @@ const num = () => `§ ${String(++n).padStart(2, '0')}`;
             <h2 id="now-title">What I’m working on now</h2>
             <a class="more" href="/now/">More on my now page</a>
           </div>
-          <dl class="now">
+          <dl class="now" style={`--now-cols: ${Math.min(nowItems.length, 3)}`}>
             {nowItems.map((item) => (
               <div>
                 <dt class="kicker">{item.label}</dt>
@@ -99,7 +99,7 @@ const num = () => `§ ${String(++n).padStart(2, '0')}`;
             <>
               <h2 id="writing-title">Writing</h2>
               <p>
-                The first essays are being written now. Until then, here is what I’ve published elsewhere under my own name.
+                Until the first essays are published, here is what I’ve published elsewhere under my own name.
               </p>
               <a class="more" href="/writing/">All writing</a>
             </>
@@ -226,7 +226,7 @@ const num = () => `§ ${String(++n).padStart(2, '0')}`;
   /* Now */
   .now {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(var(--now-cols, 3), minmax(0, 1fr));
     border-top: 1px solid var(--rule-heavy);
   }
   .now div {
