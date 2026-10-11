@@ -15,7 +15,7 @@ const counts = Object.fromEntries(topics.map((t) => [t.slug, postsOnTopic(posts,
 const selected = caseStudies.filter((c) => c.featured);
 const nowItems = profile.now?.items.filter((i) => i.home) ?? [];
 
-const { statement, emphasis, dek } = profile.pov;
+const { statement, emphasis, position, dek } = profile.pov;
 const at = statement.indexOf(emphasis);
 const [before, after] = at >= 0 ? [statement.slice(0, at), statement.slice(at + emphasis.length)] : [statement, ''];
 let n = 0;
@@ -36,6 +36,7 @@ const num = () => `§ ${String(++n).padStart(2, '0')}`;
         )
       }{after}
     </h1>
+    <p class="position reveal" style="--i:2">{position}</p>
     <p class="dek reveal" style="--i:2">{dek}</p>
     <p class="hero-links reveal" style="--i:3">
       <a class="more" href="/writing/">Read the writing</a>
@@ -162,10 +163,19 @@ const num = () => `§ ${String(++n).padStart(2, '0')}`;
   }
   h1 {
     margin-top: clamp(1.75rem, 5vw, 3rem);
-    font-size: clamp(1.85rem, 1rem + 2.6vw, 2.9rem);
-    letter-spacing: -0.05em;
-    line-height: 1.06;
-    max-width: 21ch;
+    font-size: clamp(1.5rem, 0.95rem + 1.9vw, 2.3rem);
+    letter-spacing: -0.04em;
+    line-height: 1.12;
+    max-width: 32ch;
+  }
+  .position {
+    margin-top: clamp(1rem, 3vw, 1.5rem);
+    max-width: 52ch;
+    font-family: var(--font-quote);
+    font-style: italic;
+    font-size: clamp(1.15rem, 1rem + 0.6vw, 1.45rem);
+    line-height: 1.4;
+    color: var(--ink);
   }
   .lead {
     color: var(--accent);
