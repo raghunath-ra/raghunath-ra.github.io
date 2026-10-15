@@ -2,14 +2,16 @@
 title: 'Helping colleagues explore where AI becomes the best tool'
 description: 'How I help colleagues at a US health system explore where AI becomes the best tool, and how a task that works in GitHub Copilot CLI becomes a skill colleagues can run.'
 pubDate: 2026-10-08
-updatedDate: 2026-10-16
+updatedDate: 2026-10-11
 topics: ['ai-adoption', 'ai-systems']
 draft: true
 ---
 
 My work with colleagues at a US health system is about exploring things first, and helping them explore where AI becomes the best tool and gives productivity and efficiency gains.
 
-Exploring first means looking at the task, which steps repeat, and what the output has to be. Then we can look at whether AI makes the work easier, including the effort it takes to check and correct what comes back. The department newsletters are one example of how I work on this.
+In this essay, I describe one example of this work, the department newsletters; why I build them with GitHub Copilot CLI and not with Microsoft 365 Copilot; how a task that works in GitHub Copilot CLI becomes a skill that colleagues can run; how I set colleagues up; and how I advise on which tool to use for which job.
+
+Exploring first means that a colleague and I look at the task before we look at a tool: what the task is, which steps repeat, and what the output has to be. Then we run the task with AI and look at what comes back. Where the output is usable and the work takes less time and less effort, AI is the best tool for that task; where it does not, the task stays as it is. The productivity and efficiency gains I judge by are the time and the effort the task takes.
 
 ## The department newsletters
 
@@ -19,36 +21,44 @@ I build them with GitHub Copilot CLI, and they come out engaging and professiona
 
 Without AI, we would not have thought of the task this way, and we would not have done it.
 
-## Choosing a tool for the newsletter workflow
+## Why Microsoft 365 Copilot does not fit this work
 
-For this work, GitHub Copilot CLI is the better fit for me because I keep iterating on the same files and folders under Git version control. Microsoft 365 Copilot can help with newsletter content too; the distinction here is the way I want to build and revise the files.
+Microsoft 365 Copilot does not work for this, because its harness is not built for repetitive work where I keep iterating on the same files and folders under Git version control.
 
-By harness, I mean the software around the model that runs it in loops and lets it use tools. With GitHub Copilot in VS Code or GitHub Copilot CLI, the model can work on the files in my local environment.
+By harness, I mean the deterministic software around the model; the model itself is probabilistic.
+
+## Why GitHub Copilot CLI fits this work
+
+GitHub Copilot in VS Code, or GitHub Copilot CLI, is the better tool for this work because of how its harness, environment and context work.
 
 By context, I mean the specifics of my situation that the model is given. Context engineering is giving the model those specifics inside a limited context window.
 
-Each part has its own place in the work. The harness runs the model over the newsletter files as they are revised. The environment is the folder under Git version control, where I can read the changes and return to a saved version. The context is the department material supplied for the task. Git helps me keep track of the changes; the content still needs to be checked.
+Each of the three does its own part of the work. The harness runs the model in a loop over the files of the newsletter, so what the model writes is revised and built up until the piece is complete. The environment is the folder of files under Git version control, where every iteration is a change I can read and revert. The context is the department's own material in those folders, which is what the model writes from.
 
 ## Turning a task into a skill colleagues can run
 
-When a task works in GitHub Copilot CLI, I transcribe it into a durable skill in the Agent Skills format,[^agent-skills] so that I can distribute it to colleagues and they can run it. A skill is a folder with a SKILL.md file, which carries a name, a description and the instructions for the task, and it can bundle scripts, templates and reference files. An agent that supports the format can read the name and description first, and load the full instructions when the task needs them. This keeps the instructions for every available skill from taking up context at once.
+When a task works in GitHub Copilot CLI, I transcribe it into a durable skill in the Agent Skills format,[^agent-skills] so that I can distribute it to colleagues and they can run it. A skill is a folder with a SKILL.md file, which carries a name, a description and the instructions for the task, and it can bundle scripts, templates and reference files. An agent reads the name and description of each skill at startup, and loads the full instructions only when a task matches one, so a colleague can keep many skills available at a small context cost. Because a skill is a folder, I can hand the same folder to a colleague, and their agent runs the task from it.
 
 We have used these skills for PowerPoint presentations, HR headcount analysis and governance, risk and compliance (GRC) work.
 
-The colleague still needs an agent that supports the skill, the software it depends on, and the permissions and data access the task requires. The folder carries the instructions; those other parts have to be set up as well, and the colleague needs to check the output.
+To distribute a skill is to hand over its folder. The colleague places it where their agent keeps its skills, and describes the task in their own words; the agent matches the description against the skill's name and description, loads the instructions from the SKILL.md file, and runs the scripts and templates in the folder. The colleague does not have to learn my steps; the folder carries them.
 
-[^agent-skills]: The [Agent Skills specification](https://agentskills.io/specification) defines the SKILL.md file, optional scripts and resources, progressive loading, and a compatibility field for environment requirements. Support for execution and permissions depends on the agent implementation.
+[^agent-skills]: Agent Skills is an open format for giving AI agents new capabilities, originally developed by Anthropic and released as an open standard. See the [Agent Skills overview](https://agentskills.io).
 
 ## Setting colleagues up
 
 I have set up more than twenty colleagues with VS Code, GitHub Copilot, Python and Node.js.
 
-The setup also needs the sign-ins and repository access for the task. When the work uses internal information, the data, accounts and tools have to be used within the organization's requirements.
+That setup is the toolchain and the access a build task needs: those tools, plus the sign-ins and repository access that connect them. Each part has to be in place before an agent can do the task, because the agent runs what it writes.
 
 ## Advising on which tool for which job
 
 I champion GitHub Copilot CLI internally, and I advise on when to use Microsoft 365 Copilot and when to use GitHub Copilot CLI.
 
-The distinction I give colleagues is to consider Microsoft 365 Copilot for finding and using organizational content, and GitHub Copilot for builds where we iterate on the same files many times. This is a rule of thumb for the work we are doing; the choice also depends on the integrations and access available for the task.
+I match each Copilot to the work it does best. Microsoft 365 Copilot is for finding and using the organization's own content, within each person's own access; GitHub Copilot is for builds where I iterate on the same files many times.
 
-What I want is for a task I have worked through to become something a colleague can use. The skill carries the instructions, the setup gives them the tools and access, and the choice of Copilot follows the kind of work. Whether it helps them depends on the output they get and the time and effort the whole task takes, including checking it.
+That distinction is the rule I give colleagues when they ask which one to use: match the tool to the kind of work.
+
+## Close
+
+Helping colleagues explore where AI becomes the best tool starts with the task: looking at what it is, running it with AI, and judging the result by the time and the effort it takes. The newsletters are one task where AI was the best tool. The skills carry what worked there to colleagues as folders their agents can run, and the setup and the rule of thumb make the choice repeatable for them. I judge the work by the productivity and efficiency gains colleagues get from it.
