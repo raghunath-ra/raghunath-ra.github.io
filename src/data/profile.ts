@@ -9,9 +9,8 @@
  *  Anything marked `TODO` is a placeholder. Set optional values to `null` to
  *  hide them on the site.
  *
- *  Privacy: never add an email address, phone number, resume or any name
- *  other than "Raghunath Reddy" here (see the Privacy section of CLAUDE.md).
- *  `npm run build` fails if any of them reach the built site.
+ *  Contact is through the links below only; `npm run build` fails if contact
+ *  details reach the built site.
  * ─────────────────────────────────────────────────────────────────────────────
  */
 import type { TopicSlug } from './topics';
@@ -59,7 +58,7 @@ export const profile = {
     emphasis: 'context and harness engineering for agentic AI',
     position:
       'I operate at the crossroads of AI and cybersecurity, with B2B technology as the primary focus. I am a generalist first, and then a specialist.',
-    dek: 'I’m Raghunath Reddy. I work in cybersecurity at a US health system, where I am applying harness and context engineering on a trial project for an internal use case, and testing which models and sub-agents respond better to a task. Before my current role, I spent years in B2B technology marketing, explaining identity and cybersecurity products to developers and the people who buy for them. This site is where I write about these subjects.',
+    dek: 'I’m Raghunath Reddy. I work in cybersecurity at a US health system, and before my current role I spent years in B2B technology marketing, explaining identity and cybersecurity products to developers and the people who buy for them. This site is where I write about AI, cybersecurity and B2B technology.',
   },
 
   /** Used for <meta name="description"> on the home page and as the site default. */
@@ -72,8 +71,7 @@ export const profile = {
 
   /**
    * The /about page: a career arc in prose, not a dated timeline. The full,
-   * dated history lives on LinkedIn. Facts only: what the work was and what
-   * he has said about it. No lessons or positions written on his behalf.
+   * dated history lives on LinkedIn.
    */
   story: [
     {

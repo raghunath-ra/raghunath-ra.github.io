@@ -8,11 +8,11 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro check && astro build && node scripts/privacy-guard.mjs",
+    "build": "astro check && astro build && node scripts/check-output.mjs",
     "preview": "astro preview",
     "check": "astro check",
     "astro": "astro",
-    "privacy-guard": "node scripts/privacy-guard.mjs"
+    "check-output": "node scripts/check-output.mjs"
   },
   "dependencies": {
     "@astrojs/mdx": "^8.0.3",

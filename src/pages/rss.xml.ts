@@ -28,6 +28,10 @@ const clean = (html: string) =>
 export async function GET(context: APIContext) {
   const base = context.site!;
   const posts = await getPosts();
+  // RFC 822 date of the newest essay, for <lastBuildDate>.
+  const lastBuildDate = posts.length
+    ? new Date(Math.max(...posts.map((p) => p.data.pubDate.valueOf()))).toUTCString()
+    : undefined;
   const container = await AstroContainer.create({ renderers: await loadRenderers([mdxRenderer()]) });
 
   const items = await Promise.all(
@@ -51,6 +55,13 @@ export async function GET(context: APIContext) {
     description: `Essays by ${profile.name} on AI adoption at work, how AI systems work, cybersecurity communication and marketing technical products.`,
     site: base,
     items,
-    customData: `<language>${site.lang}</language>`,
+    xmlns: { atom: 'http://www.w3.org/2005/Atom' },
+    customData: [
+      `<language>${site.lang}</language>`,
+      lastBuildDate && `<lastBuildDate>${lastBuildDate}</lastBuildDate>`,
+      `<atom:link href="${new URL('rss.xml', base).href}" rel="self" type="application/rss+xml" />`,
+    ]
+      .filter(Boolean)
+      .join(''),
   });
 }

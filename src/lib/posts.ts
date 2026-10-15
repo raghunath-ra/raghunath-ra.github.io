@@ -3,19 +3,19 @@ import type { TopicSlug } from '../data/topics';
 
 export type Post = CollectionEntry<'writing'>;
 
-/** Text that marks an unfinished draft: notes and outline placeholders addressed to the owner. */
-const OWNER_MARKERS = [/Note for Raghunath/, /\byours to (?:write|add|choose)\b/i, /\bin your own (?:words|terms)\b/i];
+/** Text that marks an unfinished draft: editorial notes and outline placeholders. */
+const DRAFT_MARKERS = [/Note for [A-Z][a-z]+/, /\byours to (?:write|add|choose)\b/i, /\bin your own (?:words|terms)\b/i];
 
 /** Published essays, newest first. Drafts are included only in `astro dev`. */
 export async function getPosts(): Promise<Post[]> {
   const posts = await getCollection('writing', ({ data }) => import.meta.env.DEV || !data.draft);
-  // Notes and outline placeholders left for the owner must never reach the live site.
+  // Editorial notes and outline placeholders must never reach the live site.
   const unfinished = posts.flatMap((p) => {
-    const marker = p.data.draft ? undefined : OWNER_MARKERS.find((m) => m.test(p.body ?? ''));
+    const marker = p.data.draft ? undefined : DRAFT_MARKERS.find((m) => m.test(p.body ?? ''));
     return marker ? [`${p.id} (matches ${marker})`] : [];
   });
   if (unfinished.length) {
-    throw new Error(`Replace or remove the notes left for the owner before publishing: ${unfinished.join(', ')}`);
+    throw new Error(`Replace or remove the editorial notes before publishing: ${unfinished.join(', ')}`);
   }
   return posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 }
