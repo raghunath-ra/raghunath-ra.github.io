@@ -34,7 +34,7 @@ export const topics: Topic[] = [
     short: 'AI adoption',
     question: 'How do you help colleagues explore where AI becomes the best tool for their work?',
     thesis:
-      'Which AI tool fits a piece of work depends on how its harness, environment and context work; when a task works in GitHub Copilot CLI, I turn it into a skill that colleagues can run.',
+      'Which AI tool fits a piece of work depends on how its harness, environment and context work; when a task works in GitHub Copilot CLI, I turn it into a skill colleagues can run.',
     stance: [
       'My work with colleagues at a US health system is about exploring things first, and helping them explore where AI becomes the best tool and gives productivity and efficiency gains. I have set up more than twenty of them with VS Code, GitHub Copilot, Python and Node.js, and I advise on when to use Microsoft 365 Copilot and when to use GitHub Copilot CLI.',
       'The department newsletters are my example. Microsoft 365 Copilot does not work for this, because its harness is not built for repetitive work where I keep iterating on the same files and folders under Git version control, so I build them with GitHub Copilot CLI. Without AI, we would not have thought of the task this way, and we would not have done it. The work page says what that involved.',
@@ -48,7 +48,7 @@ export const topics: Topic[] = [
     short: 'AI systems',
     question: 'What happens between your prompt and the answer, and how do you keep an agent accountable?',
     thesis:
-      'In my own work, I focus on harness engineering, which is about controlling the model with deterministic software, and context engineering, which gives the model the specifics of your situation inside a limited context window; proving what an agent did takes evidence, end-to-end traces and audit logs.',
+      'In my own work, I focus on harness engineering and context engineering, and proving what an agent did takes evidence, end-to-end traces and audit logs.',
     stance: [
       'This is how I explain it. A language model takes your text, breaks it into tokens and turns those tokens into numbers; inside the transformer, attention works out how the tokens relate to each other, and at the end the model picks a likely next token, then does it again. On its own, a model produces text and cannot act on anything outside the conversation. Tool calling lets it ask for actions. The harness, the deterministic software around the model, runs it in loops, hands big tasks to sub-agents and manages its context, and context engineering is how you give a model with general knowledge the specifics of your business, inside a context window that is always limited.',
       'Once you build agentic systems on top of that, the questions are about control. How much of the system is deterministic, and how much needs the model’s probabilistic output? Which decisions can only a human approve? How do you prove what an agent did? That takes evidence, end-to-end traces like the ones we rely on in application performance management, and audit logs. Without them, enterprise-grade reliability and accountability are very hard to achieve.',
