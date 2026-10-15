@@ -17,7 +17,7 @@ export interface WorkLink {
 
 export interface CaseStudy {
   title: string;
-  /** Short label above the title, e.g. "AI enablement". */
+  /** Short label above the title, e.g. "AI adoption". */
   kind: string;
   /** Where / when, e.g. "LoginRadius · 2021–2024". */
   context: string;
@@ -116,7 +116,7 @@ export const notebooks: { title: string; kind: string; date: string; summary: st
 export const caseStudies: CaseStudy[] = [
   {
     title: 'Setting up colleagues to explore where AI becomes the best tool',
-    kind: 'AI enablement',
+    kind: 'AI adoption',
     context: 'US health system · 2025–',
     topics: ['ai-adoption'],
     summary:
@@ -135,7 +135,7 @@ export const caseStudies: CaseStudy[] = [
     summary:
       'There was a need for internal newsletters, monthly and half-yearly, one for each department. I build them with GitHub Copilot CLI, and they come out engaging and professional, close to what a designer would produce. Microsoft 365 Copilot does not work for this, because its harness is not built for repetitive work where I keep iterating on the same files and folders under Git version control. GitHub Copilot in VS Code, or GitHub Copilot CLI, is the better tool because of how its harness, environment and context work. Without AI, we would not have thought of the task this way, and we would not have done it.',
     short:
-      'There was a need for internal newsletters, monthly and half-yearly, one for each department, and I build them with GitHub Copilot CLI and not Microsoft 365 Copilot, whose harness is not built for repetitive work where I keep iterating on the same files and folders under Git version control.',
+      'There was a need for internal newsletters, monthly and half-yearly, one for each department, and I build them with GitHub Copilot CLI and not Microsoft 365 Copilot.',
     links: [],
     featured: true,
   },
