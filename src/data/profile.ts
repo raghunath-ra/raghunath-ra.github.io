@@ -58,7 +58,7 @@ export const profile = {
     emphasis: 'context and harness engineering for agentic AI',
     position:
       'I operate at the crossroads of AI and cybersecurity, with B2B technology as the primary focus. I am a generalist first, and then a specialist.',
-    dek: 'I’m Raghunath Reddy. I work in cybersecurity at a US health system, and before my current role I spent years in B2B technology marketing, explaining identity and cybersecurity products to developers and the people who buy for them. This site is where I write about these subjects.',
+    dek: 'I’m Raghunath Reddy. I work in cybersecurity at a US health system, and before my current role I spent years in B2B technology marketing, explaining identity and cybersecurity products to developers and the people who buy for them. This site is where I write about AI, cybersecurity and B2B technology.',
   },
 
   /** Used for <meta name="description"> on the home page and as the site default. */
