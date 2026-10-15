@@ -7,23 +7,23 @@ topics: ['ai-systems', 'ai-adoption']
 draft: true
 ---
 
-Over the past few months, I have been thinking about how large language models, or LLMs, use language patterns learned from text written at different times. A word can have more than one meaning, and a product name can refer to something that has changed since the model learned about it. The answer a model produces may not match what I mean when I ask.
+Over the past few months, I have observed one peculiarity with AI, especially with large language models, or LLMs (as future AI systems may grow beyond LLMs): sometimes the answer refers to a meaning or a version of something that is different from what I mean when I ask. I have been thinking about this in relation to how a model learns language patterns as mathematical relationships, and reapplies what it learned when it answers.
 
-I use "meaning drift" for that practical mismatch between the answer and the meaning I intend. But there are different problems inside that phrase: language can change, the model's information can be old, or my question can leave the intended meaning unspecified. Distinguishing them matters when deciding what context to provide.
+I use "meaning drift" to describe that gap. A word's meaning can change over time, the model can be answering from old information, or I may not have explained which meaning I intend. These are different reasons for the gap, and what I give the model needs to account for the one I am dealing with.
 
 ## What the model does with your words
 
-This is how I explain a text-generating transformer model. The tokenizer associated with the model breaks text into tokens, and the model maps token identifiers to learned vectors of numbers. Different models can share a tokenizer; there is not necessarily a separate one for every provider.
+This is how I explain it for a text-generating transformer model. The tokenizer breaks the text into tokens, and each token becomes a vector of numbers, taken from a lookup table that the model learned in training.
 
-The numbers go through the transformer. Attention combines information from tokens in the available context, while feed-forward layers apply further learned transformations. Matrix multiplication is a large part of this computation. The learned relationships are represented in the model's parameters, not in a dictionary of fixed meanings for each word.
+The numbers go through the transformer. Attention combines information from tokens in the context, and the feed-forward layers apply further transformations using what was learned in training. Much of this work is matrix multiplication, repeated across many layers. The relationships the model learned are represented in its parameters.
 
-At each generation step, the model produces scores for possible next tokens. A decoding procedure selects what comes next: it may choose the highest-scoring token or sample from a probability distribution, with settings such as temperature, top-k and top-p affecting sampling. Not every service exposes the same controls.[^generation] In ordinary autoregressive generation, the selected token becomes part of the input for the next step.
+At the end, the model scores possible next tokens. Softmax turns those scores into probabilities, and the decoding method determines which token is selected. It may pick the highest-scoring token, or sample using settings such as temperature, top-k and top-p; the controls available depend on the service.[^generation] Then the model does it again, with the selected token included in what it reads, until the answer is done.
 
-The answer therefore depends both on what the model learned and on the context supplied for this request. That context can include information the model did not have during training.
+All of this is mathematics applied to learned patterns. What the model gives back also depends on the context it receives when I ask, which can include information that was not in its training text.
 
 ## Language is not born out of rules
 
-Language itself has a nuance: its use is not fixed by a rulebook. People use it in communities, and the meanings and conventions change. Usage guides describe and assess those conventions; they do not stop the language from changing.
+Language itself has a nuance: it comes from humans living in societies and using it with one another. The rules we write down come afterwards, derived from literature and other language artifacts, for learning and for standardization. Language continues to evolve, at a different pace at different times.
 
 Bryan Garner's *Garner's Modern English Usage* is one reference I use when thinking about changing usage.[^garner]
 
@@ -31,17 +31,17 @@ Bryan Garner's *Garner's Modern English Usage* is one reference I use when think
 
 During the LLM training phase, I presume, the model is trained on language patterns created at different times, with many English words taking different meanings over those times. Human societies in different geographies also interpret words, and combinations of words (phrases), in different ways.
 
-Training can expose a model to different uses of the same word, but that does not mean it learns every use or preserves each one accurately. Its stored knowledge also does not update just because new material appears online. An AI system can retrieve newer information and add it to context; that is different from changing the model's trained parameters.
+The model can learn these different uses as relationships, though I cannot assume that it learns all of them accurately. It also answers at a later time than when its training text was collected, sometimes much later. An AI system can retrieve newer information and put it into context, but the model's trained parameters do not update just because something new has been written online.
 
 ## Meaning drift
 
-Historical changes in word meaning are one part of the problem. The word "nice", for example, has older senses such as "foolish" or "silly", quite different from its familiar present-day sense of "pleasant".[^nice] That illustrates language change; it does not show that a particular model is likely to choose an obsolete sense in an ordinary modern conversation.
+Words themselves can take different meanings over time. The word "nice", for example, has older senses such as "foolish" or "silly", while today it commonly means "pleasant".[^nice] This is an example of how language changes; whether a model gives an older meaning back depends on the model and the context of the question.
 
-An example from my own use involved Omarchy, a Linux distribution based on Arch Linux.[^omarchy] When asked about Omarchy, the model referred to an older version rather than the latest one. This is more directly an example of outdated version information than of a word changing its meaning. The product name stayed the same, but the answer concerned a different release from the one intended.
+In one example from my own use, the model was asked about Omarchy, a Linux distribution based on Arch Linux,[^omarchy] and referred to an older version instead of the latest one. Here the name had stayed the same, but the product had changed. This is old version information, rather than a word changing its meaning, although the gap I get as a user is similar: the answer is about something different from what I mean today.
 
-I suspect that sparse coverage can make some subjects harder for a model to answer accurately, but this example does not establish that as the cause. More popularity would not guarantee that a particular model had learned the latest release, or that a system had retrieved the right documentation. The relevant question is which version the answer is based on and how that was established.
+I presume that how much has been written about a subject, and how recently, can be part of this. But I cannot tell from the Omarchy answer whether that was the reason. Even if Omarchy becomes more popular, the model still needs current information about the version I am asking about.
 
-An instruction such as "always use the latest version" states what I want, but it does not supply current release information or guarantee that the system can obtain it. A more useful request identifies the version, supplies its documentation or asks a system with retrieval tools to check the current release and name its source. Context engineering helps specify the question; checking the sources and the answer is still necessary.
+I can tell the model at the start, "When I ask something about Omarchy, always use the latest version." That explains what I mean, but I also need to give it the current documentation, or ask a system with retrieval tools to check the version and its source. The instruction alone does not give the model information it does not have.
 
 ## What I ask of an AI system
 
@@ -51,13 +51,11 @@ This doesn't have to mean an AI model should be restricted to using words or phr
 
 What I ask for is only for my use case.
 
-In the Omarchy example, the practical failure was answering about an older release without resolving which release the question meant. Stating the version and the source would make that mismatch easier to identify.
-
-I put this to AI agents in a guide that I am writing for them. The guide contains no AI-generated text; I am writing it with keyboard typing and my own thinking, mostly as a lightly constrained train of thought with minimal editorial changes. I use an unusual layout size and a fixed-width font. Those are presentation choices, not a guarantee that an agent receives or interprets the layout as I see it. The instructions themselves have to convey how I want the system to work.
+I put this to AI agents in a guide that I am writing for them. The guide contains no AI-generated text; I am writing it with keyboard typing and my own thinking, mostly as a lightly constrained train of thought with minimal editorial changes. It is set up in an unusual layout size and a fixed-width font. It is my attempt to convey to AI how I want it to work, and to limit meaning drift to the extent the English language permits.
 
 ## What I can control
 
-I cannot resolve changing language, missing knowledge and an ambiguous question with a single instruction. I can make the intended meaning more explicit, provide relevant information and ask for the version and sources behind an answer. That is the part I work on through context engineering and through guides like the one I am writing for agents.
+The part I control is what I give the model when I ask: the instructions, the context and the sources that explain what my words mean in this situation. In my own work, this is where I put my effort, through context engineering and through guides like the one I am writing for agents. I still need to check whether the answer follows what I meant and uses the information I gave it.
 
 [^garner]: Bryan A. Garner, *Garner's Modern English Usage*, Oxford University Press.
 [^generation]: Hugging Face's [text generation guide](https://huggingface.co/docs/transformers/en/llm_tutorial) and [generation configuration reference](https://huggingface.co/docs/transformers/en/main_classes/text_generation) describe autoregressive generation, greedy decoding, sampling and the associated controls in Transformers. Hosted services may expose different options.

@@ -1,43 +1,43 @@
 ---
 title: 'What I explain to an executive before pitching an AI solution'
-description: 'The technical picture behind an AI proposal: what the model does, which actions software and humans control, and what evidence makes the system assessable.'
+description: 'How I explain the model, harness and context before pitching an AI solution, and why I ask for evidence, traces, audit logs and human approvals.'
 pubDate: 2026-10-08
 updatedDate: 2026-10-16
 topics: ['ai-systems', 'ai-adoption']
 draft: true
 ---
 
-When I pitch an AI solution to an executive, I start with where we are in the AI paradigm. The technical picture has to serve a business question: what work the proposed system would improve, what an acceptable result would be, and who remains responsible when it acts or gets something wrong. An explanation of the model is useful only insofar as it helps assess that proposal.
+When I pitch an AI solution to an executive, I start with where we are in the AI paradigm. A language model takes text, turns it into numbers, processes them through a lot of math, mostly matrix multiplication, and gives text back. Tool calling lets it ask for actions, and the software around it decides whether and how those actions run.
 
-The distinction I want to make clear is between the model's output and the system that turns that output into actions. The model, the surrounding software and the humans approving consequential steps have different responsibilities. The pitch needs to make those responsibilities visible, rather than presenting the agent as one undifferentiated capability.
+Once you build an agentic system, you also have to decide how much of it is deterministic and how much needs the model's probabilistic output, where only humans can approve, and how you prove what the agents did. I want the executive to understand those parts so that we can talk about the work the solution would improve, what a useful result would be, and who is responsible for it.
 
 ## What the model and its surrounding software do
 
-A text-generating language model processes tokens and produces scores for what can come next. The system selects output from those scores. That gives it a way to generate text, not independent access to a business application. Tool calling lets the model request an action; the surrounding software decides whether and how that request is executed.
+By harness, I mean the software around the model that runs it in loops, lets it use tools and helps manage its context. It can hand parts of a task to sub-agents, each with its own context, and bring their results back. Those results still need to be checked before the system uses them.
 
-By harness, I mean that surrounding software: it manages the model's requests, tool execution and repeated steps. It can coordinate sub-agents, each working with its own context, and collect their results. Those results still have to be checked; delegation does not guarantee correctness.
+By context engineering, I mean giving the model the specifics of the situation, the business use case and the problem we are solving, inside a limited context window. Some of that comes from documents and instructions, and some comes back from tools. Compaction condenses earlier context so that there is room for what follows; because details can be lost, we need to decide what information the system must keep available.
 
-Context engineering supplies the information relevant to the task within a limited context window. That may include business documents, tool results and instructions. Compaction can summarize earlier material to make room, but it can also omit details. The question for the proposal is which information must remain available and how the system will obtain it.
-
-Instruction files and skills are ways to organize some of that context. AGENTS.md describes project and directory instructions for supporting coding agents; the documented convention gives more local instructions precedence when they conflict.[^agents-md] Agent Skills packages task instructions and optional resources in a folder, with detailed instructions loaded when needed.[^agent-skills] The precise loading and instruction rules depend on the harness. Neither kind of file is an access-control boundary.
+Skills files, AGENTS.md and other Markdown files are ways to organize the instructions. In coding agents that follow the AGENTS.md convention, instructions can sit at the project level or inside a directory, with the closer file taking precedence when they conflict.[^agents-md] A skill carries instructions for a task in a folder, and an agent that supports it can load the full instructions when needed.[^agent-skills] The harness decides what it reads and when. These files give instructions to the model; permissions still have to be enforced in the software.
 
 ## What stays deterministic in an agentic system
 
 For every agentic system, you have to decide how much of it is grounded in your software-defined topology and how much needs the model's probabilistic output. By software-defined topology, I mean the shape of the system as it is written in code before the model runs: the sequence of steps, which tools are available at each step, and which actions are allowed at all. The model decides inside that shape, and where a step has to follow a fixed rule, the code enforces that rule.
 
-Permissions and approval requirements belong in that software, not just in instructions asking the model to behave. If an action requires human approval, the tool or service carrying it out should check that approval before executing it. Deterministic code can still have defects; it needs testing and monitoring too.
+For example, if only a human can approve an action, the software carrying out that action needs to check for the approval before it runs. Telling the model to ask is not enough. The code enforcing the rule also needs to be tested and monitored.
 
 ## Evidence, traces, audit logs and human approvals
 
-Evidence is the first part. Agents can say that they did something without doing the work, so I ask for the evidence produced while the request was being processed: the resulting artifact, the tool response or a check of the changed system state, as appropriate to the task.
+Evidence is the first part. Agents can say that they did something without doing the work, so I ask for the evidence produced while the request was being processed. Depending on the task, that can be the file produced, the tool's response or a check of what changed in the system.
 
-An agent's explanation of why it chose a path can help someone review the result, but that explanation is generated text. It is not proof that the action happened, or a reliable record of the internal process that produced the choice. Evidence should be checked against the tools and systems involved.
+I also ask the agents to explain why they picked a decision, a path of reasoning or a line of research. That can help me review the output, but the explanation is generated text too; I still need evidence from the tools and systems to know what happened. The explanation does not give me direct access to the model's internal process.
 
-Traces are the second part, as in application performance management. They connect the steps in a request so that a reviewer can follow model calls, tool requests and responses, and failures across the workflow. A trace shows what was recorded; it does not establish that every recorded action was correct.
+Traces are the second part, as in application performance management. I want to trace a request end to end, through the model calls, the tools and the responses, so that when something goes wrong, I can track what happened and where to fix it. I still have to look at those records to judge whether the actions and the result were right.
 
-Audit logs serve a related purpose: recording who or what requested an action, the permission or human approval used, and what the executing system reports happened. They should be produced by the software carrying out the actions, with suitable access and integrity controls, rather than relying only on an agent's final summary.
+Audit logs are the third part, kept for the agents' actions and the evidence they produce. The software carrying out an action should record who or what requested it, the approval used and what happened, with controls over who can access or change that record.
 
-Together, these records make a system more assessable. They do not, on their own, establish enterprise readiness; the proposal still needs criteria for acceptable output, testing, operational ownership and a way to handle failure.
+Human approvals are the last part. Humans grant permission for agents to do specific things, and the software enforces which decisions or actions require that approval. The traces and audit logs need to connect those approvals to the actions that followed.
+
+Without this visibility, enterprise-grade reliability and accountability are very hard to achieve. We also need to test the quality of the output and decide who handles a failure when the system is in use.
 
 ## A case from Anthropic's cybersecurity evaluations
 
@@ -47,19 +47,19 @@ In one incident, Claude Mythos 5 published a malicious package to the real PyPI 
 
 Anthropic said that multiple factors contributed and described the incidents as closer to harness and operational failures than model alignment failures. It identified validation of internet access paths and real-time monitoring among the measures that could have prevented the incidents or surfaced the problem sooner.
 
-The lesson I take for an enterprise proposal is that a description of the environment is not a control over the environment. Telling a model that it has no internet access is different from enforcing that boundary. The same distinction applies when a proposal says that an agent can only act within an approved scope.
+This is why I want the boundaries enforced in the software. If the system is meant to have no internet access, that needs to be true of the environment, not just something the model has been told. The evidence, traces and audit logs then help us check what the agents did within that environment.
 
 ## What this means for the pitch
 
-The technical explanation should let an executive ask concrete questions about the proposed workflow. What is the current task, and what improvement would justify changing it? Which inputs and actions are in scope? Who checks the output, and which actions require approval? What happens when the model fails, and what records let someone investigate?
+Once the executive has this picture, I want to explain the solution in the same terms: what work it would improve, which model does the work, what context it gets, what stays deterministic, and where the humans sit. The evidence, traces and audit logs should let us check the claims we make about what the system did.
 
-The proposal should distinguish expected benefits from measured results. A working demonstration can show that a path is possible; a trial needs to establish how often the system produces acceptable work, how much checking it requires and whether the improvement justifies the cost and risk. The necessary technical depth depends on those decisions, not on covering every detail of model generation.
+A demonstration can show that the system can do a task. Before saying it is ready for enterprise work, I would want to know how often the result is usable, how much checking it needs, and whether the time and effort saved justify the cost and risk. Those are the reasons for explaining the parts of the system before asking someone to rely on it.
 
 ## What I am testing now
 
 I am working on a trial project for an internal use case, where I focus on designing the harness and context around a model and on understanding which models and sub-agents respond better to a task.
 
-I do not have results to report here. The trial is the setting for examining those choices, not evidence yet that the system meets a production standard. That distinction is part of the pitch too: what the system has demonstrated, what remains uncertain, and what the next test needs to establish.
+The trial is still running, so I do not have results to report yet. It is where I am working through these choices on a small scale, before making claims about what the system can reliably do.
 
 [^agents-md]: The [AGENTS.md documentation](https://agents.md) describes project instructions and nested files, with the closest applicable file taking precedence in its documented convention. Which files are read and how they interact with other instructions depends on the coding agent.
 [^agent-skills]: The [Agent Skills specification](https://agentskills.io/specification) defines a SKILL.md file containing metadata and instructions, optional resources, progressive loading and environment compatibility information.

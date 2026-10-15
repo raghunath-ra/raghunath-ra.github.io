@@ -9,9 +9,7 @@ draft: true
 
 My work with colleagues at a US health system is about exploring things first, and helping them explore where AI becomes the best tool and gives productivity and efficiency gains.
 
-The department newsletters are one example. They also show how a workflow I develop can become a skill that colleagues can use, and why the surrounding tools matter as much as the model.
-
-Exploring first means looking at the task: which steps repeat, what the output has to be, and whether AI makes that work easier. Time and effort matter, but so do output quality and the work needed to check and correct it. I do not report measured time savings here; this is an account of the workflow and the tool choices behind it.
+Exploring first means looking at the task, which steps repeat, and what the output has to be. Then we can look at whether AI makes the work easier, including the effort it takes to check and correct what comes back. The department newsletters are one example of how I work on this.
 
 ## The department newsletters
 
@@ -23,21 +21,21 @@ Without AI, we would not have thought of the task this way, and we would not hav
 
 ## Choosing a tool for the newsletter workflow
 
-For this workflow, I use GitHub Copilot CLI rather than Microsoft 365 Copilot because I want to keep iterating on the same files and folders under Git version control. That is a choice about the workflow I use, not a claim that Microsoft 365 Copilot cannot help create a newsletter.
+For this work, GitHub Copilot CLI is the better fit for me because I keep iterating on the same files and folders under Git version control. Microsoft 365 Copilot can help with newsletter content too; the distinction here is the way I want to build and revise the files.
 
-By harness, I mean the software around the model that manages its requests, tool use and repeated steps. GitHub Copilot in VS Code and GitHub Copilot CLI provide ways to work on a local set of files, which fits this task.
+By harness, I mean the software around the model that runs it in loops and lets it use tools. With GitHub Copilot in VS Code or GitHub Copilot CLI, the model can work on the files in my local environment.
 
 By context, I mean the specifics of my situation that the model is given. Context engineering is giving the model those specifics inside a limited context window.
 
-The harness coordinates the model's work on the newsletter files. The environment is the folder under Git version control, where I can inspect changes and return to a saved version. The context is the department material supplied for the task. These are separate parts of the workflow: version control records changes, but it does not establish that the newsletter's contents are correct.
+Each part has its own place in the work. The harness runs the model over the newsletter files as they are revised. The environment is the folder under Git version control, where I can read the changes and return to a saved version. The context is the department material supplied for the task. Git helps me keep track of the changes; the content still needs to be checked.
 
 ## Turning a task into a skill colleagues can run
 
-When a task works in GitHub Copilot CLI, I transcribe it into a durable skill in the Agent Skills format,[^agent-skills] so that I can distribute it to colleagues. A skill is a folder with a SKILL.md file containing its name, description and instructions; it can also contain scripts, templates and reference files. A supporting agent can load the metadata first and the full instructions when the skill is needed, rather than keeping every skill's instructions in context.
+When a task works in GitHub Copilot CLI, I transcribe it into a durable skill in the Agent Skills format,[^agent-skills] so that I can distribute it to colleagues and they can run it. A skill is a folder with a SKILL.md file, which carries a name, a description and the instructions for the task, and it can bundle scripts, templates and reference files. An agent that supports the format can read the name and description first, and load the full instructions when the task needs them. This keeps the instructions for every available skill from taking up context at once.
 
 We have used these skills for PowerPoint presentations, HR headcount analysis and governance, risk and compliance (GRC) work.
 
-The folder makes the instructions portable, but it does not make the whole environment portable. The receiving agent has to support the format, and any required software, permissions and data access still have to be available. The skill can describe those requirements; it does not grant access or guarantee the same result on another machine. Its output still needs review.
+The colleague still needs an agent that supports the skill, the software it depends on, and the permissions and data access the task requires. The folder carries the instructions; those other parts have to be set up as well, and the colleague needs to check the output.
 
 [^agent-skills]: The [Agent Skills specification](https://agentskills.io/specification) defines the SKILL.md file, optional scripts and resources, progressive loading, and a compatibility field for environment requirements. Support for execution and permissions depends on the agent implementation.
 
@@ -45,12 +43,12 @@ The folder makes the instructions portable, but it does not make the whole envir
 
 I have set up more than twenty colleagues with VS Code, GitHub Copilot, Python and Node.js.
 
-Installing those tools is only part of making a workflow usable. The environment also has to provide the access and dependencies the particular task needs. For workplace use, the choice of data, accounts and tools has to follow the organization's requirements; a working local setup is not, by itself, authorization to process internal information.
+The setup also needs the sign-ins and repository access for the task. When the work uses internal information, the data, accounts and tools have to be used within the organization's requirements.
 
 ## Advising on which tool for which job
 
 I champion GitHub Copilot CLI internally, and I advise on when to use Microsoft 365 Copilot and when to use GitHub Copilot CLI.
 
-My rule of thumb is to consider Microsoft 365 Copilot for work with organizational content and GitHub Copilot for builds where I iterate on the same files many times. The actual choice depends on the task, the available integrations and the access allowed for it, rather than a permanent boundary between the products.
+The distinction I give colleagues is to consider Microsoft 365 Copilot for finding and using organizational content, and GitHub Copilot for builds where we iterate on the same files many times. This is a rule of thumb for the work we are doing; the choice also depends on the integrations and access available for the task.
 
-The newsletter workflow is useful to me because it connects a real task to a tool, a set of files and instructions that can be shared. The next question is whether a colleague can use that workflow successfully in their own permitted environment, with output they can check. A skill folder helps with that handover; it is not the whole handover.
+What I want is for a task I have worked through to become something a colleague can use. The skill carries the instructions, the setup gives them the tools and access, and the choice of Copilot follows the kind of work. Whether it helps them depends on the output they get and the time and effort the whole task takes, including checking it.
