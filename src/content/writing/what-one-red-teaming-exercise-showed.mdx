@@ -2,45 +2,43 @@
 title: 'What one red-teaming exercise showed me about prompting'
 description: 'In August 2025, I red-teamed OpenAI’s gpt-oss-20b for a Kaggle challenge, a one-off I have not repeated; narrative and reference prompting got the model to produce disallowed information.'
 pubDate: 2026-10-08
-updatedDate: 2026-10-11
+updatedDate: 2026-10-16
 topics: ['ai-systems']
 draft: true
 ---
 
-In August 2025, I took part in Kaggle's Red-Teaming Challenge on OpenAI's open-weight gpt-oss-20b. It was a one-off. I have not done red-teaming since, the field has moved a lot, and I am not current on it, though I now understand how language models work.
+In August 2025, I took part in Kaggle's Red-Teaming Challenge on OpenAI's open-weight gpt-oss-20b. It was a one-off, and I have not done red-teaming since. I describe it here as an exercise that informed how I think about prompting, not as an assessment of current models or safeguards.
 
 My goal in the writeup I submitted to the challenge was to test whether the model's safety layers could withstand indirect or nuanced prompting, using conversation-based strategies that mirror how real users might bypass safeguards, intentionally or not.
-
-In this essay, I describe the two techniques I used and what the exercise showed me about how a model responds to prompting.
 
 ## The challenge and my writeup
 
 gpt-oss-20b is an open-weight model, which means OpenAI released its weights for anyone to download and run.
 
-The challenge asked participants to find flaws and vulnerabilities in gpt-oss-20b that had not been previously discovered or reported: previously undetected vulnerabilities and harmful behaviors. A finding was written up as a report of what was found and how it was found: up to five distinct issues, each in a findings file, and a writeup of the project of no more than 3,000 words. The challenge ran from Aug 5 to Aug 26, 2025.[^challenge]
+The challenge asked participants to investigate vulnerabilities and harmful behaviors in the model and report their findings.[^challenge] My work focused on how a conversation's framing could affect refusals.
 
-I submitted my writeup, "Narrative and Reference Prompting as Safety Bypass Techniques", on Aug 24, 2025. This essay stays at the level of method. The full writeup, as submitted to the challenge, is [on Kaggle](https://www.kaggle.com/competitions/openai-gpt-oss-20b-red-teaming/writeups/narrative-coaxing-tricks-gpt-oss-20b-to-output-dis).
+My submitted writeup is [on Kaggle](https://www.kaggle.com/competitions/openai-gpt-oss-20b-red-teaming/writeups/narrative-coaxing-tricks-gpt-oss-20b-to-output-dis). This essay stays at the level of method and interpretation, rather than reproducing the harmful outputs.
 
 ## Narrative prompting
 
 Narrative prompting put sensitive requests inside fictional dialogue or storytelling, where the model took on a role and completed the conversation.
 
-In my view, this works because of how a language model operates: it learns the mathematical relationships in language and reapplies them. In the text a model learns from, stories discuss these subjects at length, while a direct request for the same material is rare and sits next to refusals. So a request inside a story reaches the model as part of a pattern it has seen completed many times, and it continues the pattern: it takes on the role and completes the conversation.
+In the conversations I tested, the model produced disallowed information while continuing the narrative. My interpretation is that the narrative context affected the response, but the output alone does not establish which training examples or internal mechanisms caused it.
 
 ## Reference prompting
 
 Reference prompting raised sensitive topics through indirect references, such as their appearance in popular culture or medicine, before escalating toward more direct questions.
 
-A reference works the same way, one step further back. The reference is a frame that text handles often, such as a film, a book or a medical discussion, so the model answers the frame first, where these subjects are ordinary, and each question that follows stays close to the previous one in wording. I presume that closeness is what carries the conversation toward more direct questions.
+Here the initial frame was a reference rather than a fictional role. The conversation moved from that reference toward more direct requests. I suspect that this continuity mattered, although I did not isolate it from the other differences between prompts.
 
 ## What the exercise showed
 
-Both techniques were conversation-based, and with them I got the model to produce disallowed information. Naturalistic scenarios like these made refusals less likely to trigger than confrontational prompts did.
+Both techniques were conversation-based, and with them I got the model to produce disallowed information. That establishes that the tested conversations could get past safeguards in that setting. It does not establish a general success rate, or that these techniques outperform direct prompts across models and configurations.
 
-In my view, that is why a story or a reference changes what the model returns: a model learns the mathematical relationships in language and reapplies them, and the framing of a question is part of those relationships. It is also how I explain language models now, to colleagues and in my work. Red-teaming practice has moved a lot since August 2025, and this was one exercise; the explanation of how a model responds to prompting is the part I still use.
+To make a broader comparison, I would need repeated tests with the model version, configuration and full conversations recorded, a consistent criterion for judging outputs, and comparable direct-prompt tests. I do not report that controlled comparison here.
 
-## Close
+## What I take from it now
 
-What one red-teaming exercise showed me is a fact about prompting that I use in my work: how a question is framed is part of the input a model responds to. I wrote up what I found at the level of method, and findings like it were invited to shape the next generation of alignment tools and benchmarks. My red-teaming is one exercise, from August 2025; what I kept from it is this explanation of how a model responds to prompting.
+The useful lesson for my work is to test the surrounding conversation as well as the final question. A direct request and a request reached through a story or a reference are different test cases. That is the part of this exercise I still use when thinking about how a model responds to prompting.
 
-[^challenge]: Kaggle, [Red-Teaming Challenge - OpenAI gpt-oss-20b](https://www.kaggle.com/competitions/openai-gpt-oss-20b-red-teaming), hosted by OpenAI. The competition overview tasks participants with probing the model "to find any previously undetected vulnerabilities and harmful behaviors" and to "submit up to five distinct issues and a reproducible report detailing what you found and how you found it"; the competition's evaluation criteria give the writeup a limit of 3,000 words. The overview also says the sharpest insights "will help shape the next generation of alignment tools and benchmarks".
+[^challenge]: Kaggle, [Red-Teaming Challenge - OpenAI gpt-oss-20b](https://www.kaggle.com/competitions/openai-gpt-oss-20b-red-teaming), hosted by OpenAI.
